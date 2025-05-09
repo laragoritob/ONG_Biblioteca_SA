@@ -9,60 +9,67 @@
 
   <header> 
     <h1> RELATÓRIOS </h1>
-</header>
+  </header>
 
-<h2>Informações necessárias:</h2>
-<div class="container">
+  <h2>Informações necessárias:</h2>
+  <div class="container">
     <form class="formulario" id="form_login" action="#" method="post">
-        <div class="linha-dupla">
-            <div class="input-group">
-                <p>ID do funcionário:</p>
-                <span class="icon">👤</span>
-                <input type="text" name="id" required>
-            </div>
+      <div class="linha-dupla">
+        <!-- ID do Funcionário -->
+        <div class="input-group">
+          <p>ID do funcionário:</p>
+          <span class="icon">👤</span>
+          <input type="text" name="id" id="id_funcionario" required oninput="preencherNomeFuncionario()">
+        </div>
 
-            <div class="input-group">
-                <p>Nome do funcionário:</p>
-                <span class="icon">🗣️</span>
-                <input type="text" name="nome_funcionario" id="nome_funcionario" readonly>
-            </div>
+        <!-- Nome do Funcionário (campo readonly) -->
+        <div class="input-group">
+          <p>Nome do funcionário:</p>
+          <span class="icon">🗣️</span>
+          <input type="text" name="nome_funcionario" id="nome_funcionario" readonly>
+        </div>
 
-            <div class="input-group">
-                <p>Nome do relatório:</p>
-                <span class="icon">🧾</span>
-                <input type="text" name="id" required>
-            </div>
+        <!-- Nome do Relatório -->
+        <div class="input-group">
+          <p>Nome do relatório:</p>
+          <span class="icon">🧾</span>
+          <input type="text" name="nome_relatorio" required>
+        </div>
 
-            <div class="input-group">
-                <p>Data:</p>
-                <span class="icon">📅</span>
-                <input type="date" name="data" id="data" required>
-              </div>
+        <!-- Data -->
+        <div class="input-group">
+          <p>Data:</p>
+          <span class="icon">📅</span>
+          <input type="date" name="data" id="data" required>
+        </div>
 
-            <div class="input-group">
-                <p>Arquivo: (PDF,WORD E EXCEL)</p>
-                <span class="icon">📂</span>
-                <input type="text" name="arquivo" id="arquivo" readonly>
-                <input type="file" id="seletor_arquivo" accept=".pdf, .doc, .docx, .xls, .xlsx" style="display: none;">
-            </div>
+        <!-- Arquivo -->
+        <div class="input-group">
+          <p>Arquivo: (PDF, WORD E EXCEL)</p>
+          <span class="icon">📂</span>
+          <input type="text" name="arquivo" id="arquivo" readonly>
+          <input type="file" id="seletor_arquivo" accept=".pdf, .doc, .docx, .xls, .xlsx" style="display: none;" multiple>
+        </div>
 
-            <div id="arquivo-box" class="arquivo-box" style="display: none;">
-              <p id="nome-arquivo">Nenhum arquivo selecionado</p>
-              <ul id="lista-arquivos"></ul> <!-- Lista de arquivos selecionados -->
-            </div>
-            
-            <!-- Botão para selecionar arquivo -->
-            <div class="botao-wrapper">
-              <button type="button" class="botao-arquivo" onclick="document.getElementById('seletor_arquivo').click()">Selecionar Arquivo</button>
-            </div>
-            
-            <!-- Botão de Enviar -->
-            <div class="botao-wrapper">
-              <button type="submit" class="botao-enviar">Enviar</button>
-            </div>
+        <!-- Quadrado para exibir arquivos selecionados -->
+        <div id="arquivo-box" class="arquivo-box" style="display: none;">
+          <p id="nome-arquivo">Nenhum arquivo selecionado</p>
+          <ul id="lista-arquivos"></ul>
+        </div>
+
+        <!-- Botão para selecionar arquivo -->
+        <div class="botao-wrapper">
+          <button type="button" class="botao-arquivo" onclick="document.getElementById('seletor_arquivo').click()">Selecionar Arquivo</button>
+        </div>
+
+        <!-- Botão de Enviar -->
+        <div class="botao-wrapper">
+          <button type="submit" class="botao-enviar">Enviar</button>
+        </div>
+      </div>
     </form>
-</div>
+  </div>
 
 </body>
-<script src="javascript/relatorios.js"></script>
+  <script src="javascript/relatorios.js"></script>
 </html>
