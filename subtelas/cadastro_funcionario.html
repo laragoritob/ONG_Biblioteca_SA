@@ -10,102 +10,146 @@
     <header>
         <h1>CADASTRO DE FUNCIONÁRIOS</h1>
     </header>
+
+        <h2>Informações Pessoais:</h2>
+        
     <div class="container">
             <form class="formulario" id="form_login" action="#" method="post">
-                <div class="input-group">
-                    <p>Nome:</p>
-                    <span class="icon">👤</span>
-                    <input type="text" name="nome" required>
+                <div class="linha-dupla">
+                    <div class="input-group">
+                        <p>Nome:</p>
+                        <span class="icon">🖋️</span>
+                        <input type="text" name="nome" required>
+                    </div>
+
+                    <div class="input-group">
+                        <p>Data de Nascimento:</p>
+                        <span class="icon">📆</span>
+                        <input type="date" name="data_nascimento" required>
+                    </div>
                 </div>
 
-                <div class="input-group">
-                    <p>Data de Nascimento:</p>
-                    <span class="icon">👤</span>
-                    <input type="text" name="usuario" required>
+                <div class="linha-dupla">
+                    <div class="input-group">
+                        <p>Sexo:</p>
+                        <span class="icon">🧑🏾‍🤝‍👩🏻</span>
+                        <input type="text" name="sexo" required>
+                    </div>
+
+                    <div class="input-group">
+                        <p>CPF:</p>
+                        <span class="icon">📚</span>
+                        <input type="number" name="cpf" required>
+                    </div>
                 </div>
 
-                <div class="input-group">
-                    <p>Sexo:</p>
-                    <span class="icon">👤</span>
-                    <input type="text" name="usuario" required>
+                <div class="linha-dupla">
+                    <div class="input-group">
+                        <p>RG:</p>
+                        <span class="icon">📄</span>
+                        <input type="number" name="rg" required>
+                    </div>
+
+                    <div class="input-group">
+                        <p>Escolaridade:</p>
+                        <span class="icon">🏫</span>
+                        <input type="text" name="escolaridade" required>
+                    </div>
                 </div>
 
-                <div class="input-group">
-                    <p>CPF:</p>
-                    <span class="icon">👤</span>
-                    <input type="text" name="usuario" required>
-                </div>
+                <div class="linha-dupla">
+                    <div class="input-group">
+                        <p>Estado Civil:</p>
+                        <span class="icon">💍</span>
+                        <input type="text" name="estado_civil" required>
+                    </div>
 
-                <div class="input-group">
-                    <p>RG:</p>
-                    <span class="icon">👤</span>
-                    <input type="text" name="usuario" required>
-                </div>
-
-                <div class="input-group">
-                    <p>Escolaridade:</p>
-                    <span class="icon">👤</span>
-                    <input type="text" name="usuario" required>
-                </div>
-
-                <div class="input-group">
-                    <p>Estado Civil:</p>
-                    <span class="icon">👤</span>
-                    <input type="text" name="usuario" required>
-                </div>
-
-                <div class="input-group">
-                    <p>E-mail:</p>
-                    <span class="icon">👤</span>
-                    <input type="text" name="usuario" required>
+                    <div class="input-group">
+                        <p>E-mail:</p>
+                        <span class="icon">📩</span>
+                        <input type="email" name="email" required>
+                    </div>
                 </div>
 
                 <div class="input-group">
                     <p>Telefone:</p>
-                    <span class="icon">👤</span>
-                    <input type="text" name="usuario" required>
+                    <span class="icon">📞</span>
+                    <input type="number" name="telefone" required>
+                </div>
+            </form>
+        
+            <h2>Endereço:</h2>
+            
+            <form class="formulario" id="form_login" action="#" method="post">
+                <div class="linha-dupla">
+                    <div class="input-group">
+                        <p>País:</p>
+                        <span class="icon">🌍</span>
+                        <input type="text" name="telefone" required>
+                    </div>
+
+                    <div class="input-group">
+                        <p>Estado:</p>
+                        <span class="icon">🗾</span>
+                        <input type="text" name="estado" required>
+                    </div>
                 </div>
 
-                <div class="input-group">
-                    <p>Estado:</p>
-                    <span class="icon">👤</span>
-                    <input type="text" name="usuario" required>
+                <div class="linha-dupla">
+                    <div class="input-group">
+                        <p>Cidade:</p>
+                        <span class="icon">🌆</span>
+                        <input type="text" name="cidade" required>
+                    </div>
+
+                    <div class="input-group">
+                        <p>Bairro:</p>
+                        <span class="icon">🏘️</span>
+                        <input type="text" name="bairro" required>
+                    </div>
                 </div>
 
-                <div class="input-group">
-                    <p>Cidade:</p>
-                    <span class="icon">👤</span>
-                    <input type="text" name="usuario" required>
-                </div>
+                <div class="linha-dupla">
+                    <div class="input-group">
+                        <p>Rua:</p>
+                        <span class="icon">🛣️</span>
+                        <input type="text" name="rua" required>
+                    </div>
 
-                <div class="input-group">
-                    <p>Bairro:</p>
-                    <span class="icon">👤</span>
-                    <input type="text" name="usuario" required>
+                    <div class="input-group">
+                        <p>CEP:</p>
+                        <span class="icon">📦</span>
+                        <input type="number" name="cep" required>
+                    </div>
                 </div>
+            </form>
 
-                <div class="input-group">
-                    <p>Rua:</p>
-                    <span class="icon">👤</span>
-                    <input type="text" name="usuario" required>
-                </div>
+            <h2>Login:</h2>
 
-                <div class="input-group">
-                    <p>CEP:</p>
-                    <span class="icon">👤</span>
-                    <input type="text" name="usuario" required>
-                </div>
+            <form class="formulario" id="form_login" action="#" method="post">
+                <div class="linha-dupla">
+                    <div class="input-group">
+                        <p>Usuário:</p>
+                        <span class="icon">👤</span>
+                        <input type="text" name="usuario" required>
+                    </div>
 
-                <div class="input-group">
-                    <p>Usuário:</p>
-                    <span class="icon">👤</span>
-                    <input type="text" name="usuario" required>
+                    <div class="input-group">
+                        <p>Senha:</p>
+                        <span class="icon">🔐</span>
+                        <input type="password" name="senha" required>
+                    </div>
                 </div>
+            </form>
+    </div>
+        <div class="linha-dupla">
+            <div class="links">
+                <button type="submit" class="btn"> Cadastrar </button>
+            </div>
 
-                <div class="input-group">
-                    <p>Senha:</p>
-                    <span class="icon">👤</span>
-                    <input type="text" name="usuario" required>
-                </div>
+            <div class="links2">
+                <button type="submit" class="btn2"> Cancelar </button>
+            </div>
+        </div>
 </body>
 </html>

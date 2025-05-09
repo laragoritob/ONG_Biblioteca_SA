@@ -13,6 +13,7 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
+  flex-wrap: wrap; /* <-- ESSENCIAL PARA CELULAR */
 }
 
 /* Cabeçalho */
@@ -24,6 +25,7 @@ header {
   text-align: center;
   margin: 30px auto;
   position: relative;
+  flex-wrap: wrap; /* <-- ESSENCIAL PARA CELULAR */
 }
 
 header img {
@@ -46,7 +48,7 @@ nav {
   align-items: center;     
   gap: 50px;              
   margin: 30px auto;
-  flex-wrap: nowrap;       
+  flex-wrap: wrap;       
 }
 
 nav a{
@@ -76,5 +78,6 @@ nav a:hover{
   height: 130px;
   width: 130px;
   z-index: 1000;
+  flex-wrap: wrap; /* <-- ESSENCIAL PARA CELULAR */
 }
 

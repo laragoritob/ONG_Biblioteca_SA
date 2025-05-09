@@ -20,9 +20,9 @@ header{
 header h1{
   color: #4a3092; 
   text-align: center;
-  font-size: 45px;
+  font-size: 41px;
   float: center;
-  margin: 36px 225px 30px;
+  margin: 10px 10px 10px;
 }
 
 
@@ -53,54 +53,31 @@ header h1{
     width: 100%;
 }
 
-h1 {
-  font-size: 70px;
-  margin-left:30px;
-  margin-top: 50px;
+header h1 {
+  font-size: 50px;
+  text-align: center;
+  float: center;
+  margin: 36px 225px 30px;
+}
+
+h2 {
+  font-size: 28px;
+  margin-left: 170px;
+  margin-top: 90px;
   text-align: left;
 }
 
 .formulario {
-  background: #ffffff;
+  background: #fefaff;
   padding: 30px;
   border-radius: 35px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
+  width: 1000px;
+  max-width: 1000px;
   margin-top: 230px;
   margin-right: 50px;
-  margin-top: 40px;
-  margin-left: 40px;
-}
-
-.input-group {
-  position: relative;
-  margin-bottom: 10px;
-}
-
-.input-group input {
-  width: 100%;
-  padding: 15px 55px;
-  border: none;
-  border-radius: 25px;
-  background: #cef1ff;
-  color: rgb(0, 0, 0);
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
-.input-group input::placeholder {
-  color: rgb(0, 0, 0);
-  opacity: 1px;
-}
-
-.input-group .icon {
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px;
-  color: rgb(0, 0, 0);
+  margin-top: 5px;
+  margin-left: 150px;
 }
 
 .btn {
@@ -120,6 +97,7 @@ h1 {
   margin-left: 95px;
 }
 
+
 .btn.glow {
   box-shadow: 0px 0px 15px #884b85;
 }
@@ -137,12 +115,69 @@ h1 {
   gap: 10px;
 }
 
-.conteudo-direito a {
-  color: #db5050;
-  text-decoration: none;
+.input-group {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.input-group input {
+  width: 400px;
+  padding: 15px 55px;
+  border: none;
+  border-radius: 25px;
+  background: #cef1ff;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  box-sizing: border-box;
+  border: 1px solid #85ccea;
+}
+
+.input-group input::placeholder {
+  color: rgb(0, 0, 0);
+  opacity: 1px;
+}
+
+.input-group .icon {
+  position: absolute;
+  left: 16px;
+  top: 71%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+}
+
+.btn2 {
+  background: #ffbcfc;
+  color: rgb(0, 0, 0);
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
   font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  min-width: 200px;
+  cursor: pointer;
+  transition: all 0.3s ease;
   margin-top: 40px;
-  margin-left: 170px;
+  margin-left: 5px;
+}
+
+.links2 {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.linha-dupla {
+  display: flex;
+  gap: 100px; /* espaçamento entre os campos */
+  justify-content: space-between;
+}
+
+.linha-dupla .input-group {
+  flex: 1;
 }
 
 footer {
