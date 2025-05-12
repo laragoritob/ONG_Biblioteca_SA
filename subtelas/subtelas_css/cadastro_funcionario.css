@@ -163,6 +163,16 @@ h2 {
   margin-left: 5px;
 }
 
+.btn2.glow {
+  box-shadow: 0px 0px 15px #884b85;
+}
+
+.btn2:hover {
+  background: #e07ddb;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px #884b85;
+}
+
 .links2 {
   margin-top: 15px;
   display: flex;
