@@ -18,17 +18,13 @@ let arquivosSelecionados = [];
 document.getElementById("seletor_arquivo").addEventListener("change", function () {
   const arquivos = this.files;
   if (arquivos.length > 0) {
-    // Limpa a lista de arquivos antigos
     document.getElementById("lista-arquivos").innerHTML = "";
-
-    // Exibir o quadrado onde os arquivos selecionados serão listados
     document.getElementById("arquivo-box").style.display = "block";
+    document.getElementById("nome-arquivo").textContent = "Arquivos selecionados:"; // <- esta linha foi adicionada
 
-    // Para cada arquivo selecionado, adiciona à lista
     for (let i = 0; i < arquivos.length; i++) {
       const nomeArquivo = arquivos[i].name;
 
-      // Verificar se o arquivo já foi anexado
       if (!arquivosSelecionados.includes(nomeArquivo)) {
         arquivosSelecionados.push(nomeArquivo);
 
