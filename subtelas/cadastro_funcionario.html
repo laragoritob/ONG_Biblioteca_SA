@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ONG Biblioteca - Sala Arco-íris</title>
     <link rel="stylesheet" type="text/css" href="subtelas_css/cadastro_funcionario.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <header>
         <h1>CADASTRO DE FUNCIONÁRIOS</h1>
     </header>
-
-        <h2>Informações Pessoais:</h2>
         
     <div class="container">
-            <form class="formulario" id="form_login" action="#" method="post">
+            <form class="formulario" id="form_pessoal" action="#" method="post" onsubmit="return validaFormulario()">
+
+                <h2>Informações Pessoais:</h2>
+
                 <div class="linha-dupla">
                     <div class="input-group">
                         <p>Nome:</p>
@@ -25,7 +27,7 @@
                     <div class="input-group">
                         <p>Data de Nascimento:</p>
                         <span class="icon">📆</span>
-                        <input type="date" name="data_nascimento" required>
+                        <input type="date" name="data_nascimento" required min="1925-01-01" max="" id="dataNascimento">
                     </div>
                 </div>
 
@@ -33,7 +35,15 @@
                     <div class="input-group">
                         <p>Sexo:</p>
                         <span class="icon">🧑🏾‍🤝‍👩🏻</span>
-                        <input type="text" name="sexo" required>
+                        <div class="input-group">
+                            <span class="icon">🧑🏾‍🤝‍👩🏻</span>
+                            <select name="sexo" class="custom-select" required>
+                                <option value="" disabled selected>Selecione</option>
+                                <option value="Feminino">Feminino</option>
+                                <option value="Masculino">Masculino</option>
+                            </select>
+                        </div>
+                        
                     </div>
 
                     <div class="input-group">
@@ -76,11 +86,9 @@
                     <span class="icon">📞</span>
                     <input type="number" name="telefone" required>
                 </div>
-            </form>
         
-            <h2>Endereço:</h2>
+            <h3>Endereço:</h3>
             
-            <form class="formulario" id="form_login" action="#" method="post">
                 <div class="linha-dupla">
                     <div class="input-group">
                         <p>País:</p>
@@ -122,11 +130,9 @@
                         <input type="number" name="cep" required>
                     </div>
                 </div>
-            </form>
 
-            <h2>Login:</h2>
+            <h3>Login:</h3>
 
-            <form class="formulario" id="form_login" action="#" method="post">
                 <div class="linha-dupla">
                     <div class="input-group">
                         <p>Usuário:</p>
@@ -137,19 +143,26 @@
                     <div class="input-group">
                         <p>Senha:</p>
                         <span class="icon">🔐</span>
-                        <input type="password" name="senha" required>
+                        <input type="password" name="senha" id="senhaInput" required>
+                    </div>
+                </div>
+
+                <div class="checkbox-show-senha">
+                    <input type="checkbox" id="mostrarSenha">
+                    <label for="mostrarSenha">Mostrar senha</label>
+                </div>
+
+                <div class="linha-dupla">
+                    <div class="links">
+                        <button type="submit" class="btn" id="btnCadastrar"> Cadastrar </button>
+                    </div>
+        
+                    <div class="links">
+                        <button type="button" class="btn2"> Cancelar </button>
                     </div>
                 </div>
             </form>
     </div>
-        <div class="linha-dupla">
-            <div class="links">
-                <button type="submit" class="btn"> Cadastrar </button>
-            </div>
-
-            <div class="links2">
-                <button type="submit" class="btn2"> Cancelar </button>
-            </div>
-        </div>
 </body>
+    <script src="subtelas_javascript/JS_cadastro_funcionario.js"></script>
 </html>
