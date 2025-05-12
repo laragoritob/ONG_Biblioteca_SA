@@ -62,9 +62,16 @@ header h1 {
 
 h2 {
   font-size: 28px;
-  margin-left: 170px;
-  margin-top: 90px;
-  text-align: left;
+  margin-top: 20px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+h3 {
+  font-size: 28px;
+  margin-top: 100px;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .formulario {
@@ -83,20 +90,18 @@ h2 {
 .btn {
   background: #ffbcfc;
   color: rgb(0, 0, 0);
-  padding: 12px 30px;
+  padding: 15px 130px;
   border: none;
   border-radius: 25px;
   font-size: 16px;
   font-weight: bold;
   text-decoration: none;
   text-align: center;
-  min-width: 200px;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 15px;
-  margin-left: 95px;
+  margin-top: 30px;
+  margin-left: 70px;
 }
-
 
 .btn.glow {
   box-shadow: 0px 0px 15px #884b85;
@@ -108,11 +113,39 @@ h2 {
   box-shadow: 0 0 20px #884b85;
 }
 
+.btn2 {
+  background: #ffbcfc;
+  color: rgb(0, 0, 0);
+  padding: 15px 130px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 30px;
+  margin-right: 150px;
+}
+
+.btn2.glow {
+  box-shadow: 0px 0px 15px #884b85;
+}
+
+.btn2:hover {
+  background: #e07ddb;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px #884b85;
+}
+
 .links {
+  display: flex;
+  justify-content: center;
   margin-top: 15px;
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
+  gap: 40px; /* Espaço entre os botões */
+  padding: 20px 1px; /* Espaço acima e abaixo dos botões */
 }
 
 .input-group {
@@ -146,49 +179,48 @@ h2 {
   color: rgb(0, 0, 0);
 }
 
-.btn2 {
-  background: #ffbcfc;
-  color: rgb(0, 0, 0);
-  padding: 12px 30px;
-  border: none;
-  border-radius: 25px;
-  font-size: 16px;
-  font-weight: bold;
-  text-decoration: none;
-  text-align: center;
-  min-width: 200px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 40px;
-  margin-left: 5px;
-}
-
-.btn2.glow {
-  box-shadow: 0px 0px 15px #884b85;
-}
-
-.btn2:hover {
-  background: #e07ddb;
-  transform: translateY(-2px);
-  box-shadow: 0 0 20px #884b85;
-}
-
-.links2 {
-  margin-top: 15px;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-}
-
 .linha-dupla {
   display: flex;
-  gap: 100px; /* espaçamento entre os campos */
+  gap: 180px; /* espaçamento entre os campos */
   justify-content: space-between;
 }
 
 .linha-dupla .input-group {
   flex: 1;
 }
+
+.checkbox-show-senha {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  margin-left: 600px;
+  font-size: 14px;
+}
+
+.custom-select {
+  width: 100%;
+  padding: 15px 12px;
+  border: 1px solid #85ccea;
+  border-radius: 25px;
+  background-color: #fff;
+  font-size: 16px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Cpolygon points='0,0 10,0 5,7' style='fill:%23666;'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.custom-select:focus {
+  outline: none;
+  border-color: #ffbcfc;
+  box-shadow: 0 0 5px rgba(255, 188, 252, 0.5);
+}
+
 
 footer {
   text-align: center;
