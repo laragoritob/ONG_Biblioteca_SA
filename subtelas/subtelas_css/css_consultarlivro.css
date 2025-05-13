@@ -123,8 +123,9 @@ header h1{
 }
 
 
-a {
+a  {
   color: #000000;
+  text-decoration: none;
 }
 
 
