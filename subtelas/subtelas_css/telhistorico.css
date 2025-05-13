@@ -199,12 +199,18 @@ input[type="text"] {
     padding: 10px;            /* Espaçamento interno */
     font-size: 16px;          /* Tamanho da fonte */      
     border: 2px solid #bbe2f1; /* Cor da borda */
-    margin-bottom: 5px; 
-    margin-top: 10px;  
     border-radius: 20px;      /* Bordas arredondadas */
     background-color: #f0f8ff; /* Cor de fundo */
     color: #000000;              /* Cor do texto */
     transition: all 0.3s ease; /* Transição suave para o foco */
+  }
+
+/*MOSTRA OS EMPRESTIMO EM ATRASO*/
+  input.atrasado {
+    color: red;
+    border: 2px solid rgb(0, 0, 0);
+    background-color: rgb(250, 231, 231);
+    font-weight: bold;
   }
   
   /*BOTÕES DE RENOVAR E DEVOLVIDO*/
@@ -225,6 +231,16 @@ input[type="text"] {
     margin-left: 95px;
     margin-right: 95px;
     margin-bottom: 10px;
+  }
+
+  .linha-dupla {
+    display: flex;
+    gap: 70px; /* espaçamento entre os campos */
+    justify-content: space-between;
+  }
+  
+  .linha-dupla .input-group {
+    flex: 1;
   }
   
   .btn.glow {
