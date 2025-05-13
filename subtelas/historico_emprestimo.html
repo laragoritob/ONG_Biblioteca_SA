@@ -1,222 +1,146 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head> 
-         <meta charset="UTF-8">
-         <title> ONG Bilbioteca - Sala Arco-íris </title>
-         <link rel ="stylesheet" type="text/css" href="subtelas_css/telhistorico.css"/>
-    </head>
-    <body> 
-        <header> 
-            <h1> Histórico de Emprestimos </h1>
-        </header>
-        <nav> 
-            <table id="livros-table" border="1">
-                <thead>
-                  <tr>
-                    <th>CÓDIGO EMPRESTIMO</th>
-                    <th>NOME DO LIVRO</th>
-                    <th>NOME CLIENTE</th>
-                    <th>EMPRESTIMO</th>
-                    <th>DEVOLUÇÃO</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>0001</td>
-                    <td><a href="#" class="detalhes-livro">Para Todos Os Garotos Que Já Amei</a></td>
-                    <td>Helena Lopes </td>
-                    <td>25/02/2025</td>
-                    <td>02/02/2025</td>
-                  </tr>
-                  <tr>
-                    <td>0002</td>
-                    <td><a href="#" class="detalhes-livro2">O Cortiço</a></td>
-                    <td>Ruan Melo</td>
-                    <td>11/03/2025</td>
-                    <td>18/03/2025</td>
-                  </tr>
-                  <tr>
-                    <td>0003</td>
-                    <td><a href="#" class="detalhes-livro3">O Pequeno Príncipe</a></td>
-                    <td> Mateus Dela </td>
-                    <td>19/03/2025</td>
-                    <td>26/03/2025</td>
-                  </tr>
-                  <tr>
-                    <td>0004</td>
-                    <td><a href="#" class="detalhes-livro4">Matemática Básica</a></td>
-                    <td> Mateus Rodrigues </td>
-                    <td>04/04/2025</td>
-                    <td>18/04/2025</td>
+<head>
+  <meta charset="UTF-8">
+  <title>ONG Biblioteca - Sala Arco-íris</title>
+  <link rel="stylesheet" type="text/css" href="css/telhistorico.css" />
+</head>
+<body>
+  <header>
+    <h1>Histórico de Empréstimos</h1>
+  </header>
 
-<!--TELA DE RENOVAÇÃO DE EMPRESTIMOS-->
-<!--Modal-->
-  <div id="modal">
+  <nav>
+    <table id="livros-table" border="1">
+      <thead>
+        <tr>
+          <th>CÓDIGO EMPRÉSTIMO</th>
+          <th>NOME DO LIVRO</th>
+          <th>NOME CLIENTE</th>
+          <th>EMPRÉSTIMO</th>
+          <th>DEVOLUÇÃO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>0001</td>
+          <td><a href="#" class="detalhes-livro">Para Todos Os Garotos Que Já Amei</a></td>
+          <td>Helena Lopes</td>
+          <td>25/02/2025</td>
+          <td>02/02/2025</td>
+        </tr>
+        <tr>
+          <td>0002</td>
+          <td><a href="#" class="detalhes-livro2">O Cortiço</a></td>
+          <td>Ruan Melo</td>
+          <td>11/03/2025</td>
+          <td>18/03/2025</td>
+        </tr>
+        <tr>
+          <td>0003</td>
+          <td><a href="#" class="detalhes-livro3">O Pequeno Príncipe</a></td>
+          <td>Matheus Dela</td>
+          <td>19/03/2025</td>
+          <td>26/03/2025</td>
+        </tr>
+        <tr>
+          <td>0004</td>
+          <td><a href="#" class="detalhes-livro4">Matemática Básica</a></td>
+          <td>Mateus Rodrigues</td>
+          <td>04/04/2025</td>
+          <td>18/04/2025</td>
+        </tr>
+      </tbody>
+    </table>
+  </nav>
+
+  <!-- Modal -->
+  <div id="modal" style="display:none;">
     <div id="modal-content">
-      <span id="close-modal">&times;</span>
-      <div id="modal-body">
-        <!-- Conteúdo será inserido por JavaScript -->
-      </div>
+      <span id="close-modal" style="cursor:pointer;">&times;</span>
+      <div id="modal-body"></div>
     </div>
   </div>
 
-  <!-- Livro para todos os garotos que ja amei -->
   <script>
     const modal = document.getElementById('modal');
     const modalBody = document.getElementById('modal-body');
     const closeModal = document.getElementById('close-modal');
 
-    const conteudoLivro = `
-  <img src="img/paratodososgarotosquejaamei.jpg" title="Livro" class="hmlivro" />
-  <h3 style="margin-top: 0;"> RENOVAÇÃO OU DEVOLUÇÃO </h3>
-  <form action="/processar-dados" method="post">
+    function gerarFormulario(livro, cliente, imagem) {
+      return `
+        <img src="${imagem}" title="Livro" class="hmlivro" />
+        <h3 style="margin-top: 0;">RENOVAÇÃO OU DEVOLUÇÃO</h3>
+        <form action="/processar-dados" method="post">
+          <label for="cliente">Nome do cliente:</label>
+          <input type="text" id="cliente" name="cliente" value="${cliente}" readonly>
 
-    <label for="nome">Nome do cliente :</label>
-    <input type="text" id="nome" name="nome";>
+          <label for="livro">Nome do livro:</label>
+          <input type="text" id="livro" name="livro" value="${livro}" readonly>
 
-    <label for="nome"> Nome do livro:</label>
-    <input type="text" id="nome" name="nome">
+          <div class="linha-dupla">
+            <div class="input-group">
+              <p>Empréstimo:</p>
+              <input type="date" name="data" required>
+            </div>
+            <div class="input-group">
+              <p>Devolução:</p>
+              <input type="date" name="devolucao" required>
+            </div>
+          </div>
 
-    <label for="data">Emprestimo:</label><br>
-    <input type="date" id="data" name="data">
-
-    <label for="data">Devolução:</label><br>
-    <input type="date" id="data" name="data">
-
-  <div class="botao">
-            <button type="submit" class="btn"> RENOVAR </button>
-            <button type="submit" class="btn"> DEVOLVIDO </button>
-        </div>
-  </form>
-`;
-
-
-    //O cortiço//
-
-const conteudoLivro2 = `
-  <img src="img/ocortico.jpg" title="Livro" class="hmlivro" />
-    <h3 style="margin-top: 0;"> RENOVAÇÃO OU DEVOLUÇÃO </h3>
-
-     <label for="nome"> Nome do cliente :</label>
-    <input type="text" id="nome" name="nome";>
-
-    <label for="nome"> Nome do livro:</label>
-    <input type="text" id="nome" name="nome">
-
-    <label for="data"> Emprestimo:</label>
-    <input type="date" id="data" name="data"> 
-
-    <label for="data"> Devolução:</label> 
-    <input type="date" id="data" name="data"> 
-
-    <div class="botao">
-            <button type="submit" class="btn"> RENOVAR </button>
-            <button type="submit" class="btn"> DEVOLVIDO </button>
-        </div>
-  </form>
-`;
-
-       //O Pequeno Príncipe//
-
-const conteudoLivro3 = `
-  <img src="img/opequenoprincipe.jpg" title="Livro" class="hmlivro" />
-    <h3 style="margin-top: 0;"> RENOVAÇÃO OU DEVOLUÇÃO </h3>
-
-
-     <label for="nome"> Nome do cliente :</label>
-    <input type="text" id="nome" name="nome";>
-
-    <label for="nome"> Nome do livro:</label>
-    <input type="text" id="nome" name="nome">
-
-    <label for="data"> Emprestimo:</label>
-    <input type="date" id="data" name="data"> 
-
-    <label for="data"> Devolução:</label> 
-    <input type="date" id="data" name="data"> 
-
-    <div class="botao">
-            <button type="submit" class="btn"> RENOVAR </button>
-            <button type="submit" class="btn"> DEVOLVIDO </button>
-        </div>
-  </form>
-`;
-
-      //O Livro de Matemática//
-
-const conteudoLivro4 = `
-    <img src="img/olivrodamatematica.jpg" title="Livro" class="hmlivro" />
-      <h3 style="margin-top: 0;"> RENOVAÇÃO OU DEVOLUÇÃO </h3>
-
-    <label for="nome"> Nome do cliente :</label>
-    <input type="text" id="nome" name="nome";>
-
-    <label for="nome"> Nome do livro:</label>
-    <input type="text" id="nome" name="nome">
-
-    <label for="data"> Emprestimo:</label>
-    <input type="date" id="data" name="data"> 
-
-    <label for="data"> Devolução:</label> 
-    <input type="date" id="data" name="data"> 
-
-    <div class="botao">
-            <button type="submit" class="btn"> RENOVAR </button>
-            <button type="submit" class="btn"> DEVOLVIDO </button>
-        </div>
-  </form>
-  `;
-
- // Função genérica para abrir o modal com o conteúdo do livro
- function abrirModal(conteudo) {
-    modalBody.innerHTML = conteudo;
-    modal.style.display = 'block';
-  }
-
-  document.querySelectorAll('.detalhes-livro').forEach(link => {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      abrirModal(conteudoLivro);
-    });
-  });
-
-  document.querySelectorAll('.detalhes-livro2').forEach(link => {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      abrirModal(conteudoLivro2);
-    });
-  });
-
-  document.querySelectorAll('.detalhes-livro3').forEach(link => {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      abrirModal(conteudoLivro3);
-    });
-  });
-
-  document.querySelectorAll('.detalhes-livro4').forEach(link => {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      abrirModal(conteudoLivro4);
-    });
-  });
-
-  // Fecha o modal ao clicar no X
-  closeModal.onclick = function () {
-    modal.style.display = 'none';
-  };
-
-  // Fecha o modal ao clicar fora dele
-  window.onclick = function (event) {
-    if (event.target === modal) {
-      modal.style.display = 'none';
+          <div class="botao">
+            <button type="submit" class="btn">RENOVAR</button>
+            <button type="submit" class="btn">DEVOLVIDO</button>
+          </div>
+        </form>
+      `;
     }
-  };
 
-    </script>
-  </tr>
-</tbody>
-  </table>
-      </nav> 
-    </body>
-  </html>         
+    const livros = [
+      {
+        selector: '.detalhes-livro',
+        nome: 'Para Todos Os Garotos Que Já Amei',
+        cliente: 'Helena Lopes',
+        imagem: 'img/paratodososgarotosquejaamei.jpg'
+      },
+      {
+        selector: '.detalhes-livro2',
+        nome: 'O Cortiço',
+        cliente: 'Ruan Melo',
+        imagem: 'img/ocortico.jpg'
+      },
+      {
+        selector: '.detalhes-livro3',
+        nome: 'O Pequeno Príncipe',
+        cliente: 'Matheus Dela',
+        imagem: 'img/opequenoprincipe.jpg'
+      },
+      {
+        selector: '.detalhes-livro4',
+        nome: 'Matemática Básica',
+        cliente: 'Mateus Rodrigues',
+        imagem: 'img/olivrodamatematica.jpg'
+      }
+    ];
+
+    livros.forEach(({ selector, nome, cliente, imagem }) => {
+      document.querySelectorAll(selector).forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          modalBody.innerHTML = gerarFormulario(nome, cliente, imagem);
+          modal.style.display = 'block';
+        });
+      });
+    });
+
+    closeModal.onclick = () => modal.style.display = 'none';
+
+    window.onclick = event => {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    };
+  </script>
+</body>
+</html>
