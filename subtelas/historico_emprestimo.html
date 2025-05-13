@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>ONG Biblioteca - Sala Arco-íris</title>
-  <link rel="stylesheet" type="text/css" href="css/telhistorico.css" />
+  <link rel="stylesheet" type="text/css" href="subtelas_css/telhistorico.css" />
 </head>
 <body>
   <header>
@@ -27,7 +27,7 @@
           <td><a href="#" class="detalhes-livro">Para Todos Os Garotos Que Já Amei</a></td>
           <td>Helena Lopes</td>
           <td>25/02/2025</td>
-          <td>02/02/2025</td>
+          <td>02/03/2025</td>
         </tr>
         <tr>
           <td>0002</td>
@@ -46,7 +46,7 @@
         <tr>
           <td>0004</td>
           <td><a href="#" class="detalhes-livro4">Matemática Básica</a></td>
-          <td>Mateus Rodrigues</td>
+          <td>Matheus Rodrigues</td>
           <td>04/04/2025</td>
           <td>18/04/2025</td>
         </tr>
@@ -62,85 +62,7 @@
     </div>
   </div>
 
-  <script>
-    const modal = document.getElementById('modal');
-    const modalBody = document.getElementById('modal-body');
-    const closeModal = document.getElementById('close-modal');
+  <script src="subtelas_javascript/tela_renovacao_devolucao.js"></script>
 
-    function gerarFormulario(livro, cliente, imagem) {
-      return `
-        <img src="${imagem}" title="Livro" class="hmlivro" />
-        <h3 style="margin-top: 0;">RENOVAÇÃO OU DEVOLUÇÃO</h3>
-        <form action="/processar-dados" method="post">
-          <label for="cliente">Nome do cliente:</label>
-          <input type="text" id="cliente" name="cliente" value="${cliente}" readonly>
-
-          <label for="livro">Nome do livro:</label>
-          <input type="text" id="livro" name="livro" value="${livro}" readonly>
-
-          <div class="linha-dupla">
-            <div class="input-group">
-              <p>Empréstimo:</p>
-              <input type="date" name="data" required>
-            </div>
-            <div class="input-group">
-              <p>Devolução:</p>
-              <input type="date" name="devolucao" required>
-            </div>
-          </div>
-
-          <div class="botao">
-            <button type="submit" class="btn">RENOVAR</button>
-            <button type="submit" class="btn">DEVOLVIDO</button>
-          </div>
-        </form>
-      `;
-    }
-
-    const livros = [
-      {
-        selector: '.detalhes-livro',
-        nome: 'Para Todos Os Garotos Que Já Amei',
-        cliente: 'Helena Lopes',
-        imagem: 'img/paratodososgarotosquejaamei.jpg'
-      },
-      {
-        selector: '.detalhes-livro2',
-        nome: 'O Cortiço',
-        cliente: 'Ruan Melo',
-        imagem: 'img/ocortico.jpg'
-      },
-      {
-        selector: '.detalhes-livro3',
-        nome: 'O Pequeno Príncipe',
-        cliente: 'Matheus Dela',
-        imagem: 'img/opequenoprincipe.jpg'
-      },
-      {
-        selector: '.detalhes-livro4',
-        nome: 'Matemática Básica',
-        cliente: 'Mateus Rodrigues',
-        imagem: 'img/olivrodamatematica.jpg'
-      }
-    ];
-
-    livros.forEach(({ selector, nome, cliente, imagem }) => {
-      document.querySelectorAll(selector).forEach(link => {
-        link.addEventListener('click', e => {
-          e.preventDefault();
-          modalBody.innerHTML = gerarFormulario(nome, cliente, imagem);
-          modal.style.display = 'block';
-        });
-      });
-    });
-
-    closeModal.onclick = () => modal.style.display = 'none';
-
-    window.onclick = event => {
-      if (event.target === modal) {
-        modal.style.display = 'none';
-      }
-    };
-  </script>
 </body>
 </html>
