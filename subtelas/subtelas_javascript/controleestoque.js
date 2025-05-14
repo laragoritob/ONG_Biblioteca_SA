@@ -1,9 +1,19 @@
-const modal = document.getElementById('modal');
-const modalBody = document.getElementById('modal-body');
-const closeModal = document.getElementById('close-modal');
+document.addEventListener("DOMContentLoaded", function () {
+  // Referências aos elementos do modal
+  const modal = document.getElementById('modal');
+  const modalBody = document.getElementById('modal-body');
+  const closeModal = document.getElementById('close-modal');
 
-    //Para todos os garotos que ja amei
-const conteudoLivro = `
+  // Elementos do formulário de adição
+  const botaoAdicionar = document.getElementById('botao-adicionar');
+  const modalAdicionar = document.getElementById('modal-adicionar');
+  const closeAdicionar = document.getElementById('close-adicionar');
+  const formAdicionar = document.getElementById('form-adicionar');
+  const livroIdInput = document.getElementById('livro-id');
+
+// Conteúdo dos livros
+//Para todos os garotos que ja amei
+  const conteudoLivro = `
 <img src="img/paratodososgarotosquejaamei.jpg" title="Livro" class="hmlivro" />
 <h3 style="margin-top: 0;">Para Todos Os Garotos Que Já Amei</h3>
 <p>Lara Jean guarda suas cartas de amor em uma caixa azul-petróleo que ganhou da mãe. Não são cartas que ela recebeu de alguém, mas que ela mesma escreveu. Uma para cada garoto que amou — cinco ao todo. São cartas sinceras, sem joguinhos nem fingimentos, repletas de coisas que Lara Jean não diria a ninguém, confissões de seus sentimentos mais profundos.</p>
@@ -62,59 +72,119 @@ além de ilustrações que complementam e brincam com nossa compreensão dos nú
 </ul>
 `;
 
-// Função genérica para abrir o modal com o conteúdo do livro
-function abrirModal(conteudo) {
-modalBody.innerHTML = conteudo;
-modal.style.display = 'block';
+  // Função genérica para abrir modal
+  function abrirModal(conteudo) {
+    modalBody.innerHTML = conteudo;
+    modal.style.display = 'block';
+  }
+
+  // Listeners para botões de detalhes
+  document.querySelectorAll('.detalhes-livro').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      abrirModal(conteudoLivro);
+    });
+  });
+
+  document.querySelectorAll('.detalhes-livro2').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      abrirModal(conteudoLivro2);
+    });
+  });
+
+  document.querySelectorAll('.detalhes-livro3').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      abrirModal(conteudoLivro3);
+    });
+  });
+
+  document.querySelectorAll('.detalhes-livro4').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      abrirModal(conteudoLivro4);
+    });
+  });
+
+  // Fechar modal com botão X
+  closeModal.onclick = function () {
+    modal.style.display = 'none';
+  };
+
+  // Fechar modal ao clicar fora dele
+  window.onclick = function (event) {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  };
+
+  // Filtro de busca na tabela
+  document.getElementById('search-input').addEventListener('keyup', function () {
+    const searchValue = this.value.toLowerCase();
+    const rows = document.querySelectorAll('#livros-table tbody tr');
+    rows.forEach(row => {
+      const livro = row.cells[1].textContent.toLowerCase();
+      row.style.display = livro.includes(searchValue) ? '' : 'none';
+    });
+  });
+
+// Gera um ID de livro com prefixo #
+function gerarIdLivro() {
+  const numero = Math.floor(1000 + Math.random() * 9000);
+  return `#${numero}`;
 }
 
-document.querySelectorAll('.detalhes-livro').forEach(link => {
-link.addEventListener('click', function (e) {
-  e.preventDefault();
-  abrirModal(conteudoLivro);
-});
-});
-
-document.querySelectorAll('.detalhes-livro2').forEach(link => {
-link.addEventListener('click', function (e) {
-  e.preventDefault();
-  abrirModal(conteudoLivro2);
-});
-});
-
-document.querySelectorAll('.detalhes-livro3').forEach(link => {
-link.addEventListener('click', function (e) {
-  e.preventDefault();
-  abrirModal(conteudoLivro3);
-});
-});
-
-document.querySelectorAll('.detalhes-livro4').forEach(link => {
-link.addEventListener('click', function (e) {
-  e.preventDefault();
-  abrirModal(conteudoLivro4);
-});
-});
-
-// Fecha o modal ao clicar no X
-closeModal.onclick = function () {
-modal.style.display = 'none';
-};
-
-// Fecha o modal ao clicar fora dele
-window.onclick = function (event) {
-if (event.target === modal) {
-  modal.style.display = 'none';
+// Abrir modal de adição com verificação
+if (botaoAdicionar && modalAdicionar && livroIdInput) {
+  botaoAdicionar.addEventListener("click", () => {
+    modalAdicionar.style.display = "block";
+    livroIdInput.value = gerarIdLivro();
+  });
 }
-};
 
-// Filtro de busca na tabela
-document.getElementById('search-input').addEventListener('keyup', function () {
-const searchValue = this.value.toLowerCase();
-const rows = document.querySelectorAll('#livros-table tbody tr');
-rows.forEach(row => {
-  const livro = row.cells[1].textContent.toLowerCase();
-  row.style.display = livro.includes(searchValue) ? '' : 'none';
-});
-});
+// Fechar modal de adição
+if (closeAdicionar && modalAdicionar && formAdicionar) {
+  closeAdicionar.addEventListener("click", () => {
+    modalAdicionar.style.display = "none";
+    formAdicionar.reset();
+  });
+}
 
+// Submeter novo livro
+if (formAdicionar) {
+  formAdicionar.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const tabela = document.getElementById("livros-table").getElementsByTagName("tbody")[0];
+    const novaLinha = tabela.insertRow();
+
+    novaLinha.innerHTML = `
+      <td>${document.getElementById("livro-id").value}</td>
+      <td><a href="#">${document.getElementById("livro-nome").value}</a></td>
+      <td>${document.getElementById("livro-genero").value}</td>
+      <td>${document.getElementById("livro-quantidade").value}</td>
+      <td>${document.getElementById("livro-prateleira").value}</td>
+      <td>${
+        (() => {
+          const data = document.getElementById("livro-data").value;
+          const [ano, mes, dia] = data.split("-");
+          return `${dia}/${mes}/${ano}`;
+        })()
+      }</td>
+      <td>${document.getElementById("livro-status").value}</td>
+    `;
+
+    modalAdicionar.style.display = "none";
+    formAdicionar.reset();
+  });
+}
+
+  // Define a data mínima do input como hoje
+  const hoje = new Date();
+  const ano = hoje.getFullYear();
+  const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+  const dia = String(hoje.getDate()).padStart(2, '0');
+  const dataHoje = `${ano}-${mes}-${dia}`;
+  document.getElementById("livro-data").setAttribute("min", dataHoje);
+});
