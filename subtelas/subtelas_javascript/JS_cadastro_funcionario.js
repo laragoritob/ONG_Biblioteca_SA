@@ -14,19 +14,31 @@ document.getElementById('btnCadastrar').addEventListener('click', function (e) {
     });
 
     if (todosPreenchidos) {
+        const usuarioInput = form.querySelector('input[name="usuario"]');
+        const usuario = usuarioInput.value.trim().toLowerCase();
+        const nomesProibidos = ["gerente", "repositor", "bibliotecario", "recreador", "gestor"];
+
+        if (nomesProibidos.includes(usuario)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Nome de usuário inválido',
+                text: `O nome "${usuario}" não é permitido. Escolha outro.`,
+                confirmButtonColor: '#ffbcfc'
+            });
+            return; // Interrompe o envio
+        }
+
         Swal.fire({
             title: 'Sucesso!',
             text: 'Funcionário cadastrado com sucesso!',
             icon: 'success',
             confirmButtonText: 'OK',
             confirmButtonColor: '#ffbcfc'
-        }) .then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-                // Enviar o formulário após confirmação
-                form.submit(); // Aqui o formulário será enviado
+                form.submit(); // Envia o formulário após confirmação
             }
-            });
-
+        });
     } else {
         Swal.fire({
             title: 'Erro!',
@@ -37,6 +49,7 @@ document.getElementById('btnCadastrar').addEventListener('click', function (e) {
         });
     }
 });
+
 
 
 // LIMITE DO CALENDÁRIO //
@@ -152,6 +165,55 @@ document.getElementById('btnCadastrar').addEventListener('click', function (e) {
             });
     }
 
+
+// ATUALIZAR O NOME DO ARQUIVO AO SELECIONAR UM ARQUIVO //
+    function atualizarNomeArquivo() {
+        const inputArquivo = document.getElementById('seletor_arquivo');
+        const nomeArquivo = document.getElementById('arquivo');
+        const listaArquivos = document.getElementById('lista-arquivos');
+        const arquivoBox = document.getElementById('arquivo-box');
+        const arquivosSelecionados = inputArquivo.files;
+  
+        // Verifica se há arquivos selecionados
+        if (arquivosSelecionados.length > 0) {
+          // Exibe o nome do primeiro arquivo selecionado
+          nomeArquivo.value = arquivosSelecionados[0].name;
+          arquivoBox.style.display = 'block';
+          listaArquivos.innerHTML = '';
+          
+          // Lista os arquivos selecionados
+          for (let i = 0; i < arquivosSelecionados.length; i++) {
+            const li = document.createElement('li');
+            li.textContent = arquivosSelecionados[i].name;
+            listaArquivos.appendChild(li);
+          }
+        } else {
+          // Caso nenhum arquivo seja selecionado
+          nomeArquivo.value = 'Nenhum arquivo selecionado';
+          arquivoBox.style.display = 'none';
+        }
+      };
+
+
+// PERMITIR APENAS LETRAS NO CAMPO DE NOME, CIDADE, ESTADO, BAIRRO E RUA //
+    function permitirApenasLetras(input) {
+        input.value = input.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, ''); // Letras + acentos + espaços
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const camposLetras = ['nome', 'cidade', 'estado', 'bairro', 'rua'];
+    
+        camposLetras.forEach(nome => {
+            const campo = document.querySelector(`input[name="${nome}"]`);
+            if (campo) {
+                campo.addEventListener('input', function () {
+                    permitirApenasLetras(this);
+                });
+            }
+        });
+    });
+    
+    
 
 // BOTÃO PARA MOSTRAR SENHA //
     document.getElementById('mostrarSenha').addEventListener('change', function () {
