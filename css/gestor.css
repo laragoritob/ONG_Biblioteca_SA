@@ -3,7 +3,7 @@
 /*CONFIGURAÇÃO GERAL*/
 body{
 	    font-family: "Candara", sans-serif;
-      background-image: url("file:///C:/desn2024v1/modelagem%20de%20sistemas/sala%20arco%20iris/img/gestor_fundo.png");
+      background-image: url("https://chat.google.com/u/0/api/get_attachment_url?url_type=FIFE_URL&content_type=image%2Fpng&attachment_token=AOo0EEUJzUpBsStszSzX0DGFLl3NrldXfWKh1ZMOjOLfWI0f%2Bm3IKXm33NVox77FScMacoVGEZ4R4jbTdLSHgyY3nRBzbQzyyLxnH9oEAtIQq18oRA0lZhztbB%2FhsyEEv8E9cAAHJpt%2BdbgTk%2FIJQmfFnZYwWflxkD0uwGbPg%2FggJVFFHY0E2fKmeOXp618rxMPUM0ih67NgHzZ1dtwthCF2weXBUX73KsiY7voYLqF5EFTSofvvxtRWathmt6U0VrKW6UOv0Xug%2FOHF1Se4xZKFzBpBDr52jRko18lKQeImHktPF098WX%2F%2FJHOz%2BENE0zLs2qrUtrNlgzI67mG0BjEjhBCLtbToISz9xJ6dibxd%2Fa8sKtUH7DZOg5avk9q7zMIyGjMTOLD3r92G3LtiJFkAKGCC%2F2OLY9f%2FfLoARle1SJrNeOAt6S4rN7dNykDFN2VLjlxhNNhlTnuOkY2mR%2BbavBv5eAOXC8k9BLngDD5AlgtqXkGgJjJ7gj0%2FbOeOi4GWmJ6GERxfkN5%2B72X87MSjqKf4bGh34PMcYJ%2BvkOSuNuow309YMk5HPoVHJWnqZwQt47HNc6A0yg%3D%3D&allow_caching=true&sz=w1366-h633");
       background-repeat: no-repeat;
       background-size: cover;
       height: 100%;
@@ -66,5 +66,8 @@ nav a:hover{
       float:right;
       height:130px;
       width:130px;
-         
+      position: absolute; /* Faz a imagem ficar posicionada de maneira absoluta */
+      bottom: 1px; /* Distância do fundo da página */
+      right: 20px; /* Distância da borda direita */
+      flex-wrap: wrap; /* <-- ESSENCIAL PARA CELULAR */
       }
