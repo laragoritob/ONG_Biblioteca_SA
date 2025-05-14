@@ -18,13 +18,11 @@ header{
 }
 
 header h1{
-  color: #4a3092; 
-  text-align: center;
-  font-size: 41px;
-  float: center;
-  margin: 10px 10px 10px;
+    color: #4a3092; 
+    text-align: center;
+    font-size: 50px;
+    float: left;
 }
-
 
 .container {
   display: flex;
@@ -198,18 +196,18 @@ h3 {
 }
 
 .custom-select {
-  width: 100%;
-  padding: 15px 12px;
+  width: 400px;
+  padding: 15px 55px;
   border: 1px solid #85ccea;
   border-radius: 25px;
-  background-color: #fff;
+  background-color: #ecf9ff;
   font-size: 16px;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Cpolygon points='0,0 10,0 5,7' style='fill:%23666;'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 12px center;
+  background-position: right 20px center;
   background-size: 12px;
   cursor: pointer;
   transition: border-color 0.3s ease;
@@ -217,10 +215,113 @@ h3 {
 
 .custom-select:focus {
   outline: none;
-  border-color: #ffbcfc;
+  border-color: #e280dd;
   box-shadow: 0 0 5px rgba(255, 188, 252, 0.5);
 }
 
+.cep-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.cep-container input[type="text"] {
+  width: 400px;
+  padding: 15px 55px;
+  border: none;
+  border-radius: 25px;
+  background: #cef1ff;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  box-sizing: border-box;
+  border: 1px solid #85ccea;
+}
+
+.cep-container .icon {
+  position: absolute;
+  left: 16px;
+  top: 45%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+}
+
+.btn-cep-inside {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #cef1ff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 18px;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background 0.3s;
+}
+
+.btn-cep-inside:hover {
+  background-color: #68acf0;
+}
+
+.arquivo-box {
+  margin-top: 25px;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  width: 100%;
+  max-width: 300px;
+  margin-left: 300;
+  margin-right: auto;
+}
+
+/* Estilo do parágrafo dentro do box de arquivos */
+.arquivo-box p {
+  margin-top: 10;
+  padding: 5px 0;
+}
+
+/* Estilo da lista de arquivos */
+#lista-arquivos {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* Estilo para cada item na lista de arquivos */
+#lista-arquivos li {
+  padding: 5px;
+  background-color: #f1f1f1;
+  margin: 5px 0;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Estilo do parágrafo dentro de arquivo-box */
+#arquivo-box p {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Estilo do botão inline */
+.botao-inline {
+  margin-left: 870px;
+  padding: 5px 15px;
+  font-size: 12px;
+  background-color: #ffbcfc;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+/* Efeito hover no botão inline */
+.botao-inline:hover {
+  background-color: #e07ddb;
+}
 
 footer {
   text-align: center;
