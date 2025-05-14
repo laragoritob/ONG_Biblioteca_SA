@@ -2,81 +2,148 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Consultar Livros - Sala Arco-íris</title>
-  <link rel="stylesheet" type="text/css" href="subtelas_css/css_consultarlivro.css"/>
+  <title>Controle de Estoque - Sala Arco-íris</title>
+  <link rel="stylesheet" type="text/css" href="subtelas_css/controleestoque.css"/>
 </head>
 <body>
 
-  <header> 
-    <h1> LIVROS </h1>
+<header>
+  <h1> LIVROS </h1>
 </header>
 
-  <div id="search-conteiner">
-    <span class="material-icons">🔎</span>
-    <input type="text" id="search-input" placeholder="Pesquisar por nome do livro...">
+<div id="search-container">
+  <div class="input-wrapper">
+    <span class="icon">🔎</span>
+    <input type="text" id="search-input" name="nome_relatorio" placeholder="Buscar livro..." required>
   </div>
-  
-  <table id="livros-table" border="1">
-    <thead>
-      <tr>
-        <th>ID do Livro</th>
-        <th>Nome do Livro</th>
-        <th>Gênero</th>
-        <th>Quantidade em Estoque</th>
-        <th>Prateleira</th>
-        <th>Data</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>#0001</td>
-        <td><a href="#" class="detalhes-livro">Para Todos Os Garotos Que Já Amei</a></td>
-        <td>Romance</td>
-        <td>30</td>
-        <td>05</td>
-        <td>30/07/2024</td>
-        <td>Disponível</td>
-      </tr>
-      <tr>
-        <td>#0002</td>
-        <td><a href="#" class="detalhes-livro2">O Cortiço</a></td>
-        <td>Naturalismo</td>
-        <td>12</td>
-        <td>03</td>
-        <td>01/08/2024</td>
-        <td>Disponível</td>
-      </tr>
-      <tr>
-        <td>#0003</td>
-        <td><a href="#" class="detalhes-livro3">O Pequeno Príncipe</a></td>
-        <td>Clássico</td>
-        <td>20</td>
-        <td>02</td>
-        <td>15/09/2024</td>
-        <td>Disponível</td>
-      </tr>
-      <tr>
-        <td>#0004</td>
-        <td><a href="#" class="detalhes-livro4">Matemática Básica</a></td>
-        <td>Didático</td>
-        <td>10</td>
-        <td>04</td>
-        <td>20/10/2024</td>
-        <td>Disponível</td>
-      </tr>
-    </tbody>
-  </table>
+</div>
 
-  <!-- Modal -->
-  <div id="modal">
-    <div id="modal-content">
-      <span id="close-modal">&times;</span>
-      <div id="modal-body">
+<table id="livros-table" border="1">
+  <thead>
+    <tr>
+      <th>ID do Livro</th>
+      <th>Nome do Livro</th>
+      <th>Gênero</th>
+      <th>Quantidade em Estoque</th>
+      <th>Prateleira</th>
+      <th>Data</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>#0001</td>
+      <td><a href="#" class="detalhes-livro">Para Todos Os Garotos Que Já Amei</a></td>
+      <td>Romance</td>
+      <td>30</td>
+      <td>05</td>
+      <td>30/07/2024</td>
+      <td>Disponível</td>
+    </tr>
+    <tr>
+      <td>#0002</td>
+      <td><a href="#" class="detalhes-livro2">O Cortiço</a></td>
+      <td>Naturalismo</td>
+      <td>12</td>
+      <td>03</td>
+      <td>01/08/2024</td>
+      <td>Disponível</td>
+    </tr>
+    <tr>
+      <td>#0003</td>
+      <td><a href="#" class="detalhes-livro3">O Pequeno Príncipe</a></td>
+      <td>Clássico</td>
+      <td>20</td>
+      <td>02</td>
+      <td>15/09/2024</td>
+      <td>Disponível</td>
+    </tr>
+    <tr>
+      <td>#0004</td>
+      <td><a href="#" class="detalhes-livro4">Matemática Básica</a></td>
+      <td>Didático</td>
+      <td>10</td>
+      <td>04</td>
+      <td>20/10/2024</td>
+      <td>Disponível</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="botoes-container">
+  <button class="botao-adicionar" id="botao-adicionar">Adicionar</button>
+  <button class="botao-editar" id="botao-editar">Editar</button>
+  <button class="botao-mudar" id="botao-mudar">Mudar status</button>
+</div>
+
+<!-- Modal de Adicionar Livro -->
+<div id="modal-adicionar" class="modal">
+  <div class="modal-content">
+    <span class="close" id="close-adicionar">&times;</span>
+    <h2>Adicionar Livro</h2>
+    <form id="form-adicionar">
+      <div class="linha-dupla">
+        <div>
+          <label>ID do Livro (gerado):</label>
+          <input type="text" id="livro-id" readonly>
+        </div>
+        <div>
+          <label>Nome do Livro:</label>
+          <input type="text" id="livro-nome" required>
+        </div>
       </div>
-    </div>
-  </div>
 
+      <div class="linha-dupla">
+        <div>
+          <label>Autor:</label>
+          <input type="text" id="livro-autor" required>
+        </div>
+        <div>
+          <label>Gênero:</label>
+          <input type="text" id="livro-genero" required>
+        </div>
+      </div>
+
+      <div class="linha-dupla">
+        <div>
+          <label>Quantidade em Estoque:</label>
+          <input type="number" id="livro-quantidade" required>
+        </div>
+        <div>
+          <label>Prateleira:</label>
+          <input type="number" id="livro-prateleira" required>
+        </div>
+      </div>
+
+      <div class="linha-dupla">
+        <div>
+          <label>Data:</label>
+          <input type="date" id="livro-data" required>
+        </div>
+        <div>
+          <label>Status:</label>
+          <select id="livro-status">
+            <option value="Disponível">Disponível</option>
+            <option value="Indisponível">Indisponível</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 15px;">
+        <button type="submit">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal de Detalhes -->
+<div id="modal">
+  <div id="modal-content">
+    <span id="close-modal">&times;</span>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script src="subtelas_javascript/controleestoque.js"></script>
 </body>
-<script src="javascript/controleestoque.js"></script>
 </html>
