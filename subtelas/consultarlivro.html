@@ -11,10 +11,13 @@
     <h1> LIVROS </h1>
 </header>
 
-  <div id="search-conteiner">
-    <span class="material-icons">🔎</span>
-    <input type="text" id="search-input" placeholder="Pesquisar por nome do livro...">
+<div id="search-container">
+  <label for="search-input">Digite o nome do livro:</label>
+  <div class="input-wrapper">
+    <span class="icon">🔎</span>
+    <input type="text" id="search-input" name="nome_relatorio" placeholder="Buscar livro..." required>
   </div>
+</div>
   
   <table id="livros-table" border="1">
     <thead>
@@ -78,5 +81,5 @@
   </div>
 
 </body>
-<script src="javascript/consultarlivro.js"></script>
+<script src="subtelas_javascript/consultarlivro.js"></script>
 </html>
