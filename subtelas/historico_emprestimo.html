@@ -5,11 +5,19 @@
   <title>ONG Biblioteca - Sala Arco-íris</title>
   <link rel="stylesheet" type="text/css" href="subtelas_css/telhistorico.css" />
 </head>
+
 <body>
   <header>
     <h1>Histórico de Empréstimos</h1>
   </header>
 
+  <div id="search-container">
+    <div class="input-wrapper">
+      <span class="icon">🔎</span>
+      <input type="text" id="search-input" name="nome_relatorio" placeholder="Buscar livro..." required>
+    </div>
+  </div>
+  
   <nav>
     <table id="livros-table" border="1">
       <thead>
@@ -27,28 +35,28 @@
           <td><a href="#" class="detalhes-livro">Para Todos Os Garotos Que Já Amei</a></td>
           <td>Helena Lopes</td>
           <td>25/02/2025</td>
-          <td>02/03/2025</td>
+          <td>27/04/2025</td>
         </tr>
         <tr>
           <td>0002</td>
           <td><a href="#" class="detalhes-livro2">O Cortiço</a></td>
           <td>Ruan Melo</td>
           <td>11/03/2025</td>
-          <td>18/03/2025</td>
+          <td>18/05/2025</td>
         </tr>
         <tr>
           <td>0003</td>
           <td><a href="#" class="detalhes-livro3">O Pequeno Príncipe</a></td>
           <td>Matheus Dela</td>
           <td>19/03/2025</td>
-          <td>26/03/2025</td>
+          <td>02/04/2025</td>
         </tr>
         <tr>
           <td>0004</td>
           <td><a href="#" class="detalhes-livro4">Matemática Básica</a></td>
           <td>Matheus Rodrigues</td>
-          <td>04/04/2025</td>
-          <td>18/04/2025</td>
+          <td>24/05/2025</td>
+          <td>31/05/2025</td>
         </tr>
       </tbody>
     </table>
@@ -62,7 +70,9 @@
     </div>
   </div>
 
-  <script src="subtelas_javascript/tela_renovacao_devolucao.js"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="subtelas_javascript/tela_renovacao_devolucao.js"></script>
 </body>
 </html>
+
