@@ -69,7 +69,6 @@ nav a:hover{
       height:130px;
       width:130px;
       position: absolute; /* Faz a imagem ficar posicionada de maneira absoluta */
-      bottom: 1px; /* Distância do fundo da página */
       right: 20px; /* Distância da borda direita */
       flex-wrap: wrap; /* <-- ESSENCIAL PARA CELULAR */
      }
