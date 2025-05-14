@@ -5,10 +5,22 @@ function preencherNomeFuncionario() {
     
     // Simulação de um banco de dados de funcionários com ID e nome
     const funcionarios = {
-      "1": "João Silva",
-      "2": "Maria Oliveira",
-      "3": "Carlos Souza"
-    };
+        "1": "Bruno Henrique",
+        "2": "Heloisa Gonçalves",
+        "3": "Lara Gorito",
+        "4": "Rafaela Elisa",
+        "5": "Marcos Paulo",
+        "6": "Ruan de Mello",
+        "7": "Maria Xuxa",
+        "8": "Kim Sunoo",
+        "9": "George Miller",
+        "10": "Dwayne Johnson",
+        "11": "Taylor Lautner",
+        "12": "Jake Gyllenhaal",
+        "13": "James Hetfield",
+        "14": "Gerard Way",
+        "15": "Rodrigo Pantera"
+      };      
   
     // Atribui o nome do funcionário correspondente ao ID inserido, ou uma string vazia caso não exista
     const nomeFuncionario = funcionarios[idFuncionario] || "";
