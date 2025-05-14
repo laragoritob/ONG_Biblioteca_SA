@@ -3,7 +3,7 @@
 /*CONFIGURAÇÃO GERAL*/
 body{
 	    font-family: "Candara", sans-serif;
-      background-image: url("file:///C:/desn2024v1/modelagem%20de%20sistemas/sala%20arco%20iris/img/bibliotecario_fundo.png");
+      background-image: url("https://chat.google.com/u/0/api/get_attachment_url?url_type=FIFE_URL&content_type=image%2Fpng&attachment_token=AOo0EEWMRIuesgJjLqwKB1ryoRIV2rUvxGuJiYIVbr8%2B7zwLJuSg8xO4MTcMMoKRIGiT9fZ1nUZY%2F8GPtz4OBxhrc4xdNDxjGnhwluWnTp%2FjPttAeSwllBUfegQS7Em4qZaMKn68USLb7W%2FeMqiGbDprttB90879zDHasPXBddjMOwoLdY%2F9l1Jb6d%2BR2aT6P522sjDyBRUAhO1tSemwi1KTlYq7BcaHojaXOz%2FfetKqqJdi7GwWOBBkbgBSu%2FURsrwXxv2NFc91YM6cWOO7w8IDeePtGTmXFvRMqbKjB9YEOW%2FMjAn8Bmn0RPga9f%2B1be2j7oUtCHZwt5a2LsVZZJZB3h5KwqgBpshys9FSTKBobwwLPXLnFqElwH9qPuVvB7In4%2BTk7bsA%2BuppAe1uzlROSHBqbhhokaOiGbVUEltDa7DtMJwvlvBIsTfpS248MyCEXdJCu65VU%2BZLBDIYAEx36cKx2XI%2BFY%2FJMTkaXtXnOrO3HGkvaFfppFn8VJT05rximcyyCAmRzdEttWyHViV%2Bn3xoHcQQxCQdMqn9tEqA%2FW0xsY%2BfLWenJvj%2B%2FSzefz3i5YRSSrk%2BnL0rXmVmjeYy&allow_caching=true&sz=w1366-h633&auditContext=forDisplay");
       background-repeat: no-repeat;
       background-size: cover;
       height: 100%;
@@ -26,7 +26,7 @@ header{
 header h1{
            color: #4a3092; 
            text-align: center;
-           font-size: 48px;
+           font-size: 46px;
            float: left;
            margin: 36px 225px 30px;
          }
