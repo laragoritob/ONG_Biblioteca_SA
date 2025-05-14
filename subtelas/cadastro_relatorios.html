@@ -21,35 +21,24 @@
       
       <!-- Linha de entrada para ID do Funcionário e Nome -->
       <div class="linha-dupla">
-        <!-- Campo para ID do Funcionário -->
-        <div class="input-group">
-          <p>ID do funcionário:</p>
-          <span class="icon">#</span>
-          <input type="number" name="id" id="id_funcionario" required oninput="preencherNomeFuncionario()">
+        <div>
+          <label>Gênero:</label>
+          <input type="text" id="livro-genero" required>
         </div>
-
-        <!-- Campo para Nome do Funcionário (apenas leitura) -->
-        <div class="input-group">
-          <p>Nome do funcionário:</p>
-          <span class="icon">👤</span>
-          <input type="text" name="nome_funcionario" id="nome_funcionario" readonly>
+        <div>
+          <label>Quantidade em Estoque:</label>
+          <input type="number" id="livro-quantidade" required>
         </div>
       </div>
-
-      <!-- Linha de entrada para Nome do Relatório e Data -->
+      
       <div class="linha-dupla">
-        <!-- Campo para Nome do Relatório -->
-        <div class="input-group">
-          <p>Nome do relatório:</p>
-          <span class="icon">🧾</span>
-          <input type="text" name="nome_relatorio" required>
+        <div>
+          <label>Prateleira:</label>
+          <input type="text" id="livro-prateleira" required>
         </div>
-
-        <!-- Campo para Data (preenchido com a data de hoje) -->
-        <div class="input-group">
-          <p>Data:</p>
-          <span class="icon">📅</span>
-          <input type="date" name="data" id="data" required min="" max="">
+        <div>
+          <label>Data:</label>
+          <input type="date" id="livro-data" required>
         </div>
       </div>
 
