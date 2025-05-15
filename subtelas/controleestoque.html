@@ -8,22 +8,27 @@
 <body>
 
 <header>
+  <!-- Título principal da página -->
   <h1> LIVROS </h1>
 </header>
 
+<!-- Container da barra de busca -->
 <div id="search-container">
   <div class="input-wrapper">
     <span class="icon">🔎</span>
+    <!-- Campo de busca para filtrar livros -->
     <input type="text" id="search-input" name="nome_relatorio" placeholder="Buscar livro..." required>
   </div>
 </div>
 
+<!-- Tabela com lista dos livros cadastrados -->
 <table id="livros-table" border="1">
   <thead>
     <tr>
       <th>ID do Livro</th>
       <th>Nome do Livro</th>
       <th>Gênero</th>
+      <th>Autor</th>
       <th>Quantidade em Estoque</th>
       <th>Prateleira</th>
       <th>Data</th>
@@ -31,10 +36,12 @@
     </tr>
   </thead>
   <tbody>
+    <!-- Exemplo de linhas com dados dos livros -->
     <tr>
       <td>#0001</td>
       <td><a href="#" class="detalhes-livro">Para Todos Os Garotos Que Já Amei</a></td>
       <td>Romance</td>
+      <td>Jenny Han</td>
       <td>30</td>
       <td>05</td>
       <td>30/07/2024</td>
@@ -44,6 +51,7 @@
       <td>#0002</td>
       <td><a href="#" class="detalhes-livro2">O Cortiço</a></td>
       <td>Naturalismo</td>
+      <td>Aluísio Azevedo</td>
       <td>12</td>
       <td>03</td>
       <td>01/08/2024</td>
@@ -53,6 +61,7 @@
       <td>#0003</td>
       <td><a href="#" class="detalhes-livro3">O Pequeno Príncipe</a></td>
       <td>Clássico</td>
+      <td>Antoine de Saint-Exupéry</td>
       <td>20</td>
       <td>02</td>
       <td>15/09/2024</td>
@@ -62,6 +71,7 @@
       <td>#0004</td>
       <td><a href="#" class="detalhes-livro4">Matemática Básica</a></td>
       <td>Didático</td>
+      <td>Vários</td>
       <td>10</td>
       <td>04</td>
       <td>20/10/2024</td>
@@ -70,14 +80,16 @@
   </tbody>
 </table>
 
+<!-- Container com botões de ações para os livros -->
 <div class="botoes-container">
   <button class="botao-adicionar" id="botao-adicionar">Adicionar</button>
-  <button class="botao-editar" id="botao-editar">Editar</button>
+  <button class="botao-editar" onclick="editarLivro()">Editar</button>
   <button class="botao-mudar" id="botao-mudar">Mudar status</button>
 </div>
 
 <!-- Modal de Adicionar Livro -->
 <div id="modal-adicionar" class="modal">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <div class="modal-content">
     <span class="close" id="close-adicionar">&times;</span>
     <h2>Adicionar Livro</h2>
@@ -130,13 +142,41 @@
       </div>
 
       <div style="text-align: center; margin-top: 15px;">
-        <button type="submit">Salvar</button>
+        <button type="submit" id="botao-salvar">Salvar</button>
+        <button type="submit" id="botao-cancelar">Cancelar</button>
       </div>
     </form>
   </div>
 </div>
 
-<!-- Modal de Detalhes -->
+<!-- Modal de Mudar Status -->
+<div id="modal-status" class="modal">
+  <div class="modal-content">
+    <span class="close" id="close-status">&times;</span>
+    <h2>Mudar Status do Livro</h2>
+    <form id="form-status">
+      <p>Selecione o novo status:</p>
+      
+      <div class="linha-dupla-radio">
+        <label>
+          <input type="radio" name="novo-status" value="Disponível" required>
+          Disponível
+        </label>
+        <label>
+          <input type="radio" name="novo-status" value="Indisponível">
+          Indisponível
+        </label>
+      </div>
+
+      <div style="text-align: center; margin-top: 15px;">
+        <button type="submit">Confirmar</button>
+        <button type="button" id="cancelar-status">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal de Detalhes do livro -->
 <div id="modal">
   <div id="modal-content">
     <span id="close-modal">&times;</span>
@@ -144,6 +184,7 @@
   </div>
 </div>
 
+<!-- Script principal da página -->
 <script src="subtelas_javascript/controleestoque.js"></script>
 </body>
 </html>
