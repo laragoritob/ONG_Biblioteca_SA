@@ -161,25 +161,37 @@ header h1 {
   min-width: 200px;
 }
 
-#modal-adicionar .modal-content button[type="submit"] {
-  background-color: #85ccea;
-  color: white;
-  padding: 12px 25px;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+#modal-adicionar .modal-content {
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 15px solid #87ceeb;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
 }
 
-#modal-adicionar .modal-content button[type="submit"]:hover {
-  background-color: #5a8699;
+#modal-adicionar .modal-content button[type="submit"] {
+  background-color: #ffbcfc;
+  color: black;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 /* BOTÕES */
 .botao-adicionar,
 .botao-editar,
-.botao-mudar {
+.botao-mudar,
+.botao-salvar,
+.botao-cancelar {
   background: #ffbcfc;
   color: rgb(0, 0, 0);
   padding: 15px 40px;
@@ -304,3 +316,157 @@ a {
   box-sizing: border-box;
 }
 
+#modal-adicionar {
+  display: none;
+}
+
+#modal-adicionar input[type="text"],
+#modal-adicionar input[type="number"],
+#modal-adicionar input[type="date"],
+#modal-adicionar select {
+  width: 90%;           /* Ou menos, como 80% */
+  max-width: 350px;     /* Para limitar o tamanho em telas grandes */
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 10px;
+  margin: 0 auto 12px;
+  display: block;
+}
+
+/* MODAL MUDAR STATUS */
+#modal-status {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+#modal-status .modal-content {
+  background-color: #ffffff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 15px solid #87ceeb;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-family: "Candara", sans-serif;
+  position: relative;
+}
+
+#modal-status .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+#modal-status .close:hover {
+  color: #c0392b;
+}
+
+#modal-status h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 24px;
+  color: #4a3092;
+}
+
+#form-status label {
+  display: block;
+  margin: 12px 0;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+
+#form-status input[type="radio"] {
+  margin-right: 10px;
+}
+
+#form-status button {
+  padding: 10px 20px;
+  margin: 10px 5px 0 5px;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+#form-status button[type="submit"] {
+  background-color: #77d440;
+  color: white;
+}
+
+#form-status button[type="submit"]:hover {
+  background-color: #5eb829;
+}
+
+#cancelar-status {
+  background-color: #c93c8c;
+  color: white;
+}
+
+#cancelar-status:hover {
+  background-color: #eab2d2;
+}
+
+.btn {
+  background: #ffbcfc;
+  color: rgb(0, 0, 0);
+  padding: 15px 100px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+  margin-left: 275px;
+}
+
+.btn.glow {
+  box-shadow: 0px 0px 15px #884b85;
+}
+
+.btn:hover {
+  background: #e07ddb;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px #884b85;
+}
+
+
+.linha-dupla-radio {
+  display: flex;
+  gap: 20px; /* espaço entre os dois labels */
+  align-items: center;
+}
+
+.linha-dupla-radio label {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* espaço entre bolinha e texto */
+  cursor: pointer;
+}
+
+.linha-dupla-radio input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
