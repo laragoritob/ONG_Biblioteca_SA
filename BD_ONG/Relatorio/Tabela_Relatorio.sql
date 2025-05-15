@@ -3,6 +3,7 @@ create table Relatorio (
     Cod_Funcionario int not null,
     Nome varchar(100) not null,
     Data_Relatorio date not null,
+    Arquivo_Selecionado mediumblob,
     Tipo_Arquivo varchar(6) not null,
     
     constraint PK_Relatorio primary key (Cod_Relatorio),
