@@ -74,7 +74,7 @@ const fichacrianca5 = `
 
 // Ficha do Matheus
 const fichacrianca6 = `
-<img src="subtelas_img/matheus.jpg" title="Matheus D." class="foto-crianca" />
+<img src="subtelas_img/matheus.jpeg" title="Matheus D." class="foto-crianca" />
 <h3 style="margin-top: 0;">Matheus D.</h3>
 <p><strong>Data de Nascimento:</strong> 19/04/2016</p>
 <p><strong>Responsável:</strong> Carlos D.</p>
@@ -112,6 +112,20 @@ const fichacrianca8 = `
 <p><strong>Bairro:</strong> Velha Central.</p>
 <p><strong>Rua:</strong> Rua São Pedro.</p>
 <p><strong>Número:</strong> 10</p>
+`;
+
+// Ficha do Matheus
+const fichacrianca9 = `
+<img src="subtelas_img/matheush.jpg" title="Matheus H." class="foto-crianca" />
+<h3 style="margin-top: 0;">Matheus H.</h3>
+<p><strong>Data de Nascimento:</strong> 19/04/2016</p>
+<p><strong>Responsável:</strong> Juliano H.</p>
+<p><strong>Telefone:</strong>(47)9 1111-4433.</p>
+<p><strong>Estado:</strong> Santa Catarina.</p>
+<p><strong>Cidade:</strong> São José.</p>
+<p><strong>Bairro:</strong> Barreiros.</p>
+<p><strong>Rua:</strong> Rua João Pessoa.</p>
+<p><strong>Número:</strong> 78</p>
 `;
 
 // Função genérica para abrir o modal com o conteúdo do livro
@@ -176,6 +190,13 @@ link.addEventListener('click', function (e) {
     abrirModal(fichacrianca8);
 });
 });
+
+document.querySelectorAll('.fichacrianca9').forEach(link => {
+  link.addEventListener('click', function (e) {
+      e.preventDefault();
+      abrirModal(fichacrianca9);
+  });
+  });
 
 // Fecha o modal ao clicar no X
 closeModal.onclick = function () {
