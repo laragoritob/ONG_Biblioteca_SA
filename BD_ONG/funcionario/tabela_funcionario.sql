@@ -19,6 +19,7 @@ create table Funcionario (
     Usuario varchar(20) not null,
     Senha varchar(20) not null,
     Cargo varchar(20) not null,
+	Foto_Funcionario longblob,
     
     constraint PK_Funcionario primary key (Cod_Funcionario)
 );
