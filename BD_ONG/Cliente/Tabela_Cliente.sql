@@ -16,7 +16,6 @@ create table Cliente (
     Bairro varchar(30) not null,
     Rua varchar(40) not null,
     Num_Residencia  int not null,
-    Foto_Cliente longblob,
     
     constraint PK_Cliente primary key (Cod_Cliente)
 );
