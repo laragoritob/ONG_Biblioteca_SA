@@ -6,6 +6,16 @@ const modal = document.getElementById('modal');
     {
       selector: '.detalhes-funcionarios',
       codigo: '0001',
+      cpf:'153.204.489-17',
+      escolaridade:'Ensino Superior Completo',
+      estado:'São Paulo',
+      civil:' Casado',
+      cidade:'Campinas',
+      bairro:'Taquaral',
+      rua:'Rua José Villare',
+      numero:'145',
+      sexo:'Masculino',
+      telefone:'(19) 99745-2210',
       nome: 'Silvio Luis de Sousa',
       cargo: 'Gerente',
       nascimento: '21/03/1965',
@@ -15,6 +25,16 @@ const modal = document.getElementById('modal');
     {
       selector: '.detalhes-funcionarios2',
       codigo: '0002',
+      cpf:'230.871.112-04',
+      escolaridade:'Ensino Médio Completo',
+      estado:'Rio de Janeiro',
+      civil:'Divorciada',
+      cidade:'Niterói',
+      bairro:' Icaraí',
+      rua:' Rua Álvares de Azevedo',
+      numero:'88',
+      sexo:'Feminino',
+      telefone:'(21) 98711-3390',
       nome: 'Maria da Graça Xuxa Meneghel',
       cargo: 'Gerente',
       datanascimento: '27/03/1963',
@@ -24,6 +44,16 @@ const modal = document.getElementById('modal');
     {
       selector: '.detalhes-funcionarios3',
       codigo: '0003',
+      cpf:'401.562.870-39',
+      escolaridade:'Ensino Médio Incompleto',
+      estado:'Santa Catarina',
+      civil:'Solteiro',
+      cidade:'Joinville',
+      bairro:'América',
+      rua:'Rua Expedicionário Holz',
+      numero:'201',
+      sexo:'Masculino',
+      telefone:'(47) 99821-0543',
       nome: 'Ruan de Mello Vieira',
       cargo: 'Bibliotecário',
       datanascimento: '03/07/2007',
@@ -33,6 +63,16 @@ const modal = document.getElementById('modal');
     {
       selector: '.detalhes-funcionarios4',
       codigo: '0004',
+      cpf:'Ensino Fundamental Completo',
+      escolaridade:'Ensino Fundamental Completo',
+      estado:'Bahia',
+      civil:' Solteiro',
+      cidade:'Salvador',
+      bairro:'Itapuã',
+      rua:'Rua Genipabu',
+      numero:'76',
+      sexo:'Masculino',
+      telefone:'(71) 98144-6732',
       nome: 'Marcos Paulo Fernandes',
       cargo: 'Repositor',
       datanascimento: '31/08/2008',
@@ -42,15 +82,35 @@ const modal = document.getElementById('modal');
     {
       selector: '.detalhes-funcionarios5',
       codigo: '0005',
+      cpf:'082.119.794-22',
+      escolaridade:'Ensino Superior Completo',
+      estado:'Minas Gerais',
+      civil:'Casado',
+      cidade:'Belo Horizonte',
+      bairro:'Savassi',
+      rua:'Rua Pernambuco',
+      numero:'309',
+      sexo:'Masculino',
+      telefone:'(31) 99700-7855',
       nome: 'Gerard Arthur Way',
       cargo: 'Recreador',
       datanascimento: '09/04/1977',
       dataefetivacao: '05/02/2025',
-      imagem: 'subtelas_img/gerard_way.jpg',
+      imagem: 'subtelas_img/gerard_way.webp',
     },
     {
       selector: '.detalhes-funcionarios6',
       codigo: '0006',
+      cpf:'104.163.459-56',
+      escolaridade:'Ensino Superior Completo',
+      estado:'Paraná',
+      civil:'Solteiro',
+      cidade:'Magé',
+      bairro:'Santa Candida',
+      rua:'Albino Kolbach',
+      numero:'196',
+      sexo:'Masculino',
+      telefone:'(21) 98861-4670',
       nome: 'Kim Sunoo',
       cargo: 'Repositor',
       datanascimento: '24/06/2003',
@@ -60,6 +120,16 @@ const modal = document.getElementById('modal');
     {
       selector: '.detalhes-funcionarios7',
       codigo: '0007',
+      cpf:'123.456.789-10',
+      escolaridade:' Ensino Superior Completo ',
+      estado:'Rio de Janeiro',
+      civil:' Casado',
+      cidade:'Curitiba',
+      bairro:'Costa e Silva',
+      rua:'Bernardo Welter',
+      numero:'51',
+      sexo:'Masculino',
+      telefone:'21) 98861-4670',
       nome: 'Dwayne Douglas Johnson',
       cargo: 'Recreador',
       datanascimento: '02/05/1972',
@@ -69,6 +139,16 @@ const modal = document.getElementById('modal');
     {
       selector: '.detalhes-funcionarios8',
       codigo: '0008',
+      cpf:'093.861.509-93',
+      escolaridade:' Ensino Médio Incompleto',
+      estado:'Pernambuco',
+      civil:'Solteiro',
+      cidade:' Recife',
+      bairro:'Boa Vista',
+      rua:'Rua do Sossego',
+      numero:'132',
+      sexo:'Masculino',
+      telefone:'(81) 98422-1108',
       nome: 'Rodrigo Pantera',
       cargo: 'Recreador',
       datanascimento: '25/01/2007',
@@ -78,6 +158,16 @@ const modal = document.getElementById('modal');
     {
       selector: '.detalhes-funcionarios9',
       codigo: '0009',
+      cpf:'188.612.345-77',
+      escolaridade:'Ensino Superior Completo',
+      estado:'Rio Grande do Sul',
+      civil:'Solteiro',
+      cidade:'Porto Alegre',
+      bairro:'Moinhos de Vento',
+      rua:'Rua Padre Chagas',
+      numero:'441',
+      sexo:'Masculino',
+      telefone:'(51) 99874-6632',
       nome: 'Taylor Lautner',
       cargo: 'Bibliotecário',
       datanascimento: '19/12/1980',
@@ -87,11 +177,21 @@ const modal = document.getElementById('modal');
     {
       selector: '.detalhes-funcionarios10',
       codigo: '0010',
+      cpf:'321.997.008-63',
+      escolaridade:'Ensino Superior Completo',
+      estado:' São Paulo',
+      civil:'Masculino',
+      cidade:'Santo André',
+      bairro:'Jardim',
+      rua:'Rua das Palmeiras',
+      numero:'321',
+      sexo:'Masculino',
+      telefone:'(11) 98671-9932',
       nome: 'James Hetfield',
       cargo: 'Gestor',
       datanascimento: '03/08/1963',
       dataefetivacao: '21/08/2024',
-      imagem: 'subtelas_img/james_hetfield.webp',
+      imagem: 'subtelas_img/james_hetfield.jpg',
     }
   ];
 
@@ -113,7 +213,6 @@ const modal = document.getElementById('modal');
   <p><strong>Cargo:</strong> ${funcionario.cargo}</p>
   <p><strong>Data de Nascimento:</strong> ${funcionario.nascimento}</p>
 
-  <p><strong>Nacionalidade:</strong> ${funcionario.nacionalidade}</p>
   <p><strong>Estado:</strong> ${funcionario.estado}</p>
 
   <p><strong>Cidade:</strong> ${funcionario.cidade}</p>
@@ -142,8 +241,8 @@ const modal = document.getElementById('modal');
     }
   });
 
-function gerarFormulario(funcionario, cpf, sexo, civil, escolaridade, cargo, nacionalidade, 
-  estado, cidade, nascimento, bairro, tefone, numero, rua, imagem, editar, desativar) {
+function gerarFormulario(funcionario, cpf, sexo, civil, escolaridade, cargo, 
+  estado, cidade, nascimento, bairro, telefone, numero, rua, imagem, editar, desativar) {
 
   return `
     <img src="${imagem}" title="funcionario" class="hmfuncionario" />
@@ -170,9 +269,6 @@ function gerarFormulario(funcionario, cpf, sexo, civil, escolaridade, cargo, nac
       <label for="cliente">Data de Nascimento:</label>
       <input type="date" id="data" name="data" value="${nascimento}" readonly>
 
-      <label for="nacionalidade">Nacionalidade:</label>
-      <input type="text" id="nacionalidade" name="nacionalidade" value="${nacionalidade}" readonly>
-
       <label for="estado">Estado:</label>
       <input type="text" id="estado" name="estado" value="${estado}" readonly>
 
@@ -189,7 +285,7 @@ function gerarFormulario(funcionario, cpf, sexo, civil, escolaridade, cargo, nac
       <input type="number" id="numero" name="numero" value="${numero}" readonly>
 
       <label for="tefone">Telefone:</label>
-      <input type="number" id="tefone" name="tefone" value="${tefone}" readonly>
+      <input type="number" id="tefone" name="tefone" value="${telefone}" readonly>
 
       <div class="linha-dupla">
         <div class="input-group">
@@ -199,7 +295,7 @@ function gerarFormulario(funcionario, cpf, sexo, civil, escolaridade, cargo, nac
 
         <div class="input-group">
           <p>Desativar:</p>
-          <input type="text" name="devolucao" value="${desativar}" readonly class="${classeAtraso}">
+          <input type="text" name="devolucao" value="${desativar}" readonly">
         </div>
       </div>
 
@@ -210,20 +306,6 @@ function gerarFormulario(funcionario, cpf, sexo, civil, escolaridade, cargo, nac
     </form>
   `;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // CAMPO DE BUSCA
