@@ -33,28 +33,30 @@ header h1 {
 
 /* MODAL VISUALIZAÇÃO */
 #modal {
-  display: none; /* inicialmente oculto */
-  position: fixed; /* fixado na tela */
-  z-index: 1000; /* acima de outros elementos */
+  display: none;
+  position: fixed;
+  z-index: 1000;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto; /* scroll se necessário */
-  background-color: rgba(0, 0, 0, 0.6); /* fundo escurecido */
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
 }
 
-/* Conteúdo do modal */
 #modal-content {
   background-color: #fff;
-  margin: 10% auto; /* centralizado verticalmente */
-  padding: 20px;
-  border-radius: 8px; 
-  width: 50%;
-  max-width: 600px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  position: relative;
-}
+  margin: 5% auto;
+  padding: 10px 20px;
+  border-radius: 8px;
+  width: 60%;
+  max-width: 800px;
+  max-height: 70vh;
+  overflow-y: auto;
+  border: 15px solid #87ceeb; /* nova borda */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* sombra opcional para destacar */
+  }
+
 
 #close-modal {
   float: right;
@@ -95,33 +97,26 @@ header h1 {
 }
 
 /* MODAL ADICIONAR */
-#modal-adicionar {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+.botao-adicionar {
+display: inline-flex; /* inline para respeitar o conteúdo e flow */
+align-items: center;
+gap: 8px; /* espaço entre texto e ícone/input */
+padding: 15px 40px;
+border-radius: 25px;
+font-size: 16px;
+font-weight: bold;
+background: #ffbcfc;
+cursor: pointer;
+transition: all 0.3s ease;
+color: black;
+border: none;
 }
 
-#modal-adicionar .modal-content {
-  background-color: #fff;
-  padding: 20px 30px;
-  border-radius: 10px;
-  width: 60%;
-  max-width: 800px;
-  max-height: 70vh;
-  overflow-y: auto;
-  border: 15px solid #87ceeb;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.botao-adicionar:hover {
+background: #e07ddb;
+transform: translateY(-2px);
+box-shadow: 0 0 20px #884b85;
 }
-
 #modal-adicionar .close {
   float: right;
   font-size: 24px;
@@ -191,6 +186,10 @@ header h1 {
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 0px;
+  display: none; /* já deve estar no seu CSS */
+  display: flex; /* ativa flexbox */
+  justify-content: center; /* centraliza horizontal */
+  align-items: center; /* centraliza vertical */
 }
 
 .botoes-container {
@@ -304,7 +303,15 @@ a {
 }
 
 #modal-adicionar {
-  display: none;
+  display: none; /* inicialmente oculto */
+  position: fixed; /* fixado na tela */
+  z-index: 1000; /* acima de outros elementos */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* scroll se necessário */
+  background-color: rgba(0, 0, 0, 0.6); /* fundo escurecido */
 }
 
 #modal-adicionar input[type="text"],
@@ -318,7 +325,25 @@ a {
   border-radius: 10px;
   margin: 0 auto 12px;
   display: block;
+  background-color: #fff;
+  margin: 10% auto; /* centralizado verticalmente */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+
 }
+
+#modal-adicionar .modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 10px 20px;
+  border-radius: 8px;
+  width: 60%;
+  max-width: 800px;
+  max-height: 70vh;
+  overflow-y: auto;
+  border: 15px solid #87ceeb; /* nova borda */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* sombra opcional para destacar */
+  }
+
 
 /* MODAL MUDAR STATUS */
 #modal-status {
@@ -334,18 +359,21 @@ a {
   }
 
 #modal-status .modal-content {
-  background-color: #ffffff;
-  padding: 25px 30px;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 500px;
-  max-height: 80vh;
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 10px 20px;
+  border-radius: 8px;
+  width: 60%;
+  max-width: 800px;
+  max-height: 70vh;
   overflow-y: auto;
-  border: 15px solid #87ceeb;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  font-family: "Candara", sans-serif;
-  position: relative;
-}
+  border: 15px solid #87ceeb; /* nova borda */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* sombra opcional para destacar */
+  }
+
+
+
+
 
 #modal-status .close {
   position: absolute;
@@ -437,7 +465,6 @@ a {
   box-shadow: 0 0 20px #884b85;
 }
 
-
 .linha-dupla-radio {
   display: flex;
   gap: 20px; /* espaço entre os dois labels */
@@ -455,4 +482,65 @@ a {
   width: 16px;
   height: 16px;
   margin: 0;
+}
+
+/* Estilos SweetAlert2 */
+
+.swal2-popup {
+  font-family: "Candara", sans-serif;
+  border: 15px solid #87ceeb;
+  font-size: 10px;
+  border-radius: 12px;
+  background: #fefefe;
+  color: #333;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  width: 600px !important;  /* forçar largura */
+  max-width: 90vw !important;
+  font-size: 1rem !important;
+}
+
+.swal2-confirm {
+  background-color: #77d440; /* verde */
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 8px 24px;
+  box-shadow: #000000;
+  transition: background-color 0.3s ease;
+}
+
+.swal2-confirm:hover {
+  background-color: #45a049;
+}
+
+.swal2-cancel {
+  background-color: #e07ddb; /* vermelho */
+  border-radius: 8px;
+  padding: 8px 24px;
+  box-shadow: #884b85;
+  transition: background-color 0.3s ease;
+  color: #fff;
+}
+
+.swal2-cancel:hover {
+  background-color: #884b85;
+}
+
+.swal2-input-label {
+  color: #555;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.swal2-input {
+  border-radius: 6px;
+  border: 1.8px solid #ccc;
+  padding: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.swal2-input:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 5px #4caf50;
 }
