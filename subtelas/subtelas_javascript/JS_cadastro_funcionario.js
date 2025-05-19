@@ -52,7 +52,7 @@ document.getElementById('btnCadastrar').addEventListener('click', function (e) {
 
 
 
-// LIMITE DO CALENDÁRIO //
+// LIMITE DO CALENDÁRIO (DATA DE NASCIMENTO) //
     document.addEventListener('DOMContentLoaded', function () {
         const inputData = document.getElementById('dataNascimento');
         const hoje = new Date();
@@ -62,6 +62,19 @@ document.getElementById('btnCadastrar').addEventListener('click', function (e) {
 
         inputData.max = `${ano}-${mes}-${dia}`;
     });
+
+
+// LIMITE DO CALENDÁRIO (DATA EFETIVAÇÃO) //
+document.addEventListener('DOMContentLoaded', function () {
+    const inputData = document.getElementById('dataEfetivacao');
+    const hoje = new Date();
+    const dia = String(hoje.getDate()).padStart(2, '0');
+    const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+    const ano = hoje.getFullYear();
+
+    inputData.min = `${ano}-${mes}-${dia}`;
+    inputData.max = `${ano}-${mes}-${dia}`;
+});
 
 
 // LIMITAR O NÚMERO DE DÍGITOS DO CPF E PERMITIR APENAS NÚMEROS //
