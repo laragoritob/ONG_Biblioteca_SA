@@ -262,38 +262,80 @@ document.getElementById('cancelar-status').addEventListener('click', () => {
   });
 });
 
+
 // Modal para alterar status do livro
-const botaoMudar = document.getElementById("botao-mudar");
-const modalStatus = document.getElementById("modal-status");
-const formStatus = document.getElementById("form-status");
-const closeStatus = document.getElementById("close-status");
 
-if (botaoMudar && modalStatus && formStatus && closeStatus) {
-  botaoMudar.addEventListener("click", () => {
-    modalStatus.style.display = "block";
-  });
+let livroSelecionado = null;
 
-  closeStatus.addEventListener("click", () => {
-    modalStatus.style.display = "none";
-    formStatus.reset();
-  });
+document.addEventListener("DOMContentLoaded", function () {
+  const botaoMudar = document.getElementById('botao-mudar');
+  const modalStatus = document.getElementById('modal-status');
+  
+  document.addEventListener("DOMContentLoaded", function () {
+    const botaoMudar = document.getElementById('botao-mudar');
+    const modalStatus = document.getElementById('modal-status');
+    const closeStatus = document.getElementById('close-status');
+    const cancelarStatus = document.getElementById('cancelar-status');
+    const formStatus = document.getElementById('form-status');
+  
+    let livroSelecionado = null;
+  
+ // Abertura do modal após confirmação do ID
+ botaoMudar.addEventListener("click", () => {
+  Swal.fire({
+    title: 'Digite o ID do livro',
+    input: 'text',
+    inputLabel: 'ID do livro (ex: #0001)',
+    inputPlaceholder: 'Insira o ID aqui',
+    showCancelButton: true,
+    confirmButtonText: 'Confirmar',
+    cancelButtonText: 'Cancelar',
+    confirmButtonColor: '#4CAF50',
+    cancelButtonColor: '#f44336',
+    inputValidator: (value) => {
+      if (!value.trim()) return 'Você precisa digitar um ID!';
+    }
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const idDigitado = result.value.trim();
+      const linhas = document.querySelectorAll("#livros-table tbody tr");
 
-  window.addEventListener("click", (event) => {
-    if (event.target === modalStatus) {
-      modalStatus.style.display = "none";
-      formStatus.reset();
+      livroSelecionado = null;
+
+      linhas.forEach((linha) => {
+        const idCelula = linha.querySelector("td").textContent.trim();
+        console.log("Comparando:", idCelula, idDigitado); // DEBUG
+
+        if (idCelula === idDigitado) {
+          livroSelecionado = linha;
+        }
+      });
+
+      if (!livroSelecionado) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Livro não encontrado',
+          text: `Nenhum livro com ID ${idDigitado} foi encontrado.`,
+        });
+      } else {
+        modalStatus.style.display = "block";
+      }
     }
   });
+});
 
-  formStatus.addEventListener("submit", (e) => {
-    e.preventDefault();
+closeStatus.addEventListener("click", () => {
+  modalStatus.style.display = "none";
+});
+
+cancelarStatus.addEventListener("click", () => {
+  modalStatus.style.display = "none";
+});
+
+window.addEventListener("click", (event) => {
+  if (event.target === modalStatus) {
     modalStatus.style.display = "none";
-    formStatus.reset();
-
-    Swal.fire({
-      title: 'Status alterado!',
-      icon: 'success',
-      confirmButtonColor: '#4CAF50'
-    });
-  });
-}
+  }
+});
+});
+});
