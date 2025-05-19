@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 INSERT INTO funcionario (Cod_Funcionario, Nome, CPF, Sexo, Nome_Responsavel, Nacionalidade, Escolaridade, Telefone, RG, Data_Nascimento, Data_Efetivacao, CEP, UF, Cidade, Bairro, Rua, Num_Residencia,	Usuario, Senha, Cargo, Foto_Funcionario) VALUES
 (1, 'Silvio Luiz de Sousa', '111.111.111-11', 'M', 'Joana Sousa', 'Brasileira', 'Ensino Superior completo', '11999990001', '55.555.555-5', '1980-07-08', '2024-07-08', '01001-000', 'SP', 'São Paulo', 'Centro', 'Rua das Flores', 101, 'silvioso', 'senha123', 'gerente', NULL),
 (2, 'Lara Gorito', '222.222.222-22', 'F', 'Renata Gorito', 'Brasileira', 'Graduação em Administração', '11999990002', '44.444.444-4', '1995-05-10', '2024-07-10', '01002-000', 'SP', 'São Paulo', 'Bela Vista', 'Rua da Alegria', 102, 'larag', 'senha123', 'gestor', NULL),
