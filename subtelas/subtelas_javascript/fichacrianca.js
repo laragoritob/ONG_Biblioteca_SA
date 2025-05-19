@@ -4,115 +4,218 @@ const closeModal = document.getElementById('close-modal');
 
 // Ficha do Dalton
 const fichacrianca = `
-<img src="subtelas_img/dalton.jpg" title="Dalton M." class="foto-crianca" />
-<h3 style="margin-top: 0;">Dalton M.</h3>
-<p><strong>Data de Nascimento:</strong> 01/01/2015</p>
-<p><strong>Responsável:</strong> João M.</p>
-<p><strong>Telefone:</strong>(47)9 9261-7721.</p>
-<p><strong>Estado:</strong>Santa Catarina.</p>
-<p><strong>Cidade:</strong>Joinville.</p>
-<p><strong>Bairro:</strong>Costa e Silva.</p>
-<p><strong>Rua:</strong>Affonso Zastrow.</p>
-<p><strong>Numero:</strong>12</p>
+<div class="ficha-crianca">
+  <img src="subtelas_img/dalton.jpg" title="Dalton M." class="foto-crianca" />
+  <div class="info-crianca">
+    <h3>Dalton M.</h3>
+    <p><em>Dalton é um menino extremamente curioso e sempre interessado em entender como as coisas funcionam. 
+    Gosta de montar quebra-cabeças, assistir vídeos educativos e tem grande facilidade com números. 
+    Seus professores destacam sua atenção e dedicação nas tarefas. 
+    Ele também adora andar de bicicleta e brincar ao ar livre com os amigos do bairro.
+    Tem um ótimo relacionamento com todos ao seu redor.</em></p>
+    <p><strong>Data de Nascimento:</strong> 01/01/2015</p>
+    <p><strong>Responsável:</strong> João M.</p>
+    <p><strong>Telefone:</strong> (47)9 9261-7721</p>
+    <p><strong>Estado:</strong> Santa Catarina</p>
+    <p><strong>Cidade:</strong> Joinville</p>
+    <p><strong>Bairro:</strong> Costa e Silva</p>
+    <p><strong>Rua:</strong> Affonso Zastrow</p>
+    <p><strong>Número:</strong> 12</p>
+  </div>
+</div>
 `;
+
 
 // Ficha do Gustavo
 const fichacrianca2 = `
-<img src="subtelas_img/gustavo.jpg" title="Gustavo T." class="foto-crianca" />
-<h3 style="margin-top: 0;">Gustavo T.</h3>
-<p><strong>Data de Nascimento:</strong> 16/09/2017</p>
-<p><strong>Responsável:</strong> Mirian Back Tobler</p>
-<p><strong>Telefone:</strong>(47)9 8888-9999.</p>
-<p><strong>Estado:</strong> Santa Catarina.</p>
-<p><strong>Cidade:</strong> Florianópolis.</p>
-<p><strong>Bairro:</strong> Centro.</p>
-<p><strong>Rua:</strong> Rua dos Açores.</p>
-<p><strong>Número:</strong> 45</p>
+<div class="ficha-crianca">
+  <img src="subtelas_img/gustavo.jpg" title="Gustavo T." class="foto-crianca" />
+  <div class="info-crianca">
+    <h3>Gustavo T.</h3>
+    <p><em>Gustavo é um menino alegre e muito comunicativo, adora contar histórias e fazer amigos por onde passa. 
+    Seu passatempo favorito é desenhar e colorir, além de construir castelos de areia quando está na praia. 
+    É bastante criativo e sempre tem uma nova ideia para compartilhar. 
+    Gosta de passar tempo com a mãe, com quem lê livros antes de dormir.
+    É gentil e carismático, sempre disposto a ajudar os colegas.</em></p>
+    <p><strong>Data de Nascimento:</strong> 16/09/2017</p>
+    <p><strong>Responsável:</strong> Mirian Back Tobler</p>
+    <p><strong>Telefone:</strong> (47)9 8888-9999</p>
+    <p><strong>Estado:</strong> Santa Catarina</p>
+    <p><strong>Cidade:</strong> Florianópolis</p>
+    <p><strong>Bairro:</strong> Centro</p>
+    <p><strong>Rua:</strong> Rua dos Açores</p>
+    <p><strong>Número:</strong> 45</p>
+  </div>
+</div>
 `;
+
 
 // Ficha da Helena
 const fichacrianca3 = `
-<img src="subtelas_img/helena.jpg" title="Helena L." class="foto-crianca" />
-<h3 style="margin-top: 0;">Helena L.</h3>
-<p><strong>Data de Nascimento:</strong> 29/06/2019</p>
-<p><strong>Responsável:</strong> Mariana Lopes</p>
-<p><strong>Telefone:</strong>(47)9 7456-2389.</p>
-<p><strong>Estado:</strong> Santa Catarina.</p>
-<p><strong>Cidade:</strong> Blumenau.</p>
-<p><strong>Bairro:</strong> Itoupava Central.</p>
-<p><strong>Rua:</strong> Rua Hermann Weege.</p>
-<p><strong>Número:</strong> 107</p>
+<div class="ficha-crianca">
+  <img src="subtelas_img/helena.jpg" title="Helena L." class="foto-crianca" />
+  <div class="info-crianca">
+    <h3>Helena L.</h3>
+    <p><em>Helena é uma menina doce e encantadora, sempre com um sorriso no rosto. 
+    Ela ama brincar com seus brinquedos de animais e sonha em ser veterinária quando crescer. 
+    Adora músicas infantis e já decora letras com facilidade. 
+    Gosta de estar com a família e se diverte em passeios ao ar livre.
+    É muito carinhosa e conquista todos com seu jeitinho meigo.</em></p>
+    <p><strong>Data de Nascimento:</strong> 29/06/2019</p>
+    <p><strong>Responsável:</strong> Mariana Lopes</p>
+    <p><strong>Telefone:</strong> (47)9 7456-2389</p>
+    <p><strong>Estado:</strong> Santa Catarina</p>
+    <p><strong>Cidade:</strong> Blumenau</p>
+    <p><strong>Bairro:</strong> Itoupava Central</p>
+    <p><strong>Rua:</strong> Rua Hermann Weege</p>
+    <p><strong>Número:</strong> 107</p>
+  </div>
+</div>
 `;
+
 
 // Ficha da Emanuela
 const fichacrianca4 = `
-<img src="subtelas_img/emanuela.jpg" title="Emanuela W." class="foto-crianca" />
-<h3 style="margin-top: 0;">Emanuela W.</h3>
-<p><strong>Data de Nascimento:</strong> 07/11/2020</p>
-<p><strong>Responsável:</strong> João W.</p>
-<p><strong>Telefone:</strong>(47)9 6666-3322.</p>
-<p><strong>Estado:</strong> Santa Catarina.</p>
-<p><strong>Cidade:</strong> Itajaí.</p>
-<p><strong>Bairro:</strong> São João.</p>
-<p><strong>Rua:</strong> Rua São Paulo.</p>
-<p><strong>Número:</strong> 36</p>
+<div class="ficha-crianca">
+  <img src="subtelas_img/emanuela.jpg" title="Emanuela W." class="foto-crianca" />
+  <div class="info-crianca">
+    <h3>Emanuela W.</h3>
+    <p><em>Emanuela é uma garotinha cheia de energia e muito criativa. 
+    Gosta de brincar de casinha, cuidar das bonecas e imitar adultos com muito humor. 
+    Ela adora vestir fantasias e encenar pequenas histórias para os familiares. 
+    Seu laço com o pai é muito forte, com quem divide momentos de brincadeira e carinho. 
+    Tem um espírito alegre e contagia a todos com sua presença.</em></p>
+    <p><strong>Data de Nascimento:</strong> 07/11/2020</p>
+    <p><strong>Responsável:</strong> João W.</p>
+    <p><strong>Telefone:</strong> (47)9 6666-3322</p>
+    <p><strong>Estado:</strong> Santa Catarina</p>
+    <p><strong>Cidade:</strong> Itajaí</p>
+    <p><strong>Bairro:</strong> São João</p>
+    <p><strong>Rua:</strong> Rua São Paulo</p>
+    <p><strong>Número:</strong> 36</p>
+  </div>
+</div>
 `;
+
 
 // Ficha do João
 const fichacrianca5 = `
-<img src="subtelas_img/joao.jpg" title="João A." class="foto-crianca" />
-<h3 style="margin-top: 0;">João A.</h3>
-<p><strong>Data de Nascimento:</strong> 28/02/2018</p>
-<p><strong>Responsável:</strong> Luana Atanazio</p>
-<p><strong>Telefone:</strong>(47)9 9988-7766.</p>
-<p><strong>Estado:</strong> Santa Catarina.</p>
-<p><strong>Cidade:</strong> Jaraguá do Sul.</p>
-<p><strong>Bairro:</strong> Centro.</p>
-<p><strong>Rua:</strong> Rua Getúlio Vargas.</p>
-<p><strong>Número:</strong> 124</p>
+<div class="ficha-crianca">
+  <img src="subtelas_img/joao.jpg" title="João A." class="foto-crianca" />
+  <div class="info-crianca">
+    <h3>João A.</h3>
+    <p><em>João é uma criança muito observadora e com uma mente criativa. 
+    Ele adora construir e montar coisas com blocos, além de ser fascinado por novos desafios. 
+    Sempre buscando aprender algo novo, ele é extremamente dedicado nas atividades escolares. 
+    João gosta de explorar a natureza, observando plantas e insetos em seu caminho. 
+    É também muito afetuoso com os pais e ama passar tempo com eles, especialmente em viagens familiares.</em></p>
+    <p><strong>Data de Nascimento:</strong> 28/02/2018</p>
+    <p><strong>Responsável:</strong> Luana Atanazio</p>
+    <p><strong>Telefone:</strong> (47)9 9988-7766</p>
+    <p><strong>Estado:</strong> Santa Catarina</p>
+    <p><strong>Cidade:</strong> Joinville</p>
+    <p><strong>Bairro:</strong> Costa e Silva</p>
+    <p><strong>Rua:</strong> Affonso Zastrow</p>
+    <p><strong>Número:</strong> 12</p>
+  </div>
+</div>
 `;
 
 // Ficha do Matheus
 const fichacrianca6 = `
-<img src="subtelas_img/matheus.jpg" title="Matheus D." class="foto-crianca" />
-<h3 style="margin-top: 0;">Matheus D.</h3>
-<p><strong>Data de Nascimento:</strong> 19/04/2016</p>
-<p><strong>Responsável:</strong> Carlos D.</p>
-<p><strong>Telefone:</strong>(47)9 1111-4433.</p>
-<p><strong>Estado:</strong> Santa Catarina.</p>
-<p><strong>Cidade:</strong> São José.</p>
-<p><strong>Bairro:</strong> Barreiros.</p>
-<p><strong>Rua:</strong> Rua João Pessoa.</p>
-<p><strong>Número:</strong> 78</p>
+<div class="ficha-crianca">
+  <img src="subtelas_img/matheus.jpeg" title="Matheus D." class="foto-crianca" />
+  <div class="info-crianca">
+    <h3>Matheus D.</h3>
+    <p><em>Matheus é uma criança tranquila e muito observadora, com grande interesse por ciências naturais. 
+    Ele adora assistir documentários sobre animais e explorar o mundo ao seu redor. 
+    Sempre em busca de novos conhecimentos, é muito aplicado nas atividades escolares. 
+    Tem uma imaginação fértil e cria histórias divertidas com seus brinquedos. 
+    Matheus é um amigo leal e sempre disposto a ajudar seus colegas em momentos de necessidade.</em></p>
+    <p><strong>Data de Nascimento:</strong> 19/04/2016</p>
+    <p><strong>Responsável:</strong> Carlos D.</p>
+    <p><strong>Telefone:</strong> (47)9 1111-4433</p>
+    <p><strong>Estado:</strong> Santa Catarina</p>
+    <p><strong>Cidade:</strong> São José</p>
+    <p><strong>Bairro:</strong> Barreiros</p>
+    <p><strong>Rua:</strong> Rua João Pessoa</p>
+    <p><strong>Número:</strong> 78</p>
+  </div>
+</div>
 `;
+
 
 // Ficha do Ian
 const fichacrianca7 = `
-<img src="subtelas_img/ian.jpg" title="Ian L." class="foto-crianca" />
-<h3 style="margin-top: 0;">Ian L.</h3>
-<p><strong>Data de Nascimento:</strong> 10/08/2020</p>
-<p><strong>Responsável:</strong> Júlia L.</p>
-<p><strong>Telefone:</strong>(47)9 3333-2233.</p>
-<p><strong>Estado:</strong> Santa Catarina.</p>
-<p><strong>Cidade:</strong> Lages.</p>
-<p><strong>Bairro:</strong> Santa Mônica.</p>
-<p><strong>Rua:</strong> Rua Anhangüera.</p>
-<p><strong>Número:</strong> 56</p>
+<div class="ficha-crianca">
+  <img src="subtelas_img/ian.jpg" title="Ian L." class="foto-crianca" />
+  <div class="info-crianca">
+    <h3>Ian L.</h3>
+    <p><em>Ian é um garoto muito curioso, com uma mente rápida e cheia de ideias criativas. 
+    Ele adora explorar seu ambiente e descobrir novas coisas a cada dia. 
+    Gosta de brincar com seus brinquedos educativos e tem uma forte atração por tecnologia. 
+    Ian sempre busca aprender de forma divertida e está sempre envolvido em projetos com seus amigos. 
+    Sua energia contagiante e entusiasmo fazem dele uma criança encantadora e cheia de vida.</em></p>
+    <p><strong>Data de Nascimento:</strong> 10/08/2020</p>
+    <p><strong>Responsável:</strong> Júlia L.</p>
+    <p><strong>Telefone:</strong> (47)9 3333-2233</p>
+    <p><strong>Estado:</strong> Santa Catarina</p>
+    <p><strong>Cidade:</strong> Lages</p>
+    <p><strong>Bairro:</strong> Santa Mônica</p>
+    <p><strong>Rua:</strong> Rua Anhangüera</p>
+    <p><strong>Número:</strong> 56</p>
+  </div>
+</div>
 `;
+
 
 // Ficha da Tatiane
 const fichacrianca8 = `
-<img src="subtelas_img/tatiane.jpg" title="Tatiane V." class="foto-crianca" />
-<h3 style="margin-top: 0;">Tatiane V.</h3>
-<p><strong>Data de Nascimento:</strong> 31/12/2020</p>
-<p><strong>Responsável:</strong> Renata V.</p>
-<p><strong>Telefone:</strong>(47)9 4444-5566.</p>
-<p><strong>Estado:</strong> Santa Catarina.</p>
-<p><strong>Cidade:</strong> Blumenau.</p>
-<p><strong>Bairro:</strong> Velha Central.</p>
-<p><strong>Rua:</strong> Rua São Pedro.</p>
-<p><strong>Número:</strong> 10</p>
+<div class="ficha-crianca">
+  <img src="subtelas_img/tatiane.jpg" title="Tatiane V." class="foto-crianca" />
+  <div class="info-crianca">
+    <h3>Tatiane V.</h3>
+    <p><em>Tatiane é uma menina muito sociável e adora interagir com outras crianças. 
+    Ela tem uma personalidade vibrante e gosta de se expressar através da arte. 
+    Gosta de pintar, desenhar e criar suas próprias histórias. 
+    Tatiane tem um grande amor pelos animais e sempre encontra formas de cuidar deles. 
+    Ela é muito atenciosa com os mais velhos e está sempre disposta a ajudar quando necessário.</em></p>
+    <p><strong>Data de Nascimento:</strong> 31/12/2020</p>
+    <p><strong>Responsável:</strong> Renata V.</p>
+    <p><strong>Telefone:</strong> (47)9 4444-5566</p>
+    <p><strong>Estado:</strong> Santa Catarina</p>
+    <p><strong>Cidade:</strong> Blumenau</p>
+    <p><strong>Bairro:</strong> Velha Central</p>
+    <p><strong>Rua:</strong> Rua São Pedro</p>
+    <p><strong>Número:</strong> 10</p>
+  </div>
+</div>
 `;
+
+
+// Ficha do Matheus
+const fichacrianca9 = `
+<div class="ficha-crianca">
+  <img src="subtelas_img/matheush.jpg" title="Matheus H." class="foto-crianca" />
+  <div class="info-crianca">
+    <h3>Matheus H.</h3>
+    <p><em>Matheus é um menino muito tranquilo, sempre sorridente e com uma curiosidade natural. 
+    Ele adora fazer novas amizades e é muito sociável com todos. 
+    Além disso, Matheus tem um grande interesse por futebol e está sempre praticando o esporte com seus amigos. 
+    Tem uma energia única e sempre se destaca por sua disposição em aprender coisas novas. 
+    Matheus é muito atencioso e tem um carinho imenso pelos seus familiares.</em></p>
+    <p><strong>Data de Nascimento:</strong> 19/04/2016</p>
+    <p><strong>Responsável:</strong> Juliano H.</p>
+    <p><strong>Telefone:</strong> (47)9 1111-4433</p>
+    <p><strong>Estado:</strong> Santa Catarina</p>
+    <p><strong>Cidade:</strong> São José</p>
+    <p><strong>Bairro:</strong> Barreiros</p>
+    <p><strong>Rua:</strong> Rua João Pessoa</p>
+    <p><strong>Número:</strong> 78</p>
+  </div>
+</div>
+`;
+
 
 // Função genérica para abrir o modal com o conteúdo do livro
 function abrirModal(fichacrianca) {
@@ -177,6 +280,13 @@ link.addEventListener('click', function (e) {
 });
 });
 
+document.querySelectorAll('.fichacrianca9').forEach(link => {
+  link.addEventListener('click', function (e) {
+      e.preventDefault();
+      abrirModal(fichacrianca9);
+  });
+  });
+
 // Fecha o modal ao clicar no X
 closeModal.onclick = function () {
   modal.style.display = 'none';
@@ -208,22 +318,54 @@ style.innerHTML = `
     flex-direction: column;
     align-items: flex-start;
     padding: 20px;
-    width: 300px;
-  }
-  .foto-crianca {
     width: 100%;
-    height: auto;
-    margin-bottom: 10px;
+    box-sizing: border-box;
   }
-  #modal-body h3 {
+
+  .ficha-crianca {
+    display: flex;
+    margin-bottom: 20px;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .foto-crianca {
+    width: 400px;
+    height: 400px;
+    margin-right: 0px;
+    object-fit: contain; /* Mantém a imagem inteira dentro do espaço, sem cortar */
+}
+
+
+  .info-crianca {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .info-crianca h3 {
     margin-top: 0;
     margin-bottom: 10px;
   }
-  #modal-body p {
+
+  .info-crianca p {
     margin: 5px 0;
   }
-  #modal-body p strong {
+
+  .info-crianca p strong {
     font-weight: bold;
+  }
+
+  @media screen and (max-width: 768px) {
+    .ficha-crianca {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .info-crianca {
+      align-items: center;
+    }
   }
 `;
 
