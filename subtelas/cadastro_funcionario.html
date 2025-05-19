@@ -112,6 +112,29 @@
                     <!-- Botão para abrir o seletor de arquivos -->
                 </div>
                 <button type="button" class="botao-inline" onclick="document.getElementById('seletor_arquivo').click()">Selecionar Foto</button>
+
+            <h3>Informações Gerais:</h3>
+            
+                <div class="linha-dupla">
+                    <div class="input-group">
+                        <p>Cargo:</p>
+                        <span class="icon">🤵🏻</span>
+                        <select name="cargo" class="custom-select" required>
+                            <option value="" disabled selected>Selecione</option>
+                            <option value="Gerente">Gerente</option>
+                            <option value="Gestor">Gestor</option>
+                            <option value="Bibliotecário">Bibliotecário</option>
+                            <option value="Recreador">Recreador</option>
+                            <option value="Repositor">Repositor</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <p>Data de Efetivação:</p>
+                        <span class="icon">📆</span>
+                        <input type="date" name="data_efetivacao" min="" max="" id="dataEfetivacao" required>
+                    </div>
+                </div>
         
             <h3>Endereço:</h3>
             
