@@ -33,28 +33,27 @@ header h1 {
 
 /* MODAL VISUALIZAÇÃO */
 #modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
+  display: none; /* inicialmente oculto */
+  position: fixed; /* fixado na tela */
+  z-index: 1000; /* acima de outros elementos */
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
+  overflow: auto; /* scroll se necessário */
+  background-color: rgba(0, 0, 0, 0.6); /* fundo escurecido */
 }
 
+/* Conteúdo do modal */
 #modal-content {
-  background-color: #ffffff;
-  margin: 5% auto;
-  padding: 10px 20px;
-  border-radius: 8px;
-  width: 60%;
-  max-width: 800px;
-  max-height: 70vh;
-  overflow-y: auto;
-  border: 15px solid #87ceeb;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  margin: 10% auto; /* centralizado verticalmente */
+  padding: 20px;
+  border-radius: 8px; 
+  width: 50%;
+  max-width: 600px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  position: relative;
 }
 
 #close-modal {
@@ -161,37 +160,25 @@ header h1 {
   min-width: 200px;
 }
 
-#modal-adicionar .modal-content {
-  background-color: #fff;
-  padding: 20px 30px;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 600px;
-  max-height: 90vh;
-  overflow-y: auto;
-  border: 15px solid #87ceeb;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  margin: 0 auto;
-}
-
 #modal-adicionar .modal-content button[type="submit"] {
-  background-color: #ffbcfc;
-  color: black;
-  padding: 10px 30px;
-  border: none;
-  border-radius: 25px;
+  background-color: #85ccea;
+  color: white;
+  padding: 12px 25px;
   font-size: 16px;
-  font-weight: bold;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+#modal-adicionar .modal-content button[type="submit"]:hover {
+  background-color: #5a8699;
 }
 
 /* BOTÕES */
 .botao-adicionar,
 .botao-editar,
-.botao-mudar,
-.botao-salvar,
-.botao-cancelar {
+.botao-mudar {
   background: #ffbcfc;
   color: rgb(0, 0, 0);
   padding: 15px 40px;
@@ -335,17 +322,16 @@ a {
 
 /* MODAL MUDAR STATUS */
 #modal-status {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  justify-content: center;
-  align-items: center;
-}
+    display: none; /* modal escondido por padrão */
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 
 #modal-status .modal-content {
   background-color: #ffffff;
