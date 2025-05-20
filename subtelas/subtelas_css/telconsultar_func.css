@@ -69,8 +69,9 @@ header{
    max-height: 160px;
    object-fit: cover;
    border-radius: 6px;
-   margin-bottom: 15px;
-   margin-top: 15px;
+   margin-bottom: 5px;
+   margin-top: 5px;
+   
 }
    
 #modal-body {
