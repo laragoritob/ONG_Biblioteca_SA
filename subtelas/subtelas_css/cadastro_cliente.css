@@ -177,6 +177,15 @@ h3 {
   color: rgb(0, 0, 0);
 }
 
+.input-group .icon-tipo {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+}
+
 .linha-dupla {
   display: flex;
   gap: 180px; /* espaçamento entre os campos */
@@ -214,6 +223,30 @@ h3 {
 }
 
 .custom-select:focus {
+  outline: none;
+  border-color: #e280dd;
+  box-shadow: 0 0 5px rgba(255, 188, 252, 0.5);
+}
+
+.custom-select-tipo {
+  width: 400px;
+  padding: 15px 55px;
+  border: 1px solid #85ccea;
+  border-radius: 25px;
+  background-color: #ecf9ff;
+  font-size: 16px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Cpolygon points='0,0 10,0 5,7' style='fill:%23666;'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  background-size: 12px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.custom-select-tipo:focus {
   outline: none;
   border-color: #e280dd;
   box-shadow: 0 0 5px rgba(255, 188, 252, 0.5);
