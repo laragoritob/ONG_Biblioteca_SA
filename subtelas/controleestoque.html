@@ -87,7 +87,7 @@
 
 <div class="botoes-container">
   <button class="botao-adicionar" id="botao-adicionar">Adicionar</button>
-  <button class="botao-editar" onclick="editarLivro()">Editar</button>
+  <button class="botao-editar" id="botao-editar">Editar</button>
   <button class="botao-mudar" id="botao-mudar">Mudar status</button>
 </div>
 
@@ -96,7 +96,6 @@
 <div id="modal-adicionar" class="modal">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <div class="modal-content">
-    <span class="close" id="close-adicionar">&times;</span>
     <h2>Adicionar Livro</h2>
     <form id="form-adicionar">
       <div class="linha-dupla">
@@ -155,33 +154,90 @@
 </div>
 
 <!-- Modal de Mudar Status -->
-
 <div id="modal-status" class="modal">
   <div class="modal-content">
-    <span class="close" id="close-status">&times;</span>
     <h2>Mudar Status do Livro</h2>
     <form id="form-status">
       <p>Selecione o novo status:</p>
-
-  <div class="linha-dupla-radio">
-    <label>
-      <input type="radio" name="novo-status" value="Disponível" required>
-      Disponível
-    </label>
-    <label>
-      <input type="radio" name="novo-status" value="Indisponível">
-      Indisponível
-    </label>
+      <div class="linha-dupla-radio">
+        <label>
+          <input type="radio" name="novo-status" value="Disponível">
+          Disponível
+        </label>
+        <label>
+          <input type="radio" name="novo-status" value="Indisponível">
+          Indisponível
+        </label>
+      </div>
+      <div style="text-align: center; margin-top: 15px;">
+        <button type="submit">Confirmar</button>
+        <button type="button" id="cancelar-status">Cancelar</button>
+      </div>
+    </form>
   </div>
-
-  <div style="text-align: center; margin-top: 15px;">
-    <button type="submit">Confirmar</button>
-    <button type="button" id="cancelar-status">Cancelar</button>
-  </div>
-</form>
+</div>
 
   </div>
 </div>
+
+
+<div id="modal-editar" class="modal">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <div class="modal-content">
+    <h2>Editar Livro</h2>
+    <form id="form-editar">
+      <div class="linha-dupla">
+        <div>
+          <label>ID do Livro (gerado):</label>
+          <input type="text" id="livro-id" readonly>
+        </div>
+        <div>
+          <label>Nome do Livro:</label>
+          <input type="text" id="livro-nome" required>
+        </div>
+      </div>
+
+  <div class="linha-dupla">
+    <div>
+      <label>Autor:</label>
+      <input type="text" id="livro-autor" required>
+    </div>
+    <div>
+      <label>Gênero:</label>
+      <input type="text" id="livro-genero" required>
+    </div>
+  </div>
+
+  <div class="linha-dupla">
+    <div>
+      <label>Quantidade em Estoque:</label>
+      <input type="number" id="livro-quantidade" required>
+    </div>
+    <div>
+      <label>Prateleira:</label>
+      <input type="number" id="livro-prateleira" required>
+    </div>
+  </div>
+
+  <div class="linha-dupla">
+    <div>
+      <label>Data:</label>
+      <input type="date" id="livro-data" required>
+    </div>
+    <div>
+      <label>Status:</label>
+      <select id="livro-status">
+        <option value="Disponível">Disponível</option>
+        <option value="Indisponível">Indisponível</option>
+      </select>
+    </div>
+  </div>
+  <div style="text-align: center; margin-top: 15px;">
+    <button type="submit" id="botao-salvar">Salvar</button>
+    <button type="button" id="botao-cancelar">Cancelar</button>
+  </div>
+
+
 
 <!-- Modal de Detalhes do livro (exibição dinâmica via JS) -->
 
