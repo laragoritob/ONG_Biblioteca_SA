@@ -13,17 +13,19 @@ document.addEventListener('DOMContentLoaded', function () {
       emprestimo: '2025-02-25',
       devolucao: '2025-04-27',
       renovacoes: 0,
-      ultimaRenovacao: null  
+      status: 'Em atraso',
+      ultimaRenovacao: null
     },
     {
       selector: '.detalhes-livro2',
       codigo: '0002',
       nome: 'O Cortiço',
-      cliente: 'Ruan Melo',
+      cliente: 'Gustavo Tobler',
       imagem: 'subtelas_img/ocortico.jpg',
-      emprestimo: '2025-05-11',
-      devolucao: '2025-05-18',
+      emprestimo: '2025-05-25',
+      devolucao: '2025-05-30',
       renovacoes: 0,
+      status:'Em aberto',
       ultimaRenovacao: null
     },
     {
@@ -35,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
       emprestimo: '2025-03-19',
       devolucao: '2025-04-02',
       renovacoes: 0,
+      status:'Em atraso',
       ultimaRenovacao: null
     },
     {
@@ -46,6 +49,31 @@ document.addEventListener('DOMContentLoaded', function () {
       emprestimo: '2025-05-24',
       devolucao: '2025-05-31',
       renovacoes: 0,
+      status:'Em aberto',
+      ultimaRenovacao: null
+    },
+    {
+      selector: '.detalhes-livro5',
+      codigo: '0005',
+      nome: 'Crepúsculo',
+      cliente: 'Ian Lucas Borba',
+      imagem: 'subtelas_img/vampiros.webp',
+      emprestimo: '2025-05-27',
+      devolucao: '2025-06-03',
+      renovacoes: 0,
+      status:'Em atraso',
+      ultimaRenovacao: null
+    },
+    {
+      selector: '.detalhes-livro6',
+      codigo: '0006',
+      nome: 'FNAF',
+      cliente: 'João Vitor Atanazio',
+      imagem: 'subtelas_img/fnaf.jpg',
+      emprestimo: '2025-05-28',
+      devolucao: '2025-06-04',
+      renovacoes: 0,
+      status:'Em atraso',
       ultimaRenovacao: null
     }
   ];
@@ -65,6 +93,34 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  function definirStatus(row) {
+    const dataTexto = row.cells[4].textContent.trim();
+    const [dia, mes, ano] = dataTexto.split('/');
+    const data = new Date(`${ano}-${mes}-${dia}`);
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+    data.setHours(0, 0, 0, 0);
+
+    const statusCell = row.cells[5];
+    if (!statusCell) return;
+
+    if (row.classList.contains('devolvido')) {
+      statusCell.textContent = 'DEVOLVIDO';
+      statusCell.style.color = 'green';
+    } else if (data < hoje) {
+      statusCell.textContent = 'EM ATRASO';
+      statusCell.style.color = 'red';
+    } else {
+      statusCell.textContent = 'EM ANDAMENTO';
+      statusCell.style.color = 'orange';
+    }
+  }
+
+  document.querySelectorAll('#livros-table tbody tr').forEach(linha => {
+    marcarAtraso(linha);
+    definirStatus(linha);
+  });
+
   function reposicionarLivroNaTabela(linha, posicao) {
     const tbody = document.querySelector('#livros-table tbody');
     if (posicao === 'topo') {
@@ -73,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
       tbody.append(linha);
     }
     marcarAtraso(linha);
+    definirStatus(linha);
   }
 
   function gerarFormulario(livro, cliente, imagem, emprestimo, devolucao) {
@@ -204,6 +261,10 @@ document.addEventListener('DOMContentLoaded', function () {
       const linha = [...document.querySelectorAll('#livros-table tbody tr')]
         .find(tr => tr.cells[1].textContent.trim() === nomeLivro);
 
+      if (linha) {
+        linha.classList.add('devolvido');
+      }
+
       if (dataDevolucao < hoje) {
         Swal.fire({
           title: 'DEVOLUÇÃO REGISTRADA!',
@@ -237,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-// Filtro de busca na tabela
+// Filtro de busca
 document.getElementById('search-input').addEventListener('keyup', function () {
   const searchValue = this.value.toLowerCase();
   const rows = document.querySelectorAll('#livros-table tbody tr');
