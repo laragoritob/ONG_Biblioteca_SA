@@ -19,7 +19,7 @@ const modal = document.getElementById('modal');
       nome: 'Silvio Luis de Sousa',
       cargo: 'Gerente',
       nascimento: '21/03/1965',
-      dataefetivacao: '08/07/2024',
+      efetivacao: '08/07/2024',
       imagem: 'subtelas_img/eterno_silvio.webp',
     },
     {
@@ -36,9 +36,9 @@ const modal = document.getElementById('modal');
       sexo:'Feminino',
       telefone:'(21) 98711-3390',
       nome: 'Maria da Graça Xuxa Meneghel',
-      cargo: 'Gerente',
-      datanascimento: '27/03/1963',
-      dataefetivacao: '12/12/2024',
+      cargo: 'Recreador', 
+      nascimento: '27/03/1963',
+      efetivacao: '12/12/2024',
       imagem: 'subtelas_img/xuxa_nova.jpg',
     },
     {
@@ -56,14 +56,14 @@ const modal = document.getElementById('modal');
       telefone:'(47) 99821-0543',
       nome: 'Ruan de Mello Vieira',
       cargo: 'Bibliotecário',
-      datanascimento: '03/07/2007',
-      dataefetivacao: '09/06/2025',
+      nascimento: '03/07/2007',
+      efetivacao: '09/06/2025',
       imagem: 'subtelas_img/paratodososgarotosquejaamei.jpg',
     },
     {
       selector: '.detalhes-funcionarios4',
       codigo: '0004',
-      cpf:'Ensino Fundamental Completo',
+      cpf:'503.777.165-08',
       escolaridade:'Ensino Fundamental Completo',
       estado:'Bahia',
       civil:' Solteiro',
@@ -75,8 +75,8 @@ const modal = document.getElementById('modal');
       telefone:'(71) 98144-6732',
       nome: 'Marcos Paulo Fernandes',
       cargo: 'Repositor',
-      datanascimento: '31/08/2008',
-      dataefetivacao: '16/06/2025',
+      nascimento: '31/08/2008',
+      efetivacao: '16/06/2025',
       imagem: 'subtelas_img/marcos_pdiddy.jpg',
     },
     {
@@ -94,8 +94,8 @@ const modal = document.getElementById('modal');
       telefone:'(31) 99700-7855',
       nome: 'Gerard Arthur Way',
       cargo: 'Recreador',
-      datanascimento: '09/04/1977',
-      dataefetivacao: '05/02/2025',
+      nascimento: '09/04/1977',
+      efetivacao: '05/02/2025',
       imagem: 'subtelas_img/gerard_way.webp',
     },
     {
@@ -113,8 +113,8 @@ const modal = document.getElementById('modal');
       telefone:'(21) 98861-4670',
       nome: 'Kim Sunoo',
       cargo: 'Repositor',
-      datanascimento: '24/06/2003',
-      dataefetivacao: '08/10/2024',
+      nascimento: '24/06/2003',
+      efetivacao: '08/10/2024',
       imagem: 'subtelas_img/sunoo.jpg',
     },
     {
@@ -132,8 +132,8 @@ const modal = document.getElementById('modal');
       telefone:'21) 98861-4670',
       nome: 'Dwayne Douglas Johnson',
       cargo: 'Recreador',
-      datanascimento: '02/05/1972',
-      dataefetivacao: '29/09/2024',
+      nascimento: '02/05/1972',
+      efetivacao: '29/09/2024',
       imagem: 'subtelas_img/Dwayne_Johnson.jpg',
     },
     {
@@ -151,8 +151,8 @@ const modal = document.getElementById('modal');
       telefone:'(81) 98422-1108',
       nome: 'Rodrigo Pantera',
       cargo: 'Recreador',
-      datanascimento: '25/01/2007',
-      dataefetivacao: '11/03/2025',
+      nascimento: '25/01/2007',
+      efetivacao: '11/03/2025',
       imagem: 'subtelas_img/paratodososgarotosquejaamei.jpg',
     },
     {
@@ -170,8 +170,8 @@ const modal = document.getElementById('modal');
       telefone:'(51) 99874-6632',
       nome: 'Taylor Lautner',
       cargo: 'Bibliotecário',
-      datanascimento: '19/12/1980',
-      dataefetivacao: '17/08/2024',
+      nascimento: '19/12/1980',
+      efetivacao: '17/08/2024',
       imagem: 'subtelas_img/taylor_lautner.jpg',
     },
     {
@@ -180,7 +180,7 @@ const modal = document.getElementById('modal');
       cpf:'321.997.008-63',
       escolaridade:'Ensino Superior Completo',
       estado:' São Paulo',
-      civil:'Masculino',
+      civil:'Casado',
       cidade:'Santo André',
       bairro:'Jardim',
       rua:'Rua das Palmeiras',
@@ -189,8 +189,8 @@ const modal = document.getElementById('modal');
       telefone:'(11) 98671-9932',
       nome: 'James Hetfield',
       cargo: 'Gestor',
-      datanascimento: '03/08/1963',
-      dataefetivacao: '21/08/2024',
+      nascimento: '03/08/1963',
+      efetivacao: '21/08/2024',
       imagem: 'subtelas_img/james_hetfield.jpg',
     }
   ];
@@ -201,28 +201,33 @@ const modal = document.getElementById('modal');
       elemento.addEventListener('click', function (e) {
         e.preventDefault();
         modalBody.innerHTML = `
-  <img src="${funcionario.imagem}" title="funcionário" class="hmfuncionario" />
-  <h3 style="margin-top: 0;">Ficha de ${funcionario.nome}</h3>
+  <h3 class="modal-title">Ficha de ${funcionario.nome}</h3>
+  
+  <div class="modal-content-container">
+    <div class="photo-info-container">
+      <img src="${funcionario.imagem}" title="funcionário" class="hmfuncionario" />
+      
+      <div class="info-grid">
+        <p class="info-item"><strong>CPF:</strong> ${funcionario.cpf}</p> 
+        <p class="info-item"><strong>Sexo:</strong> ${funcionario.sexo}</p> 
+        <p class="info-item"><strong>Estado Civil:</strong> ${funcionario.civil}</p> 
+        <p class="info-item"><strong>Cargo:</strong> ${funcionario.cargo}</p> 
+        <p class="info-item"><strong>Data de Efetivação:</strong> ${funcionario.efetivacao}</p> 
+        <p class="info-item"><strong>Data de Nascimento:</strong> ${funcionario.nascimento}</p>
+        <p class="info-item"><strong>Estado:</strong> ${funcionario.estado}</p> 
+        <p class="info-item"><strong>Cidade:</strong> ${funcionario.cidade}</p> 
+        <p class="info-item"><strong>Bairro:</strong> ${funcionario.bairro}</p> 
+        <p class="info-item"><strong>Rua:</strong> ${funcionario.rua}</p> 
+        <p class="info-item"><strong>Número:</strong> ${funcionario.numero}</p> 
+        <p class="info-item"><strong>Telefone:</strong> ${funcionario.telefone}</p> 
+      </div>
+    </div>
+  </div>
 
-  <p><strong>Nome:</strong> ${funcionario.nome}</p>
-  <p><strong>CPF:</strong> ${funcionario.cpf}</p>
-
-  <p><strong>Estado Civil:</strong> ${funcionario.civil}</p>
-  <p><strong>Escolaridade:</strong> ${funcionario.escolaridade}</p>
-
-  <p><strong>Cargo:</strong> ${funcionario.cargo}</p>
-  <p><strong>Data de Nascimento:</strong> ${funcionario.nascimento}</p>
-
-  <p><strong>Estado:</strong> ${funcionario.estado}</p>
-
-  <p><strong>Cidade:</strong> ${funcionario.cidade}</p>
-  <p><strong>Bairro:</strong> ${funcionario.bairro}</p>
-
-  <p><strong>Rua:</strong> ${funcionario.rua}</p>
-  <p><strong>Número:</strong> ${funcionario.numero}</p>
-
-  <p><strong>Estado Civil:</strong> ${funcionario.civil}</p>
-  <p><strong>Escolaridade:</strong> ${funcionario.escolaridade}</p>
+  <div class="button-container">
+    <button class="btn-action btn-edit">EDITAR</button>
+    <button class="btn-action btn-deactivate">DESATIVAR FUNCIONÁRIO</button>
+  </div>
 `;
 
    modal.style.display = 'block';
@@ -241,7 +246,7 @@ const modal = document.getElementById('modal');
     }
   });
 
-function gerarFormulario(funcionario, cpf, sexo, civil, escolaridade, cargo, 
+function gerarFormulario(funcionario, cpf, sexo, civil, escolaridade, cargo, efetivacao,
   estado, cidade, nascimento, bairro, telefone, numero, rua, imagem, editar, desativar) {
 
   return `
@@ -265,6 +270,9 @@ function gerarFormulario(funcionario, cpf, sexo, civil, escolaridade, cargo,
 
       <label for="cargo">Cargo:</label>
       <input type="text" id="cargo" name="cargo" value="${cargo}" readonly>
+
+      <label for="efetivacao">Data de Efetivacao:</label>
+      <input type="text" id="efetivacao" name="cargo" value="${efetivacao}" readonly>
 
       <label for="cliente">Data de Nascimento:</label>
       <input type="date" id="data" name="data" value="${nascimento}" readonly>
@@ -301,7 +309,7 @@ function gerarFormulario(funcionario, cpf, sexo, civil, escolaridade, cargo,
 
       <div class="botao">
         <button type="submit" class="btn editar">EDITAR</button>
-        <button type="submit" class="btn">DESATIVAR</button>
+        <button type="submit" class="btn">DESATIVAR FUNCIONÁRIO</button>
       </div>
     </form>
   `;
@@ -309,11 +317,16 @@ function gerarFormulario(funcionario, cpf, sexo, civil, escolaridade, cargo,
 
 
 // CAMPO DE BUSCA
-document.getElementById('search-input').addEventListener('keyup', function () {
-  const searchValue = this.value.toLowerCase();
-  const rows = document.querySelectorAll('#funcionarios-table tbody tr');
-  rows.forEach(row => {
-    const funcionario = row.cells[1].textContent.toLowerCase();
-    row.style.display = funcionario.includes(searchValue) ? '' : 'none';
+document.getElementById('search-input').addEventListener('input', function () {
+  const filtro = this.value.toLowerCase();
+  const linhas = document.querySelectorAll('#livros-table tbody tr');
+
+  linhas.forEach((linha) => {
+    const nome = linha.querySelector('td:nth-child(2)').innerText.toLowerCase();
+    if (nome.includes(filtro)) {
+      linha.style.display = '';
+    } else {
+      linha.style.display = 'none';
+    }
   });
 });
