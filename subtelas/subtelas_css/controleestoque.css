@@ -163,6 +163,7 @@ header h1 {
   min-width: 200px;
 }
 
+/*botao adicionar*/
 #modal-adicionar .modal-content button[type="submit"] {
   background-color: #85ccea;
   color: white;
@@ -565,87 +566,91 @@ a {
   box-shadow: 0 0 5px #87ceeb;
 }
 
-
-.modal {
-  display: none; /* Oculto por padrão */
+/*modal editar*/
+#modal-editar {
+  display: none; /* Começa invisível */
   position: fixed;
   z-index: 1000;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.5); /* Fundo escurecido */
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
-/* Conteúdo do modal centralizado */
-.modal-content {
-  background-color: #fff;
-  margin: 10% auto; /* Centralização vertical */
-  padding: 20px;
+#modal-editar .modal-content {
+  background-color: #ffffff;
+  margin: 5% auto;
+  padding: 10px 20px;
   border-radius: 8px;
-  width: 50%;
-  max-width: 600px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  width: 60%;
+  max-width: 800px;
+  max-height: 70vh;
+  overflow-y: auto;
+  border: 15px solid #87ceeb; /* nova borda */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* sombra opcional para destacar */
 }
 
-/* Para formulários em linha dupla */
+#modal-editar .modal-content h2 {
+  text-align: center;
+  color: #4a3092;
+  margin-bottom: 20px;
+}
+
+#modal-editar form input,
+#modal-editar form select {
+  width: 100%;
+  padding: 6px 10px;
+  margin-bottom: 15px;
+  border: 1px solid #85ccea;
+  border-radius: 5px;
+  background-color: #f0faff;
+  font-size: 14px;
+  height: 30px;
+}
+
 .linha-dupla {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  gap: 10px;
   margin-bottom: 15px;
 }
 
 .linha-dupla > div {
   flex: 1;
+  min-width: 200px;
 }
 
-/* Estilo básico para botões dentro do modal */
-#modal-editar {
-  display: none;
-}
-
-#modal-editar input[type="text"],
-#modal-editar input[type="number"],
-#modal-editar input[type="date"],
-#modal-editar select {
-  width: 90%;           /* ou menos, como 80% */
-  max-width: 350px;     /* limita o tamanho em telas grandes */
-  padding: 8px;
-  font-size: 14px;
-  border-radius: 10px;
-  margin: 0 auto 12px;
-  display: block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
-/* Botões dentro do modal editar */
-#modal-editar .modal-content button {
-  padding: 8px 16px;
-  margin: 0 10px;
-  border: none;
-  border-radius: 10px;
-  background-color: #1976d2;
+/* botão editar */
+#modal-editar .modal-content button[type="submit"] {
+  background-color: #85ccea;
   color: white;
+  padding: 12px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
-  font-size: 14px;
   transition: background-color 0.3s ease;
 }
 
-#modal-editar .modal-content button:hover {
-  background-color: #1565c0;
+#modal-editar .modal-content button[type="submit"]:hover {
+  background-color: #5a8699;
 }
 
-/* Para que os botões fiquem centralizados */
-#modal-editar .modal-content div[style*="text-align: center"] {
-  margin-top: 15px;
+#botao-cancelar {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-/* Copiando seu estilo SweetAlert para o modal, caso use junto */
-.swal2-icon.swal2-warning.swal-add-icon {
-  color: #ff69b4 !important;
-  border-color: #ff69b4 !important;
+#botao-cancelar:hover {
+  background-color: #d32f2f;
 }
