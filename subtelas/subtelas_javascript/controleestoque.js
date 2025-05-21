@@ -369,7 +369,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!statusSelecionado || !linhaSelecionada) return;
 
     const novoStatus = statusSelecionado.value;
-    const nomeLivro = linhaSelecionada.cells[1].textContent; // Segunda célula: nome do livro
+    const nomeLivro = linhaSelecionada.cells[1].textContent; 
 
     linhaSelecionada.cells[7].textContent = novoStatus;
 
@@ -396,28 +396,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
+// Clique no botão "Editar"
 document.getElementById("botao-editar").addEventListener("click", function () {
+  const modalStatus = document.getElementById("modal-editar");
+
   Swal.fire({
-    title: "Digite o ID do livro",
-    input: "text",
-    inputPlaceholder: "Insira o ID aqui",
+    title: 'Digite o ID do livro',
+    input: 'text',
+    inputLabel: 'ID do livro (ex: #0001)',
+    inputPlaceholder: 'Insira o ID aqui',
     showCancelButton: true,
-    confirmButtonText: "Procurar",
-    cancelButtonText: "Cancelar",
-    inputValidator: (value) => {
-      if (!value) {
-        return "Você precisa inserir um ID!";
-      }
+    confirmButtonText: 'Confirmar',
+    cancelButtonText: 'Cancelar',
+    confirmButtonColor: '#4CAF50',
+    cancelButtonColor: '#f44336',
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    customClass: {
+      title: 'titulo-id-livro'
     },
+    inputValidator: (value) => {
+      if (!value.trim()) return 'Você precisa digitar um ID!';
+    }
   }).then((result) => {
     if (result.isConfirmed) {
-      const id = result.value.trim();
+      const idDigitado = result.value.trim().replace("#", "");
       const linhas = document.querySelectorAll("#livros-table tbody tr");
       let livroEncontrado = null;
 
       linhas.forEach((linha) => {
-        if (linha.cells[0].textContent === id) {
+        const idLinha = linha.cells[0].textContent.trim().replace("#", "");
+        if (idLinha === idDigitado) {
           livroEncontrado = {
             id: linha.cells[0].textContent,
             nome: linha.cells[1].textContent,
@@ -426,14 +435,22 @@ document.getElementById("botao-editar").addEventListener("click", function () {
             quantidade: linha.cells[4].textContent,
             prateleira: linha.cells[5].textContent,
             data: linha.cells[6].textContent,
-            status: linha.cells[7].textContent,
+            status: linha.cells[7].textContent
           };
         }
       });
 
-      if (livroEncontrado) {
-        // Preencher o modal de edição
+      if (!livroEncontrado) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Livro não encontrado',
+          text: `Nenhum livro com ID ${result.value} foi encontrado.`,
+          confirmButtonText: 'OK'
+        });
+      } else {
+        // Preencher o formulário
         document.querySelector("#modal-editar #livro-id").value = livroEncontrado.id;
+        document.querySelector("#modal-editar #livro-id").readOnly = true;
         document.querySelector("#modal-editar #livro-nome").value = livroEncontrado.nome;
         document.querySelector("#modal-editar #livro-genero").value = livroEncontrado.genero;
         document.querySelector("#modal-editar #livro-autor").value = livroEncontrado.autor;
@@ -442,32 +459,64 @@ document.getElementById("botao-editar").addEventListener("click", function () {
         document.querySelector("#modal-editar #livro-data").value = formatarDataISO(livroEncontrado.data);
         document.querySelector("#modal-editar #livro-status").value = livroEncontrado.status;
 
-        // Mostrar o modal
-        document.getElementById("modal-editar").style.display = "block";
-      } else {
-        Swal.fire("Erro", "Livro com o ID especificado não encontrado!", "error");
+        modalStatus.style.display = "flex";
       }
+    } else if (result.isDismissed) {
+      Swal.fire({
+        title: 'Cancelado!',
+        text: 'Mudança cancelada.',
+        icon: 'info',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#ff9800'
+      });
     }
   });
 });
 
-// Função auxiliar para converter dd/mm/yyyy → yyyy-mm-dd
+// Conversão dd/mm/yyyy → yyyy-mm-dd
 function formatarDataISO(data) {
   const [dia, mes, ano] = data.split("/");
   return `${ano}-${mes}-${dia}`;
 }
 
+// Conversão yyyy-mm-dd → dd/mm/yyyy
+function formatarDataBR(dataISO) {
+  const [ano, mes, dia] = dataISO.split("-");
+  return `${dia}/${mes}/${ano}`;
+}
+
+// Envio do formulário de edição
 document.getElementById("form-editar").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const id = document.querySelector("#modal-editar #livro-id").value;
-  const nome = document.querySelector("#modal-editar #livro-nome").value;
-  const genero = document.querySelector("#modal-editar #livro-genero").value;
-  const autor = document.querySelector("#modal-editar #livro-autor").value;
-  const quantidade = document.querySelector("#modal-editar #livro-quantidade").value;
-  const prateleira = document.querySelector("#modal-editar #livro-prateleira").value;
-  const data = document.querySelector("#modal-editar #livro-data").value;
-  const status = document.querySelector("#modal-editar #livro-status").value;
+  const modal = document.getElementById("modal-editar");
+
+  const id = modal.querySelector("#livro-id").value;
+  const nome = modal.querySelector("#livro-nome").value;
+  const genero = modal.querySelector("#livro-genero").value;
+  const autor = modal.querySelector("#livro-autor").value;
+  const quantidade = modal.querySelector("#livro-quantidade").value;
+  const prateleira = modal.querySelector("#livro-prateleira").value;
+  const data = modal.querySelector("#livro-data").value;
+  const status = modal.querySelector("#livro-status").value;
+
+  const inputs = modal.querySelectorAll("input, select");
+  let todosPreenchidos = true;
+
+  inputs.forEach(input => {
+    if (!input.value.trim()) todosPreenchidos = false;
+  });
+
+  if (!todosPreenchidos) {
+    Swal.fire({
+      title: 'Erro!',
+      text: 'Por favor, preencha todos os campos obrigatórios.',
+      icon: 'error',
+      confirmButtonText: 'OK',
+      confirmButtonColor: '#f44336'
+    });
+    return;
+  }
 
   const linhas = document.querySelectorAll("#livros-table tbody tr");
 
@@ -483,13 +532,29 @@ document.getElementById("form-editar").addEventListener("submit", function (e) {
     }
   });
 
-  document.getElementById("modal-editar").style.display = "none";
+  modal.style.display = "none";
 
-  Swal.fire("Sucesso", "Livro atualizado com sucesso!", "success");
+  Swal.fire({
+    title: 'Sucesso!',
+    text: 'Livro editado com sucesso!',
+    icon: 'success',
+    confirmButtonText: 'OK',
+    confirmButtonColor: '#4CAF50'
+  });
+
+  document.getElementById("form-editar").reset();
 });
 
-// Função para converter yyyy-mm-dd → dd/mm/yyyy
-function formatarDataBR(dataISO) {
-  const [ano, mes, dia] = dataISO.split("-");
-  return `${dia}/${mes}/${ano}`;
-}
+// Botão "Cancelar" no modal de edição
+document.getElementById("botao-cancelar").addEventListener("click", function () {
+  document.getElementById("modal-editar").style.display = "none";
+
+  Swal.fire({
+    title: 'Cancelado!',
+    text: 'Edição do livro cancelada.',
+    icon: 'info',
+    confirmButtonText: 'OK',
+    confirmButtonColor: '#2196f3'
+  });
+});
+
