@@ -189,7 +189,7 @@ table {
   box-sizing: border-box;
 }
 
-.btn {
+.editar-ficha {
   background: #ffbcfc;
   color: rgb(0, 0, 0);
   padding: 12px 30px;
@@ -206,18 +206,74 @@ table {
   margin-left: 95px;
 }
 
-.btn.glow {
+.editar-ficha.glow {
   box-shadow: 0px 0px 15px #884b85;
 }
 
-.btn:hover {
+.editar-ficha:hover {
   background: #e07ddb;
   transform: translateY(-2px);
   box-shadow: 0 0 20px #884b85;
 }
 
-.botao {
+.editar-ficha {
   margin-top: 15px;
   display: flex;
   justify-content: space-between;
-  gap: 10px; }
+  gap: 10px; 
+}
+
+.ficha-desativada {
+  opacity: 0.5;
+  text-decoration: line-through;
+  background-color: #f8d7da; /* leve vermelho claro */
+}
+
+.desativar-ficha {
+  background: #ffbcfc;
+  color: rgb(0, 0, 0);
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  min-width: 200px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+  margin-left: 95px;
+}
+
+.desativar-ficha.glow {
+  box-shadow: 0px 0px 15px #884b85;
+}
+
+.desativar-ficha:hover {
+  background: #e07ddb;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px #884b85;
+}
+
+.desativar-ficha {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; 
+}
+
+/* Contêiner para os botões dentro do modal */
+#modal-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Estilos para os botões */
+#modal-body button {
+  padding: 10px 15px;
+  font-size: 14px;
+  margin: 0 5px;  /* Espaçamento entre os botões */
+  cursor: pointer;
+}
