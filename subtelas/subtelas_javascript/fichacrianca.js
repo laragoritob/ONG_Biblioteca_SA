@@ -221,6 +221,95 @@ const fichacrianca9 = `
 function abrirModal(fichacrianca) {
   modalBody.innerHTML = fichacrianca;
   modal.style.display = 'block';
+
+    // Adiciona o botão Editar
+    const botaoEditar = document.createElement('button');
+    botaoEditar.textContent = 'Editar';
+    botaoEditar.classList.add('editar-ficha');
+  
+    // Adiciona evento ao botão
+    botaoEditar.addEventListener('click', () => {
+      habilitarEdicao(modalBody);
+    });
+  
+    modalBody.appendChild(botaoEditar);
+    modal.style.display = 'block';
+}
+
+function habilitarEdicao(container) {
+  const paragrafos = container.querySelectorAll('.info-crianca p');
+  const titulo = container.querySelector('.info-crianca h3');
+
+  // Transformar <h3> em input
+  const inputNome = document.createElement('input');
+  inputNome.type = 'text';
+  inputNome.value = titulo.textContent;
+  titulo.replaceWith(inputNome);
+
+  // Transformar <p> em inputs ou textareas
+  paragrafos.forEach(p => {
+    const strong = p.querySelector('strong');
+    const texto = p.textContent.replace(strong?.textContent || '', '').trim();
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = texto;
+
+    if (strong) {
+      const label = document.createElement('label');
+      label.textContent = strong.textContent;
+      p.innerHTML = ''; // Limpa o conteúdo
+      p.appendChild(label);
+      p.appendChild(input);
+    } else {
+      // Descrição com <em>
+      const textarea = document.createElement('textarea');
+      textarea.value = p.textContent.trim();
+      p.innerHTML = '';
+      p.appendChild(textarea);
+    }
+  });
+
+  // Substituir botão "Editar" por "Salvar"
+  const botaoEditar = container.querySelector('.editar-ficha');
+  botaoEditar.textContent = 'Salvar';
+  botaoEditar.removeEventListener('click', habilitarEdicao); // Remove antigo
+
+  botaoEditar.addEventListener('click', () => {
+    salvarEdicao(container, inputNome, paragrafos);
+  });
+}
+
+function salvarEdicao(container, inputNome, paragrafos) {
+  // Substituir inputNome por <h3>
+  const h3 = document.createElement('h3');
+  h3.textContent = inputNome.value;
+  inputNome.replaceWith(h3);
+
+  // Substituir inputs e textareas por <p> e <strong>
+  paragrafos.forEach(p => {
+    const label = p.querySelector('label');
+    const input = p.querySelector('input');
+    const textarea = p.querySelector('textarea');
+
+    if (label && input) {
+      const strong = document.createElement('strong');
+      strong.textContent = label.textContent;
+
+      p.innerHTML = '';
+      p.appendChild(strong);
+      p.innerHTML += ' ' + input.value;
+    } else if (textarea) {
+      p.innerHTML = `<em>${textarea.value}</em>`;
+    }
+  });
+
+  // Trocar botão de volta para "Editar"
+  const botaoSalvar = container.querySelector('.editar-ficha');
+  botaoSalvar.textContent = 'Editar';
+  botaoSalvar.addEventListener('click', () => {
+    habilitarEdicao(container);
+  });
 }
 
 // Corrigir a referência de classe para as classes corretas (não com acento)
@@ -366,6 +455,40 @@ style.innerHTML = `
     .info-crianca {
       align-items: center;
     }
+
+.btn {
+  background: #ffbcfc;
+  color: rgb(0, 0, 0);
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  min-width: 200px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+  margin-left: 95px;
+}
+
+.btn.glow {
+  box-shadow: 0px 0px 15px #884b85;
+}
+
+.btn:hover {
+  background: #e07ddb;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px #884b85;
+}
+
+.botao {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; 
+
   }
 `;
 
