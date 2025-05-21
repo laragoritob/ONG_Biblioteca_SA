@@ -73,7 +73,26 @@ header{
    margin-top: 5px;
    
 }
+
+.photo-info-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 55px;
+  margin-top: 15px;
+}
    
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 6px 24px;
+}
+
+.info-item {
+  font-size: 16px; /* menor fonte */
+  line-height: 1.3;
+  margin: 0;
+}
+
 #modal-body {
     overflow: hidden;
  }

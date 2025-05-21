@@ -205,8 +205,7 @@ const modal = document.getElementById('modal');
   
   <div class="modal-content-container">
     <div class="photo-info-container">
-      <img src="${funcionario.imagem}" title="funcionário" class="hmfuncionario" />
-      
+  <img src="${funcionario.imagem}" title="funcionário" class="hmfuncionario" />
       <div class="info-grid">
         <p class="info-item"><strong>CPF:</strong> ${funcionario.cpf}</p> 
         <p class="info-item"><strong>Sexo:</strong> ${funcionario.sexo}</p> 
