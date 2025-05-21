@@ -97,7 +97,6 @@ const fichacrianca4 = `
 </div>
 `;
 
-
 // Ficha do João
 const fichacrianca5 = `
 <div class="ficha-crianca">
@@ -226,6 +225,32 @@ function abrirModal(fichacrianca) {
     const botaoEditar = document.createElement('button');
     botaoEditar.textContent = 'Editar';
     botaoEditar.classList.add('editar-ficha');
+
+    // Botão Desativar
+const botaoDesativar = document.createElement('button');
+botaoDesativar.textContent = 'Desativar';
+botaoDesativar.classList.add('desativar-ficha');
+botaoDesativar.addEventListener('click', () => {
+  desativarFicha();
+});
+
+modalBody.appendChild(botaoDesativar);
+
+function desativarFicha() {
+  const nome = modalBody.querySelector('h3')?.textContent.trim();
+  if (!nome) return;
+
+  const rows = document.querySelectorAll('#Fichas-table tbody tr');
+  rows.forEach(row => {
+    const nomeC = row.cells[1].textContent.trim();
+    if (nomeC === nome) {
+      row.classList.add('ficha-desativada');
+    }
+  });
+
+  modal.style.display = 'none';
+}
+
   
     // Adiciona evento ao botão
     botaoEditar.addEventListener('click', () => {
@@ -235,6 +260,29 @@ function abrirModal(fichacrianca) {
     modalBody.appendChild(botaoEditar);
     modal.style.display = 'block';
 }
+
+// Adiciona o container para os botões
+const botaoContainer = document.createElement('div');
+botaoContainer.classList.add('botao-container');
+
+// Adiciona o botão Editar
+const botaoEditar = document.createElement('button');
+botaoEditar.textContent = 'Editar';
+botaoEditar.classList.add('editar-ficha');
+
+// Botão Desativar
+const botaoDesativar = document.createElement('button');
+botaoDesativar.textContent = 'Desativar';
+botaoDesativar.classList.add('desativar-ficha');
+botaoDesativar.addEventListener('click', () => {
+  desativarFicha();
+});
+
+botaoContainer.appendChild(botaoEditar);
+botaoContainer.appendChild(botaoDesativar);
+
+// Adiciona o container ao modal
+modalBody.appendChild(botaoContainer);
 
 function habilitarEdicao(container) {
   const paragrafos = container.querySelectorAll('.info-crianca p');
@@ -401,95 +449,96 @@ document.getElementById('search-input').addEventListener('keyup', function () {
 // Cria uma tag <style> no documento
 const style = document.createElement('style');
 style.innerHTML = `
-  #modal-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .ficha-crianca {
-    display: flex;
-    margin-bottom: 20px;
-    width: 100%;
-    justify-content: flex-start;
-  }
-
-  .foto-crianca {
-    width: 400px;
-    height: 400px;
-    margin-right: 0px;
-    object-fit: contain; /* Mantém a imagem inteira dentro do espaço, sem cortar */
-}
-
-
-  .info-crianca {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-
-  .info-crianca h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-  }
-
-  .info-crianca p {
-    margin: 5px 0;
-  }
-
-  .info-crianca p strong {
-    font-weight: bold;
-  }
-
-  @media screen and (max-width: 768px) {
-    .ficha-crianca {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .info-crianca {
-      align-items: center;
-    }
-
-.btn {
-  background: #ffbcfc;
-  color: rgb(0, 0, 0);
-  padding: 12px 30px;
-  border: none;
-  border-radius: 25px;
-  font-size: 16px;
-  font-weight: bold;
-  text-decoration: none;
-  text-align: center;
-  min-width: 200px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 15px;
-  margin-left: 95px;
-}
-
-.btn.glow {
-  box-shadow: 0px 0px 15px #884b85;
-}
-
-.btn:hover {
-  background: #e07ddb;
-  transform: translateY(-2px);
-  box-shadow: 0 0 20px #884b85;
-}
-
-.botao {
-  margin-top: 15px;
+#modal-body {
+  font-family: Arial, sans-serif;
   display: flex;
-  justify-content: space-between;
-  gap: 10px; 
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
 
-  }
+.ficha-crianca {
+  display: flex;
+  margin-bottom: 20px;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.foto-crianca {
+  width: 400px;
+  height: 400px;
+  margin-right: 0px;
+  object-fit: contain; /* Mantém a imagem inteira dentro do espaço, sem cortar */
+}
+
+
+.info-crianca {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.info-crianca h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.info-crianca p {
+  margin: 5px 0;
+}
+
+.info-crianca p strong {
+  font-weight: bold;
+}
+
+/* Estilo SEMPRE aplicado para botões lado a lado */
+.botao-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.botao-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+@media screen and (max-width: 768px) {
+.ficha-crianca {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.info-crianca {
+  align-items: center;
+}
+
+/* Estilos para o container dos botões */
+.botao-container {
+  display: flex;        /* Usando flexbox para alinhar os itens */
+  gap: 10px;            /* Espaço entre os botões */
+  margin-top: 10px;     /* Espaço acima dos botões */
+  justify-content: center; /* Alinha os botões no centro */
+}
+
+/* Estilos individuais dos botões */
+.botao-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+}
 `;
 
 // Adiciona o estilo ao documento
