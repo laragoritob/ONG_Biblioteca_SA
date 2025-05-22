@@ -1,116 +1,121 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Referências aos elementos do modal principal
+  // Referências gerais
   const modal = document.getElementById('modal');
   const modalBody = document.getElementById('modal-body');
   const closeModal = document.getElementById('close-modal');
 
-  // Elementos do modal e formulário de adição de livro
-  const botaoAdicionar = document.getElementById('botao-adicionar');
-  const modalAdicionar = document.getElementById('modal-adicionar');
-  const closeAdicionar = document.getElementById('close-adicionar');
-  const formAdicionar = document.getElementById('form-adicionar');
-  const livroIdInput = document.getElementById('livro-id');
+  // Modal adicionar livro
+  const botaoAdicionar = document.getElementById("botao-adicionar");
+  const modalAdicionar = document.getElementById("modal-adicionar");
+  const livroIdInput = document.getElementById("livro-id");
+  const formAdicionar = document.getElementById("form-adicionar");
 
-  // Conteúdos HTML para os livros
-  const conteudoLivro1 = `
-    <img src="subtelas_img/paratodososgarotosquejaamei.jpg" title="Livro" class="hmlivro" />
-    <h3 style="margin-top: 0;">Para Todos Os Garotos Que Já Amei</h3>
-    <p>Lara Jean guarda suas cartas de amor em uma caixa azul-petróleo que ganhou da mãe. Não são cartas que ela recebeu de alguém, mas que ela mesma escreveu. Uma para cada garoto que amou — cinco ao todo. São cartas sinceras, sem joguinhos nem fingimentos, repletas de coisas que Lara Jean não diria a ninguém, confissões de seus sentimentos mais profundos.</p>
-    <p>Até que um dia essas cartas secretas são misteriosamente enviadas aos destinatários, e de uma hora para outra a vida amorosa de Lara Jean sai do papel e se transforma em algo que ela não pode mais controlar.</p><br><br><br>
-    <ul>
-      <li><strong>Autora:</strong> Jenny Han</li>
-      <li><strong>Gêneros:</strong> Ficção juvenil, Romance de amor</li>
-      <li><strong>Editora:</strong> Simon & Schuster</li>
-      <li><strong>Lançamento:</strong> 15 de abril de 2014</li>
-    </ul>
-  `;
 
-  const conteudoLivro2 = `
-    <img src="subtelas_img/ocortico.jpg" title="Livro" class="hmlivro" />
-    <h3 style="margin-top: 0;">O Cortiço</h3>
-    <p>Pobreza, corrupção, injustiça, traição são elementos que integram O cortiço, principal obra do Naturalismo brasileiro. Nela, Aluísio Azevedo denuncia as mazelas sociais enfrentadas pelos moradores de um cortiço no Rio de Janeiro no século XIX. É um romance que convida a analisar por meio da observação crítica do cotidiano das personagens a animalização do ser humano, questão que se mostra, mais do que nunca, atual.</p><br><br><br><br><br><br>
-    <ul>
-      <li><strong>Autor:</strong> Aluísio Azevedo</li>
-      <li><strong>Gêneros:</strong> Naturalismo</li>
-      <li><strong>Editora:</strong> Editoras variadas</li>
-      <li><strong>Lançamento:</strong> 1890</li>
-    </ul>
-  `;
-
-  const conteudoLivro3 = `
-    <img src="subtelas_img/opequenoprincipe.jpg" title="Livro" class="hmlivro" />
-    <h3>O Pequeno Príncipe</h3>
-    <p>Nesta história que marcou gerações de leitores em todo o mundo, um piloto cai com seu avião no deserto do Saara e encontra um pequeno príncipe, que o leva a uma aventura filosófica e poética através de planetas que encerram a solidão humana.<br><br><br>
-    Um livro para todos os públicos, O pequeno príncipe é uma obra atemporal, com metáforas pertinentes e aprendizados sobre afeto, sonhos, esperança e tudo aquilo que é invisível aos olhos.</p><br><br><br><br><br>
-    <ul>
-      <li><strong>Autor:</strong> Antoine de Saint-Exupéry</li>
-      <li><strong>Gênero:</strong> Fábula, Literatura Infantil</li>
-      <li><strong>Editora:</strong> Gallimard</li>
-      <li><strong>Lançamento:</strong> abril de 1943</li>
-    </ul>
-  `;
-
-  const conteudoLivro4 = `
-    <img src="subtelas_img/olivrodamatematica.jpg" title="Livro" class="hmlivro" />
-    <h3>O Livro da Matemática</h3>
-    <p>O livro da matemática está repleto de explicações concisas, sem jargões, que descomplicam teorias complexas e citações que facilitam a visualização e memorização dos conceitos, além de ilustrações que complementam e brincam com nossa compreensão dos números.</p><br><br><br><br><br><br><br><br><br><br>
-    <ul>
-      <li><strong>Autor:</strong> Vários</li>
-      <li><strong>Editora:</strong> Globo Livros</li>
-      <li><strong>Gênero:</strong> Didático</li>
-      <li><strong>Lançamento:</strong> 19 outubro 2020</li>
-    </ul>
-  `;
-
-  // Função para abrir o modal com o conteúdo do livro
-  function abrirModal(conteudo) {
-    modalBody.innerHTML = conteudo;
-    modal.style.display = 'block';
-  }
-
-  // Eventos para abrir modal com detalhes do livro 1
-  document.querySelectorAll('.detalhes-livro').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      abrirModal(conteudoLivro1);
-    });
-  });
-
-  // Eventos para abrir modal com detalhes do livro 2
-  document.querySelectorAll('.detalhes-livro2').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      abrirModal(conteudoLivro2);
-    });
-  });
-
-  // Eventos para abrir modal com detalhes do livro 3
-  document.querySelectorAll('.detalhes-livro3').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      abrirModal(conteudoLivro3);
-    });
-  });
-
-  // Eventos para abrir modal com detalhes do livro 4
-  document.querySelectorAll('.detalhes-livro4').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      abrirModal(conteudoLivro4);
-    });
-  });
-
-  // Fechar modal principal ao clicar no X
-  closeModal.onclick = function () {
-    modal.style.display = 'none';
-  };
-
-  // Fechar modal principal ao clicar fora da área do conteúdo
-  window.addEventListener("click", function (event) {
-    if (event.target === modal) {
-      modal.style.display = "none";
+    // Conteúdos HTML para os livros
+    const conteudoLivro1 = `
+      <img src="subtelas_img/paratodososgarotosquejaamei.jpg" title="Livro" class="hmlivro" />
+      <h3 style="margin-top: 0;">Para Todos Os Garotos Que Já Amei</h3>
+      <p>Lara Jean guarda suas cartas de amor em uma caixa azul-petróleo que ganhou da mãe. Não são cartas que ela recebeu de alguém, mas que ela mesma escreveu. Uma para cada garoto que amou — cinco ao todo. São cartas sinceras, sem joguinhos nem fingimentos, repletas de coisas que Lara Jean não diria a ninguém, confissões de seus sentimentos mais profundos.</p>
+      <p>Até que um dia essas cartas secretas são misteriosamente enviadas aos destinatários, e de uma hora para outra a vida amorosa de Lara Jean sai do papel e se transforma em algo que ela não pode mais controlar.</p><br><br><br>
+      <ul>
+        <li><strong>Autora:</strong> Jenny Han</li>
+        <li><strong>Gêneros:</strong> Ficção juvenil, Romance de amor</li>
+        <li><strong>Editora:</strong> Simon & Schuster</li>
+        <li><strong>Lançamento:</strong> 15 de abril de 2014</li>
+      </ul>
+    `;
+  
+    const conteudoLivro2 = `
+      <img src="subtelas_img/ocortico.jpg" title="Livro" class="hmlivro" />
+      <h3 style="margin-top: 0;">O Cortiço</h3>
+      <p>Pobreza, corrupção, injustiça, traição são elementos que integram O cortiço, principal obra do Naturalismo brasileiro. Nela, Aluísio Azevedo denuncia as mazelas sociais enfrentadas pelos moradores de um cortiço no Rio de Janeiro no século XIX. É um romance que convida a analisar por meio da observação crítica do cotidiano das personagens a animalização do ser humano, questão que se mostra, mais do que nunca, atual.</p><br><br><br><br><br><br>
+      <ul>
+        <li><strong>Autor:</strong> Aluísio Azevedo</li>
+        <li><strong>Gêneros:</strong> Naturalismo</li>
+        <li><strong>Editora:</strong> Editoras variadas</li>
+        <li><strong>Lançamento:</strong> 1890</li>
+      </ul>
+    `;
+  
+    const conteudoLivro3 = `
+      <img src="subtelas_img/opequenoprincipe.jpg" title="Livro" class="hmlivro" />
+      <h3>O Pequeno Príncipe</h3>
+      <p>Nesta história que marcou gerações de leitores em todo o mundo, um piloto cai com seu avião no deserto do Saara e encontra um pequeno príncipe, que o leva a uma aventura filosófica e poética através de planetas que encerram a solidão humana.<br><br><br>
+      Um livro para todos os públicos, O pequeno príncipe é uma obra atemporal, com metáforas pertinentes e aprendizados sobre afeto, sonhos, esperança e tudo aquilo que é invisível aos olhos.</p><br><br><br><br><br>
+      <ul>
+        <li><strong>Autor:</strong> Antoine de Saint-Exupéry</li>
+        <li><strong>Gênero:</strong> Fábula, Literatura Infantil</li>
+        <li><strong>Editora:</strong> Gallimard</li>
+        <li><strong>Lançamento:</strong> abril de 1943</li>
+      </ul>
+    `;
+  
+    const conteudoLivro4 = `
+      <img src="subtelas_img/olivrodamatematica.jpg" title="Livro" class="hmlivro" />
+      <h3>O Livro da Matemática</h3>
+      <p>O livro da matemática está repleto de explicações concisas, sem jargões, que descomplicam teorias complexas e citações que facilitam a visualização e memorização dos conceitos, além de ilustrações que complementam e brincam com nossa compreensão dos números.</p><br><br><br><br><br><br><br><br><br><br>
+      <ul>
+        <li><strong>Autor:</strong> Vários</li>
+        <li><strong>Editora:</strong> Globo Livros</li>
+        <li><strong>Gênero:</strong> Didático</li>
+        <li><strong>Lançamento:</strong> 19 outubro 2020</li>
+      </ul>
+    `;
+  
+    // Função para abrir o modal com o conteúdo do livro
+    function abrirModal(conteudo) {
+      modalBody.innerHTML = conteudo;
+      modal.style.display = 'block';
     }
-  });
+  
+    // Eventos para abrir modal com detalhes do livro 1
+    document.querySelectorAll('.detalhes-livro').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        abrirModal(conteudoLivro1);
+      });
+    });
+  
+    // Eventos para abrir modal com detalhes do livro 2
+    document.querySelectorAll('.detalhes-livro2').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        abrirModal(conteudoLivro2);
+      });
+    });
+  
+    // Eventos para abrir modal com detalhes do livro 3
+    document.querySelectorAll('.detalhes-livro3').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        abrirModal(conteudoLivro3);
+      });
+    });
+  
+    // Eventos para abrir modal com detalhes do livro 4
+    document.querySelectorAll('.detalhes-livro4').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        abrirModal(conteudoLivro4);
+      });
+    });
+  
+    // Fechar modal principal ao clicar no X
+    closeModal.onclick = function () {
+      modal.style.display = 'none';
+    };
+  
+    // Fechar modal principal ao clicar fora da área do conteúdo
+    window.addEventListener("click", function (event) {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+
+
+
+
+
 
   // Função para gerar ID aleatório de livro
   function gerarIdLivro() {
@@ -138,6 +143,9 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   }
+
+
+
 
   // Adicionar novo livro na tabela ao enviar o formulário
   if (formAdicionar) {
@@ -215,11 +223,11 @@ document.getElementById('form-adicionar').addEventListener('submit', function (e
   }
 });
 
-document.getElementById('botao-cancelar').addEventListener('click', () => {
+document.getElementById('botao-cancelar-adicionar').addEventListener('click', () => {
   Swal.fire({
     title: 'Cancelado!',
     text: 'Cadastro cancelado.',
-    icon: 'warning',
+    icon: 'error',
     confirmButtonText: 'OK',
     confirmButtonColor: '#ff9800',
     customClass: {
@@ -269,27 +277,9 @@ document.getElementById('form-status').addEventListener('submit', function (e) {
   }
 });
 
-document.getElementById('cancelar-status').addEventListener('click', () => {
-  Swal.fire({
-    title: 'Cancelado!',
-    text: 'Cadastro cancelado.',
-    icon: 'warning',
-    confirmButtonText: 'OK',
-    confirmButtonColor: '#ff9800',
-    customClass: {
-      popup: 'swal-add-popup',
-      icon: 'swal-add-icon'
-    }
-  }).then((result) => {
-    if (result.isConfirmed) {
-      document.getElementById('form-status').reset();
-      document.getElementById('modal-status').style.display = 'none';
-    }
-  });
-});
 
 
-//MUDAR STATUS
+  // MUDAR STATUS
 document.addEventListener("DOMContentLoaded", function () {
   const botaoMudar = document.getElementById('botao-mudar');
   const linhasTabela = document.querySelectorAll("#livros-table tbody tr");
@@ -300,110 +290,10 @@ document.addEventListener("DOMContentLoaded", function () {
   let linhaSelecionada = null;
 
   botaoMudar.addEventListener("click", () => {
-    Swal.fire({
-      title: 'Digite o ID do livro',
-      input: 'text',
-      inputLabel: 'ID do livro (ex: #0001)',
-      inputPlaceholder: 'Insira o ID aqui',
-      showCancelButton: true,
-      confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Cancelar',
-      confirmButtonColor: '#4CAF50',
-      cancelButtonColor: '#f44336',
-      allowOutsideClick: false,
-      allowEscapeKey: false,
-      customClass: {
-        title: 'titulo-id-livro' // Classe personalizada para estilizar o título
-      },
-      inputValidator: (value) => {
-        if (!value.trim()) {
-          return 'Você precisa digitar um ID!';
-        }
-      }
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const idDigitado = result.value.trim();
-        linhaSelecionada = null;
-
-        linhasTabela.forEach((linha) => {
-          const idCelula = linha.querySelector("td").textContent.trim();
-          if (idCelula.replace("#", "") === idDigitado.replace("#", "")) {
-            linhaSelecionada = linha;
-          }
-        });
-
-        if (!linhaSelecionada) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Livro não encontrado',
-            text: `Nenhum livro com ID ${idDigitado} foi encontrado.`,
-            confirmButtonText: 'OK',
-            allowOutsideClick: false,
-            allowEscapeKey: false
-          });
-        } else {
-          modalStatus.style.display = "flex";
-          modalStatus.setAttribute("data-id", idDigitado);
-        }
-      } else if (result.isDismissed) {
-        Swal.fire({
-          title: 'Cancelado!',
-          text: 'Mudança cancelada.',
-          icon: 'warning',
-          confirmButtonText: 'OK',
-          confirmButtonColor: '#ff9800',
-          customClass: {
-            popup: 'swal-cancel-popup',
-            icon: 'swal-cancel-icon'
-          }
-        });
-      }
-    });
-  });
-
-  // Submissão do formulário de mudança de status
-  formStatus.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const statusSelecionado = formStatus.querySelector('input[name="novo-status"]:checked');
-    if (!statusSelecionado || !linhaSelecionada) return;
-
-    const novoStatus = statusSelecionado.value;
-    const nomeLivro = linhaSelecionada.cells[1].textContent; 
-
-    linhaSelecionada.cells[7].textContent = novoStatus;
-
-    modalStatus.style.display = "none";
-    formStatus.reset();
-
-    // Mensagem de sucesso personalizada
-    Swal.fire({
-      title: 'Sucesso!',
-      text: `Status de "${nomeLivro}" alterado para "${novoStatus}".`,
-      icon: 'success',
-      confirmButtonText: 'OK',
-      confirmButtonColor: '#77d440',
-      allowOutsideClick: false
-    });
-  });
-
-  //cancela fechar modal
-  cancelarStatus.addEventListener("click", () => {
-    modalStatus.style.display = "none";
-    formStatus.reset();
-  });
-});
-
-
-
-// Clique no botão "Editar"
-document.getElementById("botao-editar").addEventListener("click", function () {
-  const modalStatus = document.getElementById("modal-editar");
-
   Swal.fire({
     title: 'Digite o ID do livro',
     input: 'text',
-    inputLabel: 'ID do livro (ex: #0001)',
+    inputLabel: 'ID do livro (ex: 0001)',
     inputPlaceholder: 'Insira o ID aqui',
     showCancelButton: true,
     confirmButtonText: 'Confirmar',
@@ -416,145 +306,202 @@ document.getElementById("botao-editar").addEventListener("click", function () {
       title: 'titulo-id-livro'
     },
     inputValidator: (value) => {
-      if (!value.trim()) return 'Você precisa digitar um ID!';
+      if (!value.trim()) {
+        return 'Você precisa digitar um ID!';
+      }
     }
   }).then((result) => {
     if (result.isConfirmed) {
-      const idDigitado = result.value.trim().replace("#", "");
-      const linhas = document.querySelectorAll("#livros-table tbody tr");
-      let livroEncontrado = null;
+      let idDigitado = result.value.trim();
 
-      linhas.forEach((linha) => {
-        const idLinha = linha.cells[0].textContent.trim().replace("#", "");
-        if (idLinha === idDigitado) {
-          livroEncontrado = {
-            id: linha.cells[0].textContent,
-            nome: linha.cells[1].textContent,
-            genero: linha.cells[2].textContent,
-            autor: linha.cells[3].textContent,
-            quantidade: linha.cells[4].textContent,
-            prateleira: linha.cells[5].textContent,
-            data: linha.cells[6].textContent,
-            status: linha.cells[7].textContent
-          };
+      // Garante que o ID comece com #
+      if (!idDigitado.startsWith("#")) {
+        idDigitado = `#${idDigitado}`;
+      }
+
+      linhaSelecionada = null;
+
+      linhasTabela.forEach((linha) => {
+        const idCelula = linha.querySelector("td").textContent.trim();
+        if (idCelula === idDigitado) {
+          linhaSelecionada = linha;
         }
       });
 
-      if (!livroEncontrado) {
+      if (!linhaSelecionada) {
         Swal.fire({
           icon: 'error',
           title: 'Livro não encontrado',
-          text: `Nenhum livro com ID ${result.value} foi encontrado.`,
-          confirmButtonText: 'OK'
+          text: `Nenhum livro com ID ${idDigitado} foi encontrado.`,
+          confirmButtonText: 'OK',
+          allowOutsideClick: false,
+          allowEscapeKey: false
         });
       } else {
-        // Preencher o formulário
-        document.querySelector("#modal-editar #livro-id").value = livroEncontrado.id;
-        document.querySelector("#modal-editar #livro-id").readOnly = true;
-        document.querySelector("#modal-editar #livro-nome").value = livroEncontrado.nome;
-        document.querySelector("#modal-editar #livro-genero").value = livroEncontrado.genero;
-        document.querySelector("#modal-editar #livro-autor").value = livroEncontrado.autor;
-        document.querySelector("#modal-editar #livro-quantidade").value = livroEncontrado.quantidade;
-        document.querySelector("#modal-editar #livro-prateleira").value = livroEncontrado.prateleira;
-        document.querySelector("#modal-editar #livro-data").value = formatarDataISO(livroEncontrado.data);
-        document.querySelector("#modal-editar #livro-status").value = livroEncontrado.status;
-
         modalStatus.style.display = "flex";
+        modalStatus.setAttribute("data-id", idDigitado);
       }
     } else if (result.isDismissed) {
       Swal.fire({
         title: 'Cancelado!',
         text: 'Mudança cancelada.',
-        icon: 'info',
+        icon: 'error',
         confirmButtonText: 'OK',
-        confirmButtonColor: '#ff9800'
+        confirmButtonColor: '#ff9800',
+        customClass: {
+          popup: 'swal-cancel-popup',
+          icon: 'swal-cancel-icon'
+        }
       });
     }
   });
 });
 
-// Conversão dd/mm/yyyy → yyyy-mm-dd
-function formatarDataISO(data) {
-  const [dia, mes, ano] = data.split("/");
-  return `${ano}-${mes}-${dia}`;
-}
+  // Submissão do formulário de mudança de status
+  formStatus.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-// Conversão yyyy-mm-dd → dd/mm/yyyy
-function formatarDataBR(dataISO) {
-  const [ano, mes, dia] = dataISO.split("-");
-  return `${dia}/${mes}/${ano}`;
-}
+    const statusSelecionado = formStatus.querySelector('input[name="novo-status"]:checked');
 
-// Envio do formulário de edição
-document.getElementById("form-editar").addEventListener("submit", function (e) {
-  e.preventDefault();
+    if (!statusSelecionado) {
+      Swal.fire({
+        title: 'Erro!',
+        text: 'Por favor, selecione um status.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#f44336'
+      });
+      return;
+    }
 
-  const modal = document.getElementById("modal-editar");
+    if (!linhaSelecionada) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro',
+        text: 'Nenhuma linha selecionada para alteração!',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
 
-  const id = modal.querySelector("#livro-id").value;
-  const nome = modal.querySelector("#livro-nome").value;
-  const genero = modal.querySelector("#livro-genero").value;
-  const autor = modal.querySelector("#livro-autor").value;
-  const quantidade = modal.querySelector("#livro-quantidade").value;
-  const prateleira = modal.querySelector("#livro-prateleira").value;
-  const data = modal.querySelector("#livro-data").value;
-  const status = modal.querySelector("#livro-status").value;
+    const novoStatus = statusSelecionado.value;
+    const nomeLivro = linhaSelecionada.cells[1].textContent;
 
-  const inputs = modal.querySelectorAll("input, select");
-  let todosPreenchidos = true;
+    linhaSelecionada.cells[7].textContent = novoStatus;
 
-  inputs.forEach(input => {
-    if (!input.value.trim()) todosPreenchidos = false;
+    modalStatus.style.display = "none";
+    formStatus.reset();
+
+    Swal.fire({
+      title: 'Sucesso!',
+      text: `Status de "${nomeLivro}" alterado para "${novoStatus}".`,
+      icon: 'success',
+      confirmButtonText: 'OK',
+      confirmButtonColor: '#4CAF50',
+      allowOutsideClick: false
+    });
   });
 
-  if (!todosPreenchidos) {
+  // Cancelar ação com confirmação
+  cancelarStatus.addEventListener("click", () => {
     Swal.fire({
-      title: 'Erro!',
-      text: 'Por favor, preencha todos os campos obrigatórios.',
+      title: 'Cancelado!',
+      text: 'Alteração cancelada.',
       icon: 'error',
       confirmButtonText: 'OK',
-      confirmButtonColor: '#f44336'
+      confirmButtonColor: '#ff9800',
+      customClass: {
+        popup: 'swal-add-popup',
+        icon: 'swal-add-icon'
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        formStatus.reset();
+        modalStatus.style.display = 'none';
+      }
     });
-    return;
-  }
-
-  const linhas = document.querySelectorAll("#livros-table tbody tr");
-
-  linhas.forEach((linha) => {
-    if (linha.cells[0].textContent === id) {
-      linha.cells[1].textContent = nome;
-      linha.cells[2].textContent = genero;
-      linha.cells[3].textContent = autor;
-      linha.cells[4].textContent = quantidade;
-      linha.cells[5].textContent = prateleira;
-      linha.cells[6].textContent = formatarDataBR(data);
-      linha.cells[7].textContent = status;
-    }
-  });
-
-  modal.style.display = "none";
-
-  Swal.fire({
-    title: 'Sucesso!',
-    text: 'Livro editado com sucesso!',
-    icon: 'success',
-    confirmButtonText: 'OK',
-    confirmButtonColor: '#4CAF50'
-  });
-
-  document.getElementById("form-editar").reset();
-});
-
-// Botão "Cancelar" no modal de edição
-document.getElementById("botao-cancelar").addEventListener("click", function () {
-  document.getElementById("modal-editar").style.display = "none";
-
-  Swal.fire({
-    title: 'Cancelado!',
-    text: 'Edição do livro cancelada.',
-    icon: 'info',
-    confirmButtonText: 'OK',
-    confirmButtonColor: '#2196f3'
   });
 });
 
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const botaoEditar = document.getElementById("botao-editar");
+  const modalEditar = document.getElementById("modal-editar");
+  const formEditar = document.getElementById("form-editar");
+  const cancelarEditar = document.getElementById("cancelar-editar");
+  const linhasTabela = document.querySelectorAll("#livros-table tbody tr");
+
+  let linhaSelecionada = null;
+
+  botaoEditar.addEventListener("click", () => {
+    Swal.fire({
+      title: "Digite o ID do livro",
+      input: "text",
+      inputLabel: "ID do livro (ex: #0001)",
+      inputPlaceholder: "Insira o ID aqui",
+      showCancelButton: true,
+      confirmButtonText: "Confirmar",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#4CAF50",
+      cancelButtonColor: "#f44336",
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      inputValidator: (value) => {
+        if (!value.trim()) {
+          return "Você precisa digitar um ID!";
+        }
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const idDigitado = result.value.trim().replace("#", "");
+        linhaSelecionada = null;
+
+        linhasTabela.forEach((linha) => {
+          const id = linha.cells[0].textContent.trim().replace("#", "");
+          if (id === idDigitado) {
+            linhaSelecionada = linha;
+          }
+        });
+
+        if (linhaSelecionada) {
+          // Preencher o formulário com os dados da linha
+          document.getElementById("edit-titulo").value = linhaSelecionada.cells[1].textContent;
+          document.getElementById("edit-autor").value = linhaSelecionada.cells[2].textContent;
+
+          modalEditar.style.display = "flex";
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Livro não encontrado",
+            text: `Nenhum livro com ID ${result.value} foi encontrado.`,
+          });
+        }
+      }
+    });
+  });
+
+  cancelarEditar.addEventListener("click", () => {
+    modalEditar.style.display = "none";
+    formEditar.reset();
+  });
+
+  formEditar.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (!linhaSelecionada) return;
+
+    // Atualizar dados na tabela
+    linhaSelecionada.cells[1].textContent = document.getElementById("edit-titulo").value;
+    linhaSelecionada.cells[2].textContent = document.getElementById("edit-autor").value;
+
+    modalEditar.style.display = "none";
+    formEditar.reset();
+
+    Swal.fire({
+      icon: "success",
+      title: "Sucesso!",
+      text: "Livro editado com sucesso!",
+    });
+  });
+});
