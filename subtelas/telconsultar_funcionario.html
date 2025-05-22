@@ -71,23 +71,20 @@
            <td>Repositor</td>
            <td>24/06/2003</td>
            <td>08/10/2024</td>
-
         </tr>
         <tr>
            <td>0007</td>
            <td><a href="#" class="detalhes-funcionarios7">Dwayne Douglas Johnson</a></td>
            <td>Recreador</td>
            <td>02/05/1972</td>
-           <td>29/09/2024</td>
-
+           <td>29/09/2024</td>   
         </tr>
         <tr>
            <td>0008</td>
-           <td><a href="#" class="detalhes-funcionarios8">Rodrigo Pantera</a></td>
+           <td><a href="#" class="detalhes-funcionarios8">Mason Thames</a></td>
            <td>Recreador</td>
-           <td>25/01/2007</td>
+           <td>10/07/2007</td>
            <td>11/03/2025</td>
-
         </tr>
         <tr>
            <td>0009</td>
@@ -95,7 +92,6 @@
            <td>Bibliotecário</td>
            <td>19/12/1980</td>
            <td>17/08/2024</td>
-
         </tr>
         <tr>
            <td>0010</td>
@@ -103,7 +99,6 @@
            <td>Gestor</td>
            <td>03/08/1963</td>
            <td>21/08/2024</td>
-
         </tr>
 
       </tbody>
@@ -115,6 +110,105 @@
     <div id="modal-content">
       <span id="close-modal" style="cursor:pointer;">&times;</span>
       <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Modal de Edição -->
+  <div id="modal-editar" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Editar Funcionário</h2>
+      <form id="form-editar">
+        <div class="linha-dupla">
+          <div>
+            <label>Código:</label>
+            <input type="text" id="funcionario-codigo" readonly>
+          </div>
+          <div>
+            <label>Nome:</label>
+            <input type="text" id="funcionario-nome" required>
+          </div>
+        </div>
+
+        <div class="linha-dupla">
+          <div>
+            <label>CPF:</label>
+            <input type="text" id="funcionario-cpf" required>
+          </div>
+          <div>
+            <label>Sexo:</label>
+            <select id="funcionario-sexo" required>
+              <option value="Masculino">Masculino</option>
+              <option value="Feminino">Feminino</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="linha-dupla">
+          <div>
+            <label>Estado Civil:</label>
+            <select id="funcionario-civil" required>
+              <option value="Solteiro">Solteiro</option>
+              <option value="Casado">Casado</option>
+              <option value="Divorciado">Divorciado</option>
+              <option value="Viúvo">Viúvo</option>
+            </select>
+          </div>
+          <div>
+            <label>Cargo:</label>
+            <input type="text" id="funcionario-cargo" required>
+          </div>
+        </div>
+
+        <div class="linha-dupla">
+          <div>
+            <label>Data de Nascimento:</label>
+            <input type="date" id="funcionario-nascimento" required>
+          </div>
+          <div>
+            <label>Data de Efetivação:</label>
+            <input type="date" id="funcionario-efetivacao" required>
+          </div>
+        </div>
+
+        <div class="linha-dupla">
+          <div>
+            <label>Estado:</label>
+            <input type="text" id="funcionario-estado" required>
+          </div>
+          <div>
+            <label>Cidade:</label>
+            <input type="text" id="funcionario-cidade" required>
+          </div>
+        </div>
+
+        <div class="linha-dupla">
+          <div>
+            <label>Bairro:</label>
+            <input type="text" id="funcionario-bairro" required>
+          </div>
+          <div>
+            <label>Rua:</label>
+            <input type="text" id="funcionario-rua" required>
+          </div>
+        </div>
+
+        <div class="linha-dupla">
+          <div>
+            <label>Número:</label>
+            <input type="text" id="funcionario-numero" required>
+          </div>
+          <div>
+            <label>Telefone:</label>
+            <input type="text" id="funcionario-telefone" required>
+          </div>
+        </div>
+
+        <div class="botao">
+          <button type="submit" class="btn">Salvar</button>
+          <button type="button" class="btn" id="cancelar-edicao">Cancelar</button>
+        </div>
+      </form>
     </div>
   </div>
 
