@@ -5,7 +5,6 @@ create table Cliente (
     CPF varchar(15) not null,
     Sexo char(2) not null,
     Nome_Responsavel varchar(50),
-    Nacionalidade varchar(20) not null,
     Escolaridade varchar(40),
     Telefone varchar(20) not null,
     RG varchar(15) not null,
@@ -16,6 +15,8 @@ create table Cliente (
     Bairro varchar(30) not null,
     Rua varchar(40) not null,
     Num_Residencia  int not null,
+    Estado_Civil varchar(20) not null,
+    Email varchar(50) not null,
     Foto_Cliente longblob,
     
     constraint PK_Cliente primary key (Cod_Cliente)
