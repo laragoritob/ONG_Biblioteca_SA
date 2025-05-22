@@ -425,7 +425,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
+// EDITAR
 document.addEventListener("DOMContentLoaded", function () {
   const botaoEditar = document.getElementById("botao-editar");
   const modalEditar = document.getElementById("modal-editar");
@@ -433,51 +433,70 @@ document.addEventListener("DOMContentLoaded", function () {
   const cancelarEditar = document.getElementById("cancelar-editar");
   const linhasTabela = document.querySelectorAll("#livros-table tbody tr");
 
-  let linhaSelecionada = null;
+  let linhaSelecionada = null;  // variável global para manter referência da linha
 
   botaoEditar.addEventListener("click", () => {
     Swal.fire({
-      title: "Digite o ID do livro",
-      input: "text",
-      inputLabel: "ID do livro (ex: #0001)",
-      inputPlaceholder: "Insira o ID aqui",
+      title: 'Digite o ID do livro',
+      input: 'text',
+      inputLabel: 'ID do livro (ex: 0001)',
+      inputPlaceholder: 'Insira o ID aqui',
       showCancelButton: true,
-      confirmButtonText: "Confirmar",
-      cancelButtonText: "Cancelar",
-      confirmButtonColor: "#4CAF50",
-      cancelButtonColor: "#f44336",
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#4CAF50',
+      cancelButtonColor: '#f44336',
       allowOutsideClick: false,
       allowEscapeKey: false,
+      customClass: {
+        title: 'titulo-id-livro'
+      },
       inputValidator: (value) => {
         if (!value.trim()) {
-          return "Você precisa digitar um ID!";
+          return 'Você precisa digitar um ID!';
         }
       }
     }).then((result) => {
       if (result.isConfirmed) {
         const idDigitado = result.value.trim().replace("#", "");
-        linhaSelecionada = null;
+        linhaSelecionada = null; // reset
 
         linhasTabela.forEach((linha) => {
-          const id = linha.cells[0].textContent.trim().replace("#", "");
-          if (id === idDigitado) {
+          const idCelula = linha.querySelector("td").textContent.trim();
+          if (idCelula === idDigitado) {
             linhaSelecionada = linha;
           }
         });
 
-        if (linhaSelecionada) {
-          // Preencher o formulário com os dados da linha
+        if (!linhaSelecionada) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Livro não encontrado',
+            text: `Nenhum livro com ID ${idDigitado} foi encontrado.`,
+            confirmButtonText: 'OK',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          });
+        } else {
+          // Preenche o formulário com os dados da linha selecionada
           document.getElementById("edit-titulo").value = linhaSelecionada.cells[1].textContent;
           document.getElementById("edit-autor").value = linhaSelecionada.cells[2].textContent;
 
+          // Abre o modal de edição
           modalEditar.style.display = "flex";
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Livro não encontrado",
-            text: `Nenhum livro com ID ${result.value} foi encontrado.`,
-          });
         }
+      } else if (result.isDismissed) {
+        Swal.fire({
+          title: 'Cancelado!',
+          text: 'Mudança cancelada.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#ff9800',
+          customClass: {
+            popup: 'swal-cancel-popup',
+            icon: 'swal-cancel-icon'
+          }
+        });
       }
     });
   });
@@ -485,18 +504,20 @@ document.addEventListener("DOMContentLoaded", function () {
   cancelarEditar.addEventListener("click", () => {
     modalEditar.style.display = "none";
     formEditar.reset();
+    linhaSelecionada = null; // resetar linha selecionada ao cancelar
   });
 
   formEditar.addEventListener("submit", (e) => {
     e.preventDefault();
     if (!linhaSelecionada) return;
 
-    // Atualizar dados na tabela
+    // Atualiza os dados na tabela com os valores do formulário
     linhaSelecionada.cells[1].textContent = document.getElementById("edit-titulo").value;
     linhaSelecionada.cells[2].textContent = document.getElementById("edit-autor").value;
 
     modalEditar.style.display = "none";
     formEditar.reset();
+    linhaSelecionada = null;
 
     Swal.fire({
       icon: "success",
@@ -505,3 +526,4 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
