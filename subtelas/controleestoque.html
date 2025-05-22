@@ -5,16 +5,18 @@
   <meta charset="UTF-8">
   <title>Controle de Estoque - Sala Arco-íris</title>
   <link rel="stylesheet" type="text/css" href="subtelas_css/controleestoque.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+
 
 <header>
   <!-- Título principal da página -->
   <h1> LIVROS </h1>
 </header>
 
-<!-- Container da barra de busca -->
 
+<!-- Container da barra de busca -->
 <div id="search-container">
   <div class="input-wrapper">
     <span class="icon">🔎</span>
@@ -23,8 +25,8 @@
   </div>
 </div>
 
-<!-- Tabela com lista dos livros cadastrados -->
 
+<!-- Tabela com lista dos livros cadastrados -->
 <table id="livros-table" border="1">
   <thead>
     <tr>
@@ -39,7 +41,6 @@
     </tr>
   </thead>
   <tbody>
-    <!-- Exemplo de linhas com dados dos livros -->
     <tr>
       <td>#0001</td>
       <td><a href="#" class="detalhes-livro">Para Todos Os Garotos Que Já Amei</a></td>
@@ -83,18 +84,29 @@
   </tbody>
 </table>
 
-<!-- Container com botões de ações para os livros -->
 
+
+<!-- Container com botões de ações para os livros -->
 <div class="botoes-container">
   <button class="botao-adicionar" id="botao-adicionar">Adicionar</button>
   <button class="botao-editar" id="botao-editar">Editar</button>
   <button class="botao-mudar" id="botao-mudar">Mudar status</button>
 </div>
 
-<!-- Modal de Adicionar Livro -->
 
+
+<!-- Modal de Detalhes do livro -->
+<div id="modal">
+  <div id="modal-content">
+    <span id="close-modal">&times;</span>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+
+
+<!-- Modal de Adicionar Livro -->
 <div id="modal-adicionar" class="modal">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <div class="modal-content">
     <h2>Adicionar Livro</h2>
     <form id="form-adicionar">
@@ -146,15 +158,15 @@
   </div>
 
   <div style="text-align: center; margin-top: 15px;">
-    <button type="submit" id="botao-salvar">Salvar</button>
-    <button type="submit" id="botao-cancelar">Cancelar</button>
+    <button type="submit" id="botao-salvar-adicionar">Salvar</button>
+    <button type="button" id="botao-cancelar-adicionar">Cancelar</button>
   </div>
 </form>
   </div>
 </div>
 
 <!-- Modal de Mudar Status -->
-<div id="modal-status" class="modal">
+<div id="modal-status" class="modal" style="display: none;">
   <div class="modal-content">
     <h2>Mudar Status do Livro</h2>
     <form id="form-status">
@@ -170,87 +182,73 @@
         </label>
       </div>
       <div style="text-align: center; margin-top: 15px;">
-        <button type="submit">Confirmar</button>
+        <button type="submit" id="salvar-status">Salvar</button>
         <button type="button" id="cancelar-status">Cancelar</button>
       </div>
     </form>
   </div>
 </div>
 
-  </div>
-</div>
+
 
 <!-- Modal de Mudar Editar -->
 <div id="modal-editar" class="modal">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <div class="modal-content">
     <h2>Editar Livro</h2>
     <form id="form-editar">
       <div class="linha-dupla">
         <div>
           <label>ID do Livro (gerado):</label>
-          <input type="text" id="livro-id" readonly>
+          <input type="text" id="editar-livro-id" readonly>
         </div>
         <div>
           <label>Nome do Livro:</label>
-          <input type="text" id="livro-nome" required>
+          <input type="text" id="editar-livro-nome" required>
         </div>
       </div>
 
   <div class="linha-dupla">
     <div>
       <label>Autor:</label>
-      <input type="text" id="livro-autor" required>
+      <input type="text" id="editar-livro-autor" required>
     </div>
     <div>
       <label>Gênero:</label>
-      <input type="text" id="livro-genero" required>
+      <input type="text" id="editar-livro-genero" required>
     </div>
   </div>
 
   <div class="linha-dupla">
     <div>
       <label>Quantidade em Estoque:</label>
-      <input type="number" id="livro-quantidade" required>
+      <input type="number" id="editar-livro-quantidade" required>
     </div>
     <div>
       <label>Prateleira:</label>
-      <input type="number" id="livro-prateleira" required>
+      <input type="number" id="editar-livro-prateleira" required>
     </div>
   </div>
 
   <div class="linha-dupla">
     <div>
       <label>Data:</label>
-      <input type="date" id="livro-data" required>
+      <input type="date" id="editar-livro-data" required>
     </div>
     <div>
       <label>Status:</label>
-      <select id="livro-status">
+      <select id="editar-livro-status">
         <option value="Disponível">Disponível</option>
         <option value="Indisponível">Indisponível</option>
       </select>
     </div>
   </div>
   <div style="text-align: center; margin-top: 15px;">
-    <button type="submit" id="botao-salvar">Salvar</button>
-    <button type="button" id="botao-cancelar">Cancelar</button>
+    <button type="submit" id="salvar-editar">Salvar</button>
+     <button type="button" id="cancelar-editar">Cancelar</button>
   </div>
+</form>
 
-
-
-<!-- Modal de Detalhes do livro (exibição dinâmica via JS) -->
-
-<div id="modal">
-  <div id="modal-content">
-    <span id="close-modal">&times;</span>
-    <div id="modal-body"></div>
-  </div>
-</div>
-
-<!-- Script principal da página -->
 
 <script src="subtelas_javascript/controleestoque.js"></script>
-
 </body>
 </html>
