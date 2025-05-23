@@ -196,14 +196,6 @@ h3 {
   flex: 1;
 }
 
-.checkbox-show-senha {
-  margin-top: 8px;
-  display: flex;
-  align-items: center;
-  margin-left: 600px;
-  font-size: 14px;
-}
-
 .custom-select {
   width: 400px;
   padding: 15px 55px;
@@ -307,7 +299,7 @@ h3 {
   background-color: #f9f9f9;
   width: 100%;
   max-width: 300px;
-  margin-left: 300;
+  margin-left: 300px;
   margin-right: auto;
 }
 
@@ -340,7 +332,7 @@ h3 {
 
 /* Estilo do botão inline */
 .botao-inline {
-  margin-left: 870px;
+  margin-left: 10px;
   padding: 5px 15px;
   font-size: 12px;
   background-color: #ffbcfc;
