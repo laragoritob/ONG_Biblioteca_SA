@@ -222,6 +222,9 @@ table {
     box-sizing: border-box;
 }
 
+/*BOTÕES DE EDITAR E DESATIVAR*/
+
+
 /* MODAL DE EDIÇÃO */
 #modal-editar {
     display: none;
