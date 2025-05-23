@@ -13,7 +13,7 @@ const funcionario = [
     cpf:'153.204.489-17',
     escolaridade:'Ensino Superior Completo',
     estado:'São Paulo',
-    civil:' Casado',
+    civil:'Casado',
     cidade:'Campinas',
     bairro:'Taquaral',
     rua:'Rua José Villare',
