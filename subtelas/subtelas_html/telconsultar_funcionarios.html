@@ -1,0 +1,73 @@
+<div id="modal-editar" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Editar Funcionário</h2>
+        <form id="form-editar">
+            <input type="hidden" id="funcionario-codigo">
+            <div class="form-group">
+                <label for="funcionario-nome">Nome:</label>
+                <input type="text" id="funcionario-nome" required>
+            </div>
+            <div class="form-group">
+                <label for="funcionario-cpf">CPF:</label>
+                <input type="text" id="funcionario-cpf" required>
+            </div>
+            <div class="form-group">
+                <label for="funcionario-sexo">Sexo:</label>
+                <select id="funcionario-sexo" required>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Feminino">Feminino</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="funcionario-civil">Estado Civil:</label>
+                <select id="funcionario-civil" required>
+                    <option value="Solteiro">Solteiro</option>
+                    <option value="Casado">Casado</option>
+                    <option value="Divorciado">Divorciado</option>
+                    <option value="Viúvo">Viúvo</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="funcionario-cargo">Cargo:</label>
+                <input type="text" id="funcionario-cargo" required>
+            </div>
+            <div class="form-group">
+                <label for="funcionario-nascimento">Data de Nascimento:</label>
+                <input type="date" id="funcionario-nascimento" required>
+            </div>
+            <div class="form-group">
+                <label for="funcionario-efetivacao">Data de Efetivação:</label>
+                <input type="date" id="funcionario-efetivacao" required>
+            </div>
+            <div class="form-group">
+                <label for="funcionario-estado">Estado:</label>
+                <input type="text" id="funcionario-estado" required>
+            </div>
+            <div class="form-group">
+                <label for="funcionario-cidade">Cidade:</label>
+                <input type="text" id="funcionario-cidade" required>
+            </div>
+            <div class="form-group">
+                <label for="funcionario-bairro">Bairro:</label>
+                <input type="text" id="funcionario-bairro" required>
+            </div>
+            <div class="form-group">
+                <label for="funcionario-rua">Rua:</label>
+                <input type="text" id="funcionario-rua" required>
+            </div>
+            <div class="form-group">
+                <label for="funcionario-numero">Número:</label>
+                <input type="text" id="funcionario-numero" required>
+            </div>
+            <div class="form-group">
+                <label for="funcionario-telefone">Telefone:</label>
+                <input type="text" id="funcionario-telefone" required>
+            </div>
+            <div class="form-buttons">
+                <button type="button" class="btn-cancelar" id="cancelar-edicao">Cancelar</button>
+                <button type="submit" class="btn-salvar">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div> 
