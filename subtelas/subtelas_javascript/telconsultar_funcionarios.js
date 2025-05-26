@@ -3,7 +3,7 @@ const modalBody = document.getElementById('modal-body');
 const closeModal = document.getElementById('close-modal');
 const modalEditar = document.getElementById('modal-editar');
 const formEditar = document.getElementById('form-editar');
-const closeEditar = document.querySelector('#modal-editar .close');
+const closeEditar = document.getElementById('close-editar');
 const cancelarEdicao = document.getElementById('cancelar-edicao');
 
 const funcionario = [
@@ -34,7 +34,7 @@ const funcionario = [
     estado:'Rio de Janeiro',
     civil:'Divorciada',
     cidade:'Niterói',
-    bairro:' Icaraí',
+    bairro:'Icaraí',
     rua:' Rua Álvares de Azevedo',
     numero:'88',
     sexo:'Feminino',
@@ -127,13 +127,13 @@ const funcionario = [
     cpf:'123.456.789-10',
     escolaridade:' Ensino Superior Completo ',
     estado:'Rio de Janeiro',
-    civil:' Casado',
+    civil:'Casado',
     cidade:'Curitiba',
     bairro:'Costa e Silva',
     rua:'Bernardo Welter',
     numero:'51',
     sexo:'Masculino',
-    telefone:'21) 98861-4670',
+    telefone:'(21) 98861-4670',
     nome: 'Dwayne Douglas Johnson',
     cargo: 'Recreador',
     nascimento: '02/05/1972',
@@ -227,9 +227,9 @@ funcionario.forEach(funcionario => {
     </div>
   </div>
 
-      <div class="botao">
-          <button type="button" class="btn renovar" onclick="abrirModalEditar('${funcionario.codigo}')">EDITAR</button>
-          <button type="button" class="btn">DESATIVAR</button>
+        <div class="btn">
+          <button class="btn-editar" onclick="abrirModalEditar('${funcionario.codigo}')">Editar</button>
+          <button class="btn-desativar" onclick="desativarFuncionario('${funcionario.codigo}')">Desativar</button>
         </div>
 `;
 
@@ -278,13 +278,43 @@ function formatarDataBR(dataISO) {
     return `${dia}/${mes}/${ano}`;
 }
 
-// Event Listeners para o modal de edição
-closeEditar.addEventListener('click', () => {
+// Event Listeners para fechar modais
+closeModal.onclick = function() {
+    modal.style.display = 'none';
+}
+
+closeEditar.onclick = function() {
     modalEditar.style.display = 'none';
+}
+
+cancelarEdicao.onclick = function() {
+    modalEditar.style.display = 'none';
+}
+
+// Fechar modal ao clicar fora
+window.addEventListener('click', function(event) {
+    // Para o modal principal
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+    
+    // Para o modal de edição
+    if (event.target === modalEditar) {
+        modalEditar.style.display = 'none';
+    }
 });
 
-cancelarEdicao.addEventListener('click', () => {
-    modalEditar.style.display = 'none';
+// Prevenir que cliques dentro do modal fechem ele
+modal.addEventListener('click', function(event) {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
+modalEditar.addEventListener('click', function(event) {
+    if (event.target === modalEditar) {
+        modalEditar.style.display = 'none';
+    }
 });
 
 formEditar.addEventListener('submit', function(e) {
@@ -310,13 +340,16 @@ formEditar.addEventListener('submit', function(e) {
         funcionarioEncontrado.telefone = document.getElementById('funcionario-telefone').value;
 
         // Atualizar a tabela
-        const linha = document.querySelector(`tr td:first-child:contains('${codigo}')`).closest('tr');
-        if (linha) {
-            linha.cells[1].textContent = funcionarioEncontrado.nome;
-            linha.cells[2].textContent = funcionarioEncontrado.cargo;
-            linha.cells[3].textContent = funcionarioEncontrado.nascimento;
-            linha.cells[4].textContent = funcionarioEncontrado.efetivacao;
-        }
+        const linhasTabela = document.querySelectorAll('table tbody tr');
+        linhasTabela.forEach(linha => {
+            const codigoCelula = linha.cells[0].textContent.trim();
+            if (codigoCelula === codigo) {
+                linha.cells[1].textContent = funcionarioEncontrado.nome;
+                linha.cells[2].textContent = funcionarioEncontrado.cargo;
+                linha.cells[3].textContent = funcionarioEncontrado.nascimento;
+                linha.cells[4].textContent = funcionarioEncontrado.efetivacao;
+            }
+        });
 
         // Fechar o modal de edição
         modalEditar.style.display = 'none';
@@ -337,24 +370,28 @@ formEditar.addEventListener('submit', function(e) {
     }
 });
 
-// Event Listeners para fechar modais
-closeModal.addEventListener('click', function () {
-    modal.style.display = 'none';
-});
-
-window.addEventListener('click', function (e) {
-    if (e.target == modal) {
-        modal.style.display = 'none';
-    }
-    if (e.target == modalEditar) {
-        modalEditar.style.display = 'none';
-    }
-});
+// Função para desativar funcionário
+function desativarFuncionario(desativar) {
+    Swal.fire({
+        title: 'Confirmar Desativação',
+        text: 'Tem certeza que deseja desativar este funcionário?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, desativar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Aqui você pode adicionar a lógica para desativar o funcionário
+            Swal.fire('Desativado!', 'Funcionário foi desativado com sucesso.', 'success');
+            modal.style.display = 'none';
+        }
+    });
+}
 
 // CAMPO DE BUSCA
 document.getElementById('search-input').addEventListener('input', function () {
     const filtro = this.value.toLowerCase();
-    const linhas = document.querySelectorAll('#livros-table tbody tr');
+    const linhas = document.querySelectorAll('#funcionarios-table tbody tr');
 
     linhas.forEach((linha) => {
         const nome = linha.querySelector('td:nth-child(2)').innerText.toLowerCase();
