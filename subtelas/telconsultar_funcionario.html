@@ -19,7 +19,7 @@
   </div>
   
   <nav>
-    <table id="livros-table" border="1">
+    <table id="funcionarios-table" border="1">
       <thead>
         <tr>
           <th>ID</th>
@@ -106,9 +106,9 @@
   </nav>
 
   <!-- Modal -->
-  <div id="modal" style="display:none;">
+  <div id="modal" class="modal">
     <div id="modal-content">
-      <span id="close-modal" style="cursor:pointer;">&times;</span>
+      <span class="close" id="close-modal">&times;</span>
       <div id="modal-body"></div>
     </div>
   </div>
@@ -116,7 +116,7 @@
   <!-- Modal de Edição -->
   <div id="modal-editar" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
+      <span class="close" id="close-editar">&times;</span>
       <h2>Editar Funcionário</h2>
       <form id="form-editar">
         <div class="linha-dupla">
@@ -192,7 +192,6 @@
             <input type="text" id="funcionario-rua" required>
           </div>
         </div>
-
         <div class="linha-dupla">
           <div>
             <label>Número:</label>
@@ -204,14 +203,16 @@
           </div>
         </div>
 
-        <div class="botao">
-          <button type="submit" class="btn">Salvar</button>
-          <button type="button" class="btn" id="cancelar-edicao">Cancelar</button>
-        </div>
+        <div class="btn">
+          <button class="btn-editar">Editar</button>
+          <button class="btn-desativar">Desativar</button>
+        </div>        
       </form>
     </div>
   </div>
+  
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="subtelas_javascript/telconsultar_funcionarios.js"></script>
 </body>
 </html>
