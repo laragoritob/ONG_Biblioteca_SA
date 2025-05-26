@@ -478,14 +478,14 @@ a {
 
 .linha-dupla-radio {
   display: flex;
-  gap: 20px; /* espaço entre os dois labels */
+  gap: 20px;
   align-items: center;
 }
 
 .linha-dupla-radio label {
   display: flex;
   align-items: center;
-  gap: 6px; /* espaço entre bolinha e texto */
+  gap: 6px;
   cursor: pointer;
 }
 
