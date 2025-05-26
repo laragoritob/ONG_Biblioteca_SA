@@ -118,9 +118,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // Função para gerar ID aleatório de livro
+  let contador = 5;
+
   function gerarIdLivro() {
-    const numero = Math.floor(1000 + Math.random() * 9000);
-    return `#${numero}`;
+    const id = `#${String(contador).padStart(4, '0')}`;
+    contador++;
+    return id;
   }
 
   // Abrir modal de adicionar livro e preencher o ID automaticamente
@@ -425,6 +428,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+
+
 // EDITAR
 document.addEventListener("DOMContentLoaded", function () {
   const botaoEditar = document.getElementById("botao-editar");
@@ -459,7 +464,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }).then((result) => {
       if (result.isConfirmed) {
         const idDigitado = result.value.trim().replace("#", "");
-        linhaSelecionada = null; // reset
+        linhaSelecionada = null; 
 
         linhasTabela.forEach((linha) => {
           const idCelula = linha.querySelector("td").textContent.trim();
