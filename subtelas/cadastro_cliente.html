@@ -100,25 +100,17 @@
                 </div>
 
                 <div class="input-group">
-                    <p> Nome do Responsável: </p>
-                    <span class="icon">👨🏿</span>
-                    <input type="text" name="responsavel">
+                    <p> Foto do Cliente: (PNG e JPEG) </p>
+                    <span class="icon">📂</span>
+                    <!-- Exibição do nome do arquivo selecionado -->
+                    <input type="text" name="arquivo" id="arquivo" readonly placeholder="Nenhum arquivo selecionado">
+                    <!-- Campo de seleção de arquivo -->
+                    <input type="file" id="seletor_arquivo" accept=".png, .jpeg, .jpg" style="display: none;" multiple onchange="atualizarNomeArquivo()">
                 </div>
+                <!-- Botão para abrir o seletor de arquivos -->
             </div>
-
-
-            <div class="input-group">
-                <p> Foto do Cliente: (PNG e JPEG) </p>
-                <span class="icon">📂</span>
-                <!-- Exibição do nome do arquivo selecionado -->
-                <input type="text" name="arquivo" id="arquivo" readonly placeholder="Nenhum arquivo selecionado">
-                <!-- Campo de seleção de arquivo -->
-                <input type="file" id="seletor_arquivo" accept=".png, .jpeg, .jpg" style="display: none;" multiple onchange="atualizarNomeArquivo()">
-            </div>
-            <!-- Botão para abrir o seletor de arquivos -->
             <button type="button" class="botao-inline" onclick="document.getElementById('seletor_arquivo').click()">Selecionar Foto</button>
     
-
         <h3>Endereço:</h3>
         
             <div class="linha-dupla">
@@ -183,7 +175,7 @@
                 </div>
     
                 <div class="links">
-                    <button type="button" class="btn2"> Cancelar </button>
+                    <button type="button" class="btn2" onclick="document.getElementById('form_pessoal').reset(); document.getElementById('arquivo').value = '';"> Cancelar </button>
                 </div>
             </div>
         </form>
