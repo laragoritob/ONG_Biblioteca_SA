@@ -118,9 +118,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // Função para gerar ID aleatório de livro
+  let contador = 5;
+
   function gerarIdLivro() {
-    const numero = Math.floor(1000 + Math.random() * 9000);
-    return `#${numero}`;
+    const id = `#${String(contador).padStart(4, '0')}`;
+    contador++;
+    return id;
   }
 
   // Abrir modal de adicionar livro e preencher o ID automaticamente
@@ -277,9 +280,25 @@ document.getElementById('form-status').addEventListener('submit', function (e) {
   }
 });
 
+//imagem
+
+const inputImagemAdicionar = document.getElementById("livro-imagem");
+const previewImagemAdicionar = document.getElementById("livro-imagem-preview");
+
+inputImagemAdicionar.addEventListener("change", function () {
+  const file = inputImagemAdicionar.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      previewImagemAdicionar.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+});
 
 
-  // MUDAR STATUS
+
+// MUDAR STATUS
 document.addEventListener("DOMContentLoaded", function () {
   const botaoMudar = document.getElementById('botao-mudar');
   const linhasTabela = document.querySelectorAll("#livros-table tbody tr");
@@ -403,37 +422,52 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Cancelar ação com confirmação
-  cancelarStatus.addEventListener("click", () => {
+  cancelarStatus.addEventListener("click", function () {
     Swal.fire({
       title: 'Cancelado!',
-      text: 'Alteração cancelada.',
+      text: 'Alteração de status cancelada.',
       icon: 'error',
       confirmButtonText: 'OK',
-      confirmButtonColor: '#ff9800',
-      customClass: {
-        popup: 'swal-add-popup',
-        icon: 'swal-add-icon'
-      }
-    }).then((result) => {
-      if (result.isConfirmed) {
-        formStatus.reset();
-        modalStatus.style.display = 'none';
-      }
+      confirmButtonColor: '#ff9800'
+    }).then(() => {
+      formStatus.reset();
+      modalStatus.style.display = "none";
     });
   });
 });
 
 
 
-// EDITAR
+
+//EDITAR
 document.addEventListener("DOMContentLoaded", function () {
   const botaoEditar = document.getElementById("botao-editar");
   const modalEditar = document.getElementById("modal-editar");
   const formEditar = document.getElementById("form-editar");
   const cancelarEditar = document.getElementById("cancelar-editar");
   const linhasTabela = document.querySelectorAll("#livros-table tbody tr");
+  const inputImagem = document.getElementById("editar-livro-imagem");
+  const previewImagem = document.getElementById("editar-livro-imagem-preview");
 
-  let linhaSelecionada = null;  // variável global para manter referência da linha
+  let linhaSelecionada = null;
+
+  function abrirModal() {
+    modalEditar.style.display = "flex";
+    setTimeout(() => {
+      modalEditar.style.opacity = 1;
+      modalEditar.style.transition = "opacity 0.3s ease";
+    }, 10);
+  }
+
+  function fecharModal() {
+    modalEditar.style.opacity = 0;
+    setTimeout(() => {
+      modalEditar.style.display = "none";
+      formEditar.reset();
+      previewImagem.src = "";
+      linhaSelecionada = null;
+    }, 300);
+  }
 
   botaoEditar.addEventListener("click", () => {
     Swal.fire({
@@ -448,18 +482,22 @@ document.addEventListener("DOMContentLoaded", function () {
       cancelButtonColor: '#f44336',
       allowOutsideClick: false,
       allowEscapeKey: false,
+      inputValidator: (value) => {
+        if (!value.trim()) return 'Você precisa digitar um ID!';
+      },
       customClass: {
         title: 'titulo-id-livro'
-      },
-      inputValidator: (value) => {
-        if (!value.trim()) {
-          return 'Você precisa digitar um ID!';
-        }
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        const idDigitado = result.value.trim().replace("#", "");
-        linhaSelecionada = null; // reset
+        let idDigitado = result.value.trim();
+
+        // Garante que o ID comece com #
+        if (!idDigitado.startsWith("#")) {
+          idDigitado = `#${idDigitado}`;
+        }
+
+        linhaSelecionada = null;
 
         linhasTabela.forEach((linha) => {
           const idCelula = linha.querySelector("td").textContent.trim();
@@ -478,52 +516,132 @@ document.addEventListener("DOMContentLoaded", function () {
             allowEscapeKey: false
           });
         } else {
-          // Preenche o formulário com os dados da linha selecionada
-          document.getElementById("edit-titulo").value = linhaSelecionada.cells[1].textContent;
-          document.getElementById("edit-autor").value = linhaSelecionada.cells[2].textContent;
+          // Preencher campos do modal com os dados da linha encontrada
+          document.getElementById("editar-livro-id").value = linhaSelecionada.cells[0].textContent.trim();
+          document.getElementById("editar-livro-nome").value = linhaSelecionada.cells[1].textContent.trim();
+          document.getElementById("editar-livro-autor").value = linhaSelecionada.cells[2].textContent.trim();
+          document.getElementById("editar-livro-genero").value = linhaSelecionada.cells[3].textContent.trim();
+          document.getElementById("editar-livro-quantidade").value = linhaSelecionada.cells[4].textContent.trim();
+          document.getElementById("editar-livro-prateleira").value = linhaSelecionada.cells[5].textContent.trim();
 
-          // Abre o modal de edição
-          modalEditar.style.display = "flex";
+
+          // Converter data para formato do input date
+          const dataTexto = linhaSelecionada.cells[6].textContent.trim();
+          const partesData = dataTexto.split("/");
+          if (partesData.length === 3) {
+            const dataInputFormat = `${partesData[2]}-${partesData[1].padStart(2, '0')}-${partesData[0].padStart(2, '0')}`;
+            document.getElementById("editar-livro-data").value = dataInputFormat;
+          } else {
+            document.getElementById("editar-livro-data").value = dataTexto;
+          }
+
+          document.getElementById("editar-livro-status").value = linhaSelecionada.cells[7].textContent.trim();
+
+          const imgElement = linhaSelecionada.cells[8]?.querySelector("img");
+          previewImagem.src = imgElement ? imgElement.src : "";
+
+          abrirModal();
         }
       } else if (result.isDismissed) {
         Swal.fire({
           title: 'Cancelado!',
-          text: 'Mudança cancelada.',
+          text: 'Edição cancelada.',
           icon: 'error',
           confirmButtonText: 'OK',
-          confirmButtonColor: '#ff9800',
-          customClass: {
-            popup: 'swal-cancel-popup',
-            icon: 'swal-cancel-icon'
-          }
+          confirmButtonColor: '#ff9800'
         });
       }
     });
   });
 
-  cancelarEditar.addEventListener("click", () => {
-    modalEditar.style.display = "none";
-    formEditar.reset();
-    linhaSelecionada = null; // resetar linha selecionada ao cancelar
+  inputImagem.addEventListener("change", function () {
+    const file = inputImagem.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        previewImagem.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  cancelarEditar.addEventListener("click", function () {
+    Swal.fire({
+      title: 'Cancelado!',
+      text: 'Edição cancelada.',
+      icon: 'error',
+      confirmButtonText: 'OK',
+      confirmButtonColor: '#ff9800'
+    }).then(() => {
+      fecharModal();
+    });
   });
 
   formEditar.addEventListener("submit", (e) => {
     e.preventDefault();
     if (!linhaSelecionada) return;
 
-    // Atualiza os dados na tabela com os valores do formulário
-    linhaSelecionada.cells[1].textContent = document.getElementById("edit-titulo").value;
-    linhaSelecionada.cells[2].textContent = document.getElementById("edit-autor").value;
+    linhaSelecionada.cells[1].textContent = document.getElementById("editar-livro-nome").value;
+    linhaSelecionada.cells[2].textContent = document.getElementById("editar-livro-autor").value;
+    linhaSelecionada.cells[3].textContent = document.getElementById("editar-livro-genero").value;
+    linhaSelecionada.cells[4].textContent = document.getElementById("editar-livro-quantidade").value;
+    linhaSelecionada.cells[5].textContent = document.getElementById("editar-livro-prateleira").value;
 
-    modalEditar.style.display = "none";
-    formEditar.reset();
-    linhaSelecionada = null;
+    const dataRaw = document.getElementById("editar-livro-data").value;
+    const partes = dataRaw.split("-");
+    const dataFormatada = partes.length === 3 ? `${partes[2]}/${partes[1]}/${partes[0]}` : dataRaw;
+    linhaSelecionada.cells[6].textContent = dataFormatada;
+
+    linhaSelecionada.cells[7].textContent = document.getElementById("editar-livro-status").value;
+
+    if (inputImagem.files[0]) {
+      const img = linhaSelecionada.cells[8].querySelector("img");
+      if (img) {
+        img.src = previewImagem.src;
+      }
+    }
 
     Swal.fire({
-      icon: "success",
-      title: "Sucesso!",
-      text: "Livro editado com sucesso!",
+      title: 'Sucesso!',
+      text: 'Editado com sucesso.',
+      icon: 'success',
+      confirmButtonText: 'OK',
+      confirmButtonColor: '#4CAF50',
+      allowOutsideClick: false
+    }).then(() => {
+      fecharModal();
+    
+      // Exibir o botão cancelar quando modal abrir, para usuário poder cancelar em outra edição
+      const botaoCancelar = document.getElementById("botao-cancelar");
+      if (botaoCancelar) {
+        botaoCancelar.style.display = "inline-block";  // mostra o botão (caso estivesse oculto)
+        botaoCancelar.addEventListener("click", () => {
+          Swal.fire({
+            title: 'Cancelado!',
+            text: 'Edição cancelada.',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#ff9800'
+          }).then(() => {
+            fecharModal();
+          });
+        });
+      }
     });
-  });
-});
+  });    
+});    
 
+//imagem
+const inputImagemEditar = document.getElementById("livro-imagem-editar");
+const previewImagemEditar = document.getElementById("imagem-preview-editar");
+
+inputImagemEditar.addEventListener("change", function () {
+  const file = inputImagemEditar.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      previewImagemEditar.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+});
