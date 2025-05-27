@@ -5,7 +5,7 @@ body{
     margin: 0px auto;
     font-family: "Candara", sans-serif;
     background: rgb(255, 255, 255);
-    background-image: url("https://chat.google.com/u/0/api/get_attachment_url?url_type=FIFE_URL&content_type=image%2Fpng&attachment_token=AOo0EEUgw%2BYF4Gftx%2BXIZZci66NZNxaTzegFOFj%2BPj19jtGC4gBrNixbwZ6shC%2BOse%2B%2BDl%2BCCxPuRCYGsMhuJ4Te0NpSRn4UG81HdbRsGxkA5NGvuj3G%2BDukHWO3JW5RO1hbOjlRN9u3VZe04haLG9nvAJ3fyuyXLqmWFAA3c%2FPVw49g3a1uBCe0vb1g%2BZifNz1nFDLAavHymF%2FeozZuRwd4YpP1WVDAhxxrM8LLdcSSq0Vwe9z5ijjRbDKCrdqC6DfOFqpitbutOFKFXRku%2FlvxhbTEXEaBGnrHJmhZxzkjGcwQUB%2BJdmykDKoMVoXV2BFOkvHr5YEGRMvjXRwpLVONQz4weWdMvJQPJ7hcGzJrX%2F2FBQPy0Oq6PuoAPbTZyjDVV6YGgOOV4MKBKLXGlaNNE5POw%2BOepte5CIPetJ1qiP67pLcifOTSKz8O2xm%2FfYvVOfzoBQUCgG8zmjHS5O0mmE9CsOAPABFthymBZHCQIgqxVdgkiFZznQPL7sBdYry4fYH68a02wD3e5i2O1EBtJb%2BdEeCAy4L9sdOmB4tyue7FM4AWsZ7cpORIGFs8kkFy%2B9yTNkJ6&allow_caching=true&sz=w512");
+    background-color: #fbf0ff;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -22,7 +22,7 @@ body{
     cursor: pointer;
     font-size: 14px;
   }
-
+  
   .btn-voltar:hover {
     background-color: #4c52a7;
   }
@@ -240,7 +240,51 @@ table {
 }
 
 /*BOTÕES DE EDITAR E DESATIVAR*/
+.btn {
+    background: #ffbcfc;
+    color: rgb(0, 0, 0);
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;  
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    min-width: 200px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    margin-left: 95px;
+    margin-right: 95px;
+    margin-bottom: 10px;
+}
 
+.linha-dupla {
+    display: flex;
+    gap: 70px; /* espaçamento entre os campos */
+    justify-content: space-between;
+}
+
+.linha-dupla .input-group {
+    flex: 1;
+}
+
+.btn.glow {
+    box-shadow: 0px 0px 15px #884b85;
+}
+
+.btn:hover {
+    background: #e07ddb;
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px #884b85;
+}
+
+.botao {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
 
 /* MODAL DE EDIÇÃO */
 #modal-editar {
