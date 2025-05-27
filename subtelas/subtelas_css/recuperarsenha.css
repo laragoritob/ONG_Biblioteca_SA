@@ -30,6 +30,167 @@ h1 {
   text-align: center;
 }
 
+.verification-container {
+  display: none;
+  text-align: center;
+  padding: 20px;
+}
+
+.verification-title {
+  color: #7076c9;
+  margin-bottom: 20px;
+}
+
+.verification-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.verification-input {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 24px;
+  border: 2px solid #7076c9;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+.verification-input:focus {
+  outline: none;
+  border-color: #4c52a7;
+  box-shadow: 0 0 5px rgba(112, 118, 201, 0.5);
+}
+
+.btn-verify {
+  background-color: #7076c9;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.btn-verify:hover {
+  background-color: #4c52a7;
+}
+
+.email-form {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+.password-reset-container {
+  display: none;
+  text-align: center;
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.password-reset-title {
+  color: #7076c9;
+  margin-bottom: 50px;
+}
+
+.password-input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.password-input-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.password-input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #7076c9;
+  border-radius: 30px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.password-input:focus {
+  outline: none;
+  border-color: #4c52a7;
+  box-shadow: 0 0 5px rgba(112, 118, 201, 0.5);
+}
+
+.btn-reset {
+  background-color: #7076c9;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 35px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  width: 100%;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.btn-reset:hover {
+  background-color: #4c52a7;
+}
+
+.user-type-group {
+  margin-bottom: 20px;
+}
+
+.user-type-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  text-align: left;
+}
+
+.user-type-input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #7076c9;
+  border-radius: 30px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.user-type-input:focus {
+  outline: none;
+  border-color: #4c52a7;
+  box-shadow: 0 0 5px rgba(112, 118, 201, 0.5);
+}
+
+.show-password-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+  color: #7076c9;
+  cursor: pointer;
+}
+
+.show-password-container input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #7076c9;
+}
+
+.show-password-container label {
+  cursor: pointer;
+  user-select: none;
+}
+
 .formulario {
   background: #fcf5ff;
   padding: 30px;

@@ -64,6 +64,39 @@
     .btn-voltar:hover {
       background-color: #4c52a7;
     }
+
+    .botoes-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .botao-mudar {
+      background: #ffbcfc;
+      color: rgb(0, 0, 0);
+      padding: 15px 40px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 0px;
+    }
+
+    .botao-mudar.glow {
+      box-shadow: 0px 0px 15px #884b85;
+    }
+
+    .botao-mudar:hover {
+      background: #e07ddb;
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px #884b85;
+    }
   </style>
 </head>
 <body>
@@ -121,37 +154,33 @@
       </tr>
     </tbody>
   </table>
-      <div class="botoes-container">
-          <button class="botao-mudar" id="botao-mudar">Mudar status</button>
-      </div>
 
-      <div id="modal-status" class="modal">
-        <div class="modal-content">
-        <span id="close-status" class="close">&times;</span>
-
-          <h2>Mudar Status da Multa</h2>
-
-        <form id="form-status">
-          <p>Selecione o novo status:</p>
-
-      <div class="linha-dupla-radio">
-        <label>
-          <input type="radio" name="novo-status" value="Disponível" required>Disponível
-        </label>
-
-        <label>
-          <input type="radio" name="novo-status" value="Indisponível" required>Indisponível
-        </label>
-      </div>
-
-      <div style="text-align: center; margin-top: 15px;">
-        <button type="submit">Confirmar</button>
-        <button type="button" id="cancelar-status">Cancelar</button>
-      </div>
-      
-    </form>
+  <div class="botoes-container">
+    <button class="botao-mudar" id="botao-mudar">Mudar status</button>
   </div>
-</div>
-    </body>
-    <script src="subtelas_javascript/consultar_multa.js"></script>
+
+  <div id="modal-status" class="modal">
+    <div class="modal-content">
+      <span id="close-status" class="close">&times;</span>
+      <h2>Mudar Status da Multa</h2>
+      <form id="form-status">
+        <p>Selecione o novo status:</p>
+        <div class="linha-dupla-radio">
+          <label>
+            <input type="radio" name="novo-status" value="Disponível" required>Disponível
+          </label>
+          <label>
+            <input type="radio" name="novo-status" value="Indisponível" required>Indisponível
+          </label>
+        </div>
+        <div style="text-align: center; margin-top: 15px;">
+          <button type="submit">Confirmar</button>
+          <button type="button" id="cancelar-status">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="subtelas_javascript/consultar_multa.js"></script>
+</body>
 </html>
