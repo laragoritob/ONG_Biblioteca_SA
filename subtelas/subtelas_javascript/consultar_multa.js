@@ -36,22 +36,30 @@ document.addEventListener('DOMContentLoaded', function() {
             showCancelButton: true,
             confirmButtonText: 'Confirmar',
             cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#4CAF50',
-            cancelButtonColor: '#f44336'
+            confirmButtonColor: '#77d440',
+            cancelButtonColor: '#c93c8c'
         }).then((result) => {
             if (result.isConfirmed) {
                 const idDigitado = result.value.trim();
-                const linha = document.querySelector(`#multas-table tbody tr td:first-child:contains('${idDigitado}')`).closest('tr');
+                const rows = document.querySelectorAll('#multas-table tbody tr');
+                let linhaEncontrada = null;
+
+                rows.forEach(row => {
+                    if (row.cells[0].textContent === idDigitado) {
+                        linhaEncontrada = row;
+                    }
+                });
                 
-                if (linha) {
-                    window.linhaSelecionada = linha;
+                if (linhaEncontrada) {
+                    window.linhaSelecionada = linhaEncontrada;
                     openModal();
                 } else {
                     Swal.fire({
                         icon: 'error',
                         title: 'Multa não encontrada',
                         text: `Nenhuma multa com ID ${idDigitado} foi encontrada.`,
-                        confirmButtonText: 'OK'
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#7076c9'
                     });
                 }
             }
@@ -81,7 +89,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 icon: 'error',
                 title: 'Erro!',
                 text: 'Por favor, selecione um status.',
-                confirmButtonText: 'OK'
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#7076c9'
             });
             return;
         }
@@ -93,7 +102,8 @@ document.addEventListener('DOMContentLoaded', function() {
             title: 'Sucesso!',
             text: 'Status alterado com sucesso!',
             icon: 'success',
-            confirmButtonText: 'OK'
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#7076c9'
         }).then(() => {
             closeModal();
         });

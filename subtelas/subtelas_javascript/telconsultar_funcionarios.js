@@ -25,6 +25,7 @@ const funcionario = [
     nascimento: '21/03/1965',
     efetivacao: '08/07/2024',
     imagem: 'subtelas_img/eterno_silvio.webp',
+    status: 'Ativo'
   },
   {
     selector: '.detalhes-funcionarios2',
@@ -44,6 +45,7 @@ const funcionario = [
     nascimento: '27/03/1963',
     efetivacao: '12/12/2024',
     imagem: 'subtelas_img/xuxa_nova.jpg',
+      status: 'Ativo'
   },
   {
     selector: '.detalhes-funcionarios3',
@@ -63,6 +65,7 @@ const funcionario = [
     nascimento: '03/07/2007',
     efetivacao: '09/06/2025',
     imagem: 'subtelas_img/paratodososgarotosquejaamei.jpg',
+      status: 'Desativado'
   },
   {
     selector: '.detalhes-funcionarios4',
@@ -82,6 +85,7 @@ const funcionario = [
     nascimento: '31/08/2008',
     efetivacao: '16/06/2025',
     imagem: 'subtelas_img/marcos_pdiddy.jpg',
+    status: 'Ativo'
   },
   {
     selector: '.detalhes-funcionarios5',
@@ -101,6 +105,7 @@ const funcionario = [
     nascimento: '09/04/1977',
     efetivacao: '05/02/2025',
     imagem: 'subtelas_img/gerard_way.webp',
+    status: 'Desativado'
   },
   {
     selector: '.detalhes-funcionarios6',
@@ -120,6 +125,7 @@ const funcionario = [
     nascimento: '24/06/2003',
     efetivacao: '08/10/2024',
     imagem: 'subtelas_img/sunoo.jpg',
+    status: 'Desativado'
   },
   {
     selector: '.detalhes-funcionarios7',
@@ -139,6 +145,7 @@ const funcionario = [
     nascimento: '02/05/1972',
     efetivacao: '29/09/2024',
     imagem: 'subtelas_img/Dwayne_Johnson.jpg',
+    status: 'Ativo'
   },
   {
     selector: '.detalhes-funcionarios8',
@@ -158,6 +165,7 @@ const funcionario = [
     nascimento: '10/07/2007',
     efetivacao: '11/03/2025',
     imagem: 'subtelas_img/mason_thames.webp',
+    status: 'Ativo'
   },
   {
     selector: '.detalhes-funcionarios9',
@@ -177,6 +185,7 @@ const funcionario = [
     nascimento: '19/12/1980',
     efetivacao: '17/08/2024',
     imagem: 'subtelas_img/taylor_lautner.jpg',
+    status: 'Ativo'
   },
   {
     selector: '.detalhes-funcionarios10',
@@ -196,6 +205,7 @@ const funcionario = [
     nascimento: '03/08/1963',
     efetivacao: '21/08/2024',
     imagem: 'subtelas_img/james_hetfield.jpg',
+    status: 'Desativado'
   }
 ];
 
@@ -204,6 +214,16 @@ funcionario.forEach(funcionario => {
   if (elemento) {
     elemento.addEventListener('click', function (e) {
       e.preventDefault();
+      // Buscar dados atualizados do localStorage
+      const dadosSalvos = localStorage.getItem('funcionarios');
+      if (dadosSalvos) {
+        const funcionariosSalvos = JSON.parse(dadosSalvos);
+        const funcionarioAtualizado = funcionariosSalvos.find(f => f.codigo === funcionario.codigo);
+        if (funcionarioAtualizado) {
+          funcionario = funcionarioAtualizado;
+        }
+      }
+      
       modalBody.innerHTML = `
   <h3 class="modal-title">Ficha de ${funcionario.nome}</h3>
   
@@ -222,14 +242,15 @@ funcionario.forEach(funcionario => {
         <p class="info-item"><strong>Bairro:</strong> ${funcionario.bairro}</p> 
         <p class="info-item"><strong>Rua:</strong> ${funcionario.rua}</p> 
         <p class="info-item"><strong>Número:</strong> ${funcionario.numero}</p> 
-        <p class="info-item"><strong>Telefone:</strong> ${funcionario.telefone}</p> 
+        <p class="info-item"><strong>Telefone:</strong> ${funcionario.telefone}</p>
+        <p class="info-item"><strong>Status:</strong> <span class="status-badge ${funcionario.status.toLowerCase()}">${funcionario.status}</span></p>
       </div>
     </div>
   </div>
 
       <div class="botao">
           <button type="button" class="btn renovar" onclick="abrirModalEditar('${funcionario.codigo}')">EDITAR</button>
-          <button type="button" class="btn">DESATIVAR</button>
+          <button type="button" class="btn ${funcionario.status === 'Ativo' ? 'desativar' : 'ativar'}" onclick="alterarStatus('${funcionario.codigo}')">${funcionario.status === 'Ativo' ? 'DESATIVAR' : 'ATIVAR'}</button>
         </div>
 `;
 
@@ -287,74 +308,220 @@ cancelarEdicao.addEventListener('click', () => {
     modalEditar.style.display = 'none';
 });
 
-formEditar.addEventListener('submit', function(e) {
+// Função para mostrar a ficha do funcionário
+function mostrarFicha(e) {
     e.preventDefault();
+    console.log('Mostrar ficha chamado');
+    
+    // Pegar o código do funcionário da linha da tabela
+    const linha = this.closest('tr');
+    const codigo = linha.cells[0].textContent.trim();
+    console.log('Código do funcionário:', codigo);
+    
+    // Encontrar o funcionário
+    const funcionarioAtual = funcionario.find(f => f.codigo === codigo);
+    console.log('Funcionário encontrado:', funcionarioAtual);
+    
+    if (funcionarioAtual) {
+        // Criar o conteúdo do modal
+        const conteudo = `
+            <h3 class="modal-title">Ficha de ${funcionarioAtual.nome}</h3>
+            
+            <div class="modal-content-container">
+                <div class="photo-info-container">
+                    <img src="${funcionarioAtual.imagem}" title="funcionário" class="hmfuncionario" />
+                    <div class="info-grid">
+                        <p class="info-item"><strong>CPF:</strong> ${funcionarioAtual.cpf}</p> 
+                        <p class="info-item"><strong>Sexo:</strong> ${funcionarioAtual.sexo}</p> 
+                        <p class="info-item"><strong>Estado Civil:</strong> ${funcionarioAtual.civil}</p> 
+                        <p class="info-item"><strong>Cargo:</strong> ${funcionarioAtual.cargo}</p> 
+                        <p class="info-item"><strong>Data de Efetivação:</strong> ${funcionarioAtual.efetivacao}</p> 
+                        <p class="info-item"><strong>Data de Nascimento:</strong> ${funcionarioAtual.nascimento}</p>
+                        <p class="info-item"><strong>Estado:</strong> ${funcionarioAtual.estado}</p> 
+                        <p class="info-item"><strong>Cidade:</strong> ${funcionarioAtual.cidade}</p> 
+                        <p class="info-item"><strong>Bairro:</strong> ${funcionarioAtual.bairro}</p> 
+                        <p class="info-item"><strong>Rua:</strong> ${funcionarioAtual.rua}</p> 
+                        <p class="info-item"><strong>Número:</strong> ${funcionarioAtual.numero}</p> 
+                        <p class="info-item"><strong>Telefone:</strong> ${funcionarioAtual.telefone}</p> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="botao">
+                <button type="button" class="btn renovar" onclick="abrirModalEditar('${funcionarioAtual.codigo}')">EDITAR</button>
+                <button type="button" class="btn">DESATIVAR</button>
+            </div>
+        `;
+        
+        // Atualizar o conteúdo do modal
+        modalBody.innerHTML = conteudo;
+        
+        // Mostrar o modal
+        modal.style.display = 'block';
+        console.log('Modal exibido');
+    }
+}
+
+// Adicionar evento de clique ao botão salvar quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM carregado');
+    
+    // Carregar dados do localStorage
+    const dadosSalvos = localStorage.getItem('funcionarios');
+    if (dadosSalvos) {
+        const funcionariosSalvos = JSON.parse(dadosSalvos);
+        funcionario.length = 0;
+        funcionario.push(...funcionariosSalvos);
+    }
+    
+    // Configurar botão salvar
+    const btnSalvar = document.getElementById('btn-salvar');
+    if (btnSalvar) {
+        btnSalvar.addEventListener('click', function(e) {
+            e.preventDefault();
+            salvarAlteracoes();
+        });
+    }
+
+    // Adicionar event listeners aos links
+    const links = document.querySelectorAll('#funcionarios-table tbody tr td a');
+    links.forEach(link => {
+        link.addEventListener('click', mostrarFicha);
+        console.log('Event listener adicionado para:', link.textContent);
+    });
+    
+    // Configurar botão de fechar do modal
+    const closeModal = document.getElementById('close-modal');
+    if (closeModal) {
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+            console.log('Modal fechado pelo botão X');
+        });
+    }
+    
+    // Fechar modal ao clicar fora dele
+    window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+            console.log('Modal fechado ao clicar fora');
+        }
+    });
+});
+
+// Função para salvar as alterações
+function salvarAlteracoes() {
+    console.log('Iniciando salvamento...');
     
     const codigo = document.getElementById('funcionario-codigo').value;
+    console.log('Código do funcionário:', codigo);
+    
     const funcionarioEncontrado = funcionario.find(f => f.codigo === codigo);
+    console.log('Funcionário encontrado:', funcionarioEncontrado);
     
     if (funcionarioEncontrado) {
         // Atualizar os dados do funcionário
-        funcionarioEncontrado.nome = document.getElementById('funcionario-nome').value;
-        funcionarioEncontrado.cpf = document.getElementById('funcionario-cpf').value;
-        funcionarioEncontrado.sexo = document.getElementById('funcionario-sexo').value;
-        funcionarioEncontrado.civil = document.getElementById('funcionario-civil').value;
-        funcionarioEncontrado.cargo = document.getElementById('funcionario-cargo').value;
-        funcionarioEncontrado.nascimento = formatarDataBR(document.getElementById('funcionario-nascimento').value);
-        funcionarioEncontrado.efetivacao = formatarDataBR(document.getElementById('funcionario-efetivacao').value);
-        funcionarioEncontrado.estado = document.getElementById('funcionario-estado').value;
-        funcionarioEncontrado.cidade = document.getElementById('funcionario-cidade').value;
-        funcionarioEncontrado.bairro = document.getElementById('funcionario-bairro').value;
-        funcionarioEncontrado.rua = document.getElementById('funcionario-rua').value;
-        funcionarioEncontrado.numero = document.getElementById('funcionario-numero').value;
-        funcionarioEncontrado.telefone = document.getElementById('funcionario-telefone').value;
+        const novosDados = {
+            nome: document.getElementById('funcionario-nome').value,
+            cpf: document.getElementById('funcionario-cpf').value,
+            sexo: document.getElementById('funcionario-sexo').value,
+            civil: document.getElementById('funcionario-civil').value,
+            cargo: document.getElementById('funcionario-cargo').value,
+            nascimento: formatarDataBR(document.getElementById('funcionario-nascimento').value),
+            efetivacao: formatarDataBR(document.getElementById('funcionario-efetivacao').value),
+            estado: document.getElementById('funcionario-estado').value,
+            cidade: document.getElementById('funcionario-cidade').value,
+            bairro: document.getElementById('funcionario-bairro').value,
+            rua: document.getElementById('funcionario-rua').value,
+            numero: document.getElementById('funcionario-numero').value,
+            telefone: document.getElementById('funcionario-telefone').value
+        };
+        
+        console.log('Novos dados a serem salvos:', novosDados);
+
+        // Atualizar os dados do funcionário
+        Object.assign(funcionarioEncontrado, novosDados);
+        console.log('Dados atualizados no objeto:', funcionarioEncontrado);
+
+        // Salvar no localStorage
+        localStorage.setItem('funcionarios', JSON.stringify(funcionario));
 
         // Atualizar a tabela
-        const linha = document.querySelector(`tr td:first-child:contains('${codigo}')`).closest('tr');
-        if (linha) {
-            linha.cells[1].textContent = funcionarioEncontrado.nome;
-            linha.cells[2].textContent = funcionarioEncontrado.cargo;
-            linha.cells[3].textContent = funcionarioEncontrado.nascimento;
-            linha.cells[4].textContent = funcionarioEncontrado.efetivacao;
+        function salvarAlteracoes() {
+            console.log('Iniciando salvamento...');
+            
+            const codigo = document.getElementById('funcionario-codigo').value;
+            const index = funcionario.findIndex(f => f.codigo === codigo);
+            
+            if (index !== -1) {
+                funcionario[index] = {
+                    ...funcionario[index], // mantém propriedades como imagem
+                    codigo,
+                    nome: document.getElementById('funcionario-nome').value,
+                    cpf: document.getElementById('funcionario-cpf').value,
+                    sexo: document.getElementById('funcionario-sexo').value,
+                    civil: document.getElementById('funcionario-civil').value,
+                    cargo: document.getElementById('funcionario-cargo').value,
+                    nascimento: formatarDataBR(document.getElementById('funcionario-nascimento').value),
+                    efetivacao: formatarDataBR(document.getElementById('funcionario-efetivacao').value),
+                    estado: document.getElementById('funcionario-estado').value,
+                    cidade: document.getElementById('funcionario-cidade').value,
+                    bairro: document.getElementById('funcionario-bairro').value,
+                    rua: document.getElementById('funcionario-rua').value,
+                    numero: document.getElementById('funcionario-numero').value,
+                    telefone: document.getElementById('funcionario-telefone').value
+                };
+        
+                // Salva no localStorage
+                localStorage.setItem('funcionarios', JSON.stringify(funcionario));
+        
+                // Fecha o modal de edição
+                modalEditar.style.display = 'none';
+        
+                // Atualiza a ficha se estiver aberta
+                mostrarFichaPorCodigo(codigo);
+        
+                console.log('Funcionário atualizado e salvo.');
+            } else {
+                console.warn('Funcionário não encontrado para salvar.');
+            }
         }
-
+        
+        
         // Fechar o modal de edição
         modalEditar.style.display = 'none';
-
-        // Atualizar o modal de visualização
-        const elemento = document.querySelector(funcionarioEncontrado.selector);
-        if (elemento) {
-            elemento.click();
-        }
+        console.log('Modal de edição fechado');
 
         // Mostrar mensagem de sucesso
         Swal.fire({
             title: 'Sucesso!',
-            text: 'Funcionário atualizado com sucesso!',
+            text: 'Alteração feita com sucesso!',
             icon: 'success',
+            confirmButtonText: 'OK',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Fechar o modal de visualização também
+                modal.style.display = 'none';
+                console.log('Modal de visualização fechado após salvar');
+            }
+        });
+    } else {
+        console.log('Funcionário não encontrado com o código:', codigo);
+        // Mostrar mensagem de erro
+        Swal.fire({
+            title: 'Erro!',
+            text: 'Não foi possível encontrar o funcionário.',
+            icon: 'error',
             confirmButtonText: 'OK'
         });
     }
-});
-
-// Event Listeners para fechar modais
-closeModal.addEventListener('click', function () {
-    modal.style.display = 'none';
-});
-
-window.addEventListener('click', function (e) {
-    if (e.target == modal) {
-        modal.style.display = 'none';
-    }
-    if (e.target == modalEditar) {
-        modalEditar.style.display = 'none';
-    }
-});
+}
 
 // CAMPO DE BUSCA
 document.getElementById('search-input').addEventListener('input', function () {
     const filtro = this.value.toLowerCase();
-    const linhas = document.querySelectorAll('#livros-table tbody tr');
+    const linhas = document.querySelectorAll('#funcionarios-table tbody tr');
 
     linhas.forEach((linha) => {
         const nome = linha.querySelector('td:nth-child(2)').innerText.toLowerCase();
@@ -365,3 +532,76 @@ document.getElementById('search-input').addEventListener('input', function () {
         }
     });
 });
+
+// Função para alterar o status do funcionário
+function alterarStatus(codigo) {
+    const funcionarioEncontrado = funcionario.find(f => f.codigo === codigo);
+    if (funcionarioEncontrado) {
+        const novoStatus = funcionarioEncontrado.status === 'Ativo' ? 'Desativado' : 'Ativo';
+        
+        Swal.fire({
+            title: 'Confirmação',
+            text: 'Tem certeza que deseja desativar este funcionário?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sim, tenho certeza',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#f44336',
+            cancelButtonColor: '#4CAF50'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Atualizar o status do funcionário
+                funcionarioEncontrado.status = novoStatus;
+                
+                // Atualizar o status na tabela
+                const statusCell = document.querySelector(`tr td:first-child:contains('${codigo}')`).closest('tr').querySelector('td:last-child');
+                statusCell.innerHTML = `<span class="status-badge ${novoStatus.toLowerCase()}">${novoStatus}</span>`;
+                
+                // Salvar no localStorage
+                localStorage.setItem('funcionarios', JSON.stringify(funcionario));
+                
+                // Atualizar a ficha se estiver aberta
+                const elemento = document.querySelector(funcionarioEncontrado.selector);
+                if (elemento) {
+                    elemento.click();
+                }
+                
+                Swal.fire({
+                    title: 'Sucesso!',
+                    text: 'Desativação feita com sucesso!',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#4CAF50'
+                });
+            }
+        });
+    }
+}
+
+// Adicionar estilos CSS para o status
+const style = document.createElement('style');
+style.textContent = `
+    .status-badge {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-weight: bold;
+        display: inline-block;
+        min-width: 80px;
+        text-align: center;
+    }
+    .status-badge.ativo {
+        background-color: #4CAF50;
+        color: white;
+    }
+    .status-badge.desativado {
+        background-color: #f44336;
+        color: white;
+    }
+    .btn.desativar {
+        background-color: #f44336;
+    }
+    .btn.ativar {
+        background-color: #4CAF50;
+    }
+`;
+document.head.appendChild(style);
