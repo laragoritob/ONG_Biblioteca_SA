@@ -1,31 +1,33 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <title>Controle de Estoque - Sala Arco-íris</title>
-  
-  <!-- Estilo da página -->
   <link rel="stylesheet" type="text/css" href="subtelas_css/controleestoque.css"/>
-  
-  <!-- Biblioteca de alertas (SweetAlert2) -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
-<!-- Cabeçalho principal da página -->
+
 <header>
+  <button class="btn-voltar" onclick="window.history.back()">← Voltar</button>
+  <!-- Título principal da página -->
   <h1> LIVROS </h1>
 </header>
 
-<!-- Campo de busca -->
+
+<!-- Container da barra de busca -->
 <div id="search-container">
   <div class="input-wrapper">
     <span class="icon">🔎</span>
+    <!-- Campo de busca para filtrar livros -->
     <input type="text" id="search-input" name="nome_relatorio" placeholder="Buscar livro..." required>
   </div>
 </div>
 
-<!-- Tabela de exibição dos livros cadastrados -->
+
+<!-- Tabela com lista dos livros cadastrados -->
 <table id="livros-table" border="1">
   <thead>
     <tr>
@@ -40,7 +42,6 @@
     </tr>
   </thead>
   <tbody>
-    <!-- Linhas de exemplo de livros -->
     <tr>
       <td>#0001</td>
       <td><a href="#" class="detalhes-livro">Para Todos Os Garotos Que Já Amei</a></td>
@@ -49,9 +50,8 @@
       <td>30</td>
       <td>05</td>
       <td>30/07/2024</td>
-      <td>Ativo</td>
+      <td>Disponível</td>
     </tr>
-    <!-- Mais exemplos -->
     <tr>
       <td>#0002</td>
       <td><a href="#" class="detalhes-livro2">O Cortiço</a></td>
@@ -60,7 +60,7 @@
       <td>12</td>
       <td>03</td>
       <td>01/08/2024</td>
-      <td>Ativo</td>
+      <td>Disponível</td>
     </tr>
     <tr>
       <td>#0003</td>
@@ -70,7 +70,7 @@
       <td>20</td>
       <td>02</td>
       <td>15/09/2024</td>
-      <td>Ativo</td>
+      <td>Disponível</td>
     </tr>
     <tr>
       <td>#0004</td>
@@ -80,19 +80,23 @@
       <td>10</td>
       <td>04</td>
       <td>20/10/2024</td>
-      <td>Ativo</td>
+      <td>Disponível</td>
     </tr>
   </tbody>
 </table>
 
-<!-- Botões principais para interações -->
+
+
+<!-- Container com botões de ações para os livros -->
 <div class="botoes-container">
   <button class="botao-adicionar" id="botao-adicionar">Adicionar</button>
   <button class="botao-editar" id="botao-editar">Editar</button>
   <button class="botao-mudar" id="botao-mudar">Mudar status</button>
 </div>
 
-<!-- Modal para exibição de detalhes do livro -->
+
+
+<!-- Modal de Detalhes do livro -->
 <div id="modal">
   <div id="modal-content">
     <span id="close-modal">&times;</span>
@@ -100,13 +104,13 @@
   </div>
 </div>
 
+
+
 <!-- Modal de Adicionar Livro -->
 <div id="modal-adicionar" class="modal">
   <div class="modal-content">
     <h2>Adicionar Livro</h2>
     <form id="form-adicionar">
-      
-      <!-- Linha com ID gerado automaticamente e nome -->
       <div class="linha-dupla">
         <div>
           <label>ID do Livro (gerado):</label>
@@ -118,55 +122,51 @@
         </div>
       </div>
 
-      <!-- Linha com autor e gênero -->
-      <div class="linha-dupla">
-        <div>
-          <label>Autor:</label>
-          <input type="text" id="livro-autor" required>
-        </div>
-        <div>
-          <label>Gênero:</label>
-          <input type="text" id="livro-genero" required>
-        </div>
-      </div>
+  <div class="linha-dupla">
+    <div>
+      <label>Autor:</label>
+      <input type="text" id="livro-autor" required>
+    </div>
+    <div>
+      <label>Gênero:</label>
+      <input type="text" id="livro-genero" required>
+    </div>
+  </div>
 
-      <!-- Linha com quantidade e prateleira -->
-      <div class="linha-dupla">
-        <div>
-          <label>Quantidade em Estoque:</label>
-          <input type="number" id="livro-quantidade" required>
-        </div>
-        <div>
-          <label>Prateleira:</label>
-          <input type="number" id="livro-prateleira" required>
-        </div>
-      </div>
+  <div class="linha-dupla">
+    <div>
+      <label>Quantidade em Estoque:</label>
+      <input type="number" id="livro-quantidade" required>
+    </div>
+    <div>
+      <label>Prateleira:</label>
+      <input type="number" id="livro-prateleira" required>
+    </div>
+  </div>
 
-      <!-- Linha com data e status -->
-      <div class="linha-dupla">
-        <div>
-          <label>Data:</label>
-          <input type="date" id="livro-data" required>
-        </div>
-        <div>
-          <label>Status:</label>
-          <select id="livro-status">
-            <option value="Ativo">Ativo</option>
-            <option value="Desativado">Desativado</option>
-          </select>
-        </div>
-      </div>
+  <div class="linha-dupla">
+    <div>
+      <label>Data:</label>
+      <input type="date" id="livro-data" required>
+    </div>
+    <div>
+      <label>Status:</label>
+      <select id="livro-status">
+        <option value="Disponível">Disponível</option>
+        <option value="Indisponível">Indisponível</option>
+      </select>
+    </div>
+  </div>
 
-      <!-- Botões do formulário -->
-      <div style="text-align: center; margin-top: 15px;">
-        <button type="submit" id="botao-salvar-adicionar">Salvar</button>
-        <button type="button" id="botao-cancelar-adicionar">Cancelar</button>
-      </div>
-    </form>
+  <div style="text-align: center; margin-top: 15px;">
+    <button type="submit" id="botao-salvar-adicionar">Salvar</button>
+    <button type="button" id="botao-cancelar-adicionar">Cancelar</button>
+  </div>
+</form>
   </div>
 </div>
 
-<!-- Modal para mudar o status do livro -->
+<!-- Modal de Mudar Status -->
 <div id="modal-status" class="modal" style="display: none;">
   <div class="modal-content">
     <h2>Mudar Status do Livro</h2>
@@ -174,10 +174,12 @@
       <p>Selecione o novo status:</p>
       <div class="linha-dupla-radio">
         <label>
-          <input type="radio" name="novo-status" value="Ativo"> Ativo
+          <input type="radio" name="novo-status" value="Disponível">
+          Disponível
         </label>
         <label>
-          <input type="radio" name="novo-status" value="Desativado"> Desativado
+          <input type="radio" name="novo-status" value="Indisponível">
+          Indisponível
         </label>
       </div>
       <div style="text-align: center; margin-top: 15px;">
@@ -188,13 +190,13 @@
   </div>
 </div>
 
-<!-- Modal de Edição de Livro -->
+
+
+<!-- Modal de Mudar Editar -->
 <div id="modal-editar" class="modal">
   <div class="modal-content">
     <h2>Editar Livro</h2>
     <form id="form-editar">
-      
-      <!-- Linha com ID e nome -->
       <div class="linha-dupla">
         <div>
           <label>ID do Livro (gerado):</label>
@@ -206,63 +208,48 @@
         </div>
       </div>
 
-      <!-- Linha com autor e gênero -->
-      <div class="linha-dupla">
-        <div>
-          <label>Autor:</label>
-          <input type="text" id="editar-livro-autor" required>
-        </div>
-        <div>
-          <label>Gênero:</label>
-          <input type="text" id="editar-livro-genero" required>
-        </div>
-      </div>
-
-      <!-- Linha com quantidade e prateleira -->
-      <div class="linha-dupla">
-        <div>
-          <label>Quantidade em Estoque:</label>
-          <input type="number" id="editar-livro-quantidade" required>
-        </div>
-        <div>
-          <label>Prateleira:</label>
-          <input type="number" id="editar-livro-prateleira" required>
-        </div>
-      </div>
-
-      <!-- Linha com data e status -->
-      <div class="linha-dupla">
-        <div>
-          <label>Data:</label>
-          <input type="date" id="editar-livro-data" required>
-        </div>
-        <div>
-          <label>Status:</label>
-          <select id="editar-livro-status">
-            <option value="Ativo">Ativo</option>
-            <option value="Desativado">Desativado</option>
-          </select>
-        </div>
-      </div>
-
-          <!-- Foto da capa -->
-      <div class="linha-unica">
-        <label>Capa do Livro:</label>
-        <div class="imagem-preview-container">
-          <img id="editar-livro-imagem-preview" src="" alt="Capa do livro" class="imagem-preview">
-          <input type="file" id="editar-livro-imagem" accept="image/*">
-        </div>
-
-      <!-- Botões do formulário -->
-      <div style="text-align: center; margin-top: 15px;">
-        <button type="submit" id="salvar-editar">Salvar</button>
-        <button type="button" id="cancelar-editar">Cancelar</button>
-      </div>
-    </form>
+  <div class="linha-dupla">
+    <div>
+      <label>Autor:</label>
+      <input type="text" id="editar-livro-autor" required>
+    </div>
+    <div>
+      <label>Gênero:</label>
+      <input type="text" id="editar-livro-genero" required>
+    </div>
   </div>
-</div>
 
-<!-- Script com funcionalidades da página -->
+  <div class="linha-dupla">
+    <div>
+      <label>Quantidade em Estoque:</label>
+      <input type="number" id="editar-livro-quantidade" required>
+    </div>
+    <div>
+      <label>Prateleira:</label>
+      <input type="number" id="editar-livro-prateleira" required>
+    </div>
+  </div>
+
+  <div class="linha-dupla">
+    <div>
+      <label>Data:</label>
+      <input type="date" id="editar-livro-data" required>
+    </div>
+    <div>
+      <label>Status:</label>
+      <select id="editar-livro-status">
+        <option value="Disponível">Disponível</option>
+        <option value="Indisponível">Indisponível</option>
+      </select>
+    </div>
+  </div>
+  <div style="text-align: center; margin-top: 15px;">
+    <button type="submit" id="salvar-editar">Salvar</button>
+     <button type="button" id="cancelar-editar">Cancelar</button>
+  </div>
+</form>
+
+
 <script src="subtelas_javascript/controleestoque.js"></script>
 </body>
 </html>
