@@ -7,9 +7,10 @@
 </head>
 
 <body>
-  <header>
-    <h1>Consultar Funcionários</h1>
-  </header>
+    <header>
+        <button class="btn-voltar" onclick="window.history.back()">← Voltar</button>
+        <h1>Consultar Funcionários</h1>
+    </header>
 
   <div id="search-container">
     <div class="input-wrapper">
@@ -19,7 +20,7 @@
   </div>
   
   <nav>
-    <table id="funcionarios-table" border="1">
+    <table id="livros-table" border="1">
       <thead>
         <tr>
           <th>ID</th>
@@ -106,9 +107,9 @@
   </nav>
 
   <!-- Modal -->
-  <div id="modal" class="modal">
+  <div id="modal" style="display:none;">
     <div id="modal-content">
-      <span class="close" id="close-modal">&times;</span>
+      <span id="close-modal" style="cursor:pointer;">&times;</span>
       <div id="modal-body"></div>
     </div>
   </div>
@@ -116,7 +117,7 @@
   <!-- Modal de Edição -->
   <div id="modal-editar" class="modal">
     <div class="modal-content">
-      <span class="close" id="close-editar">&times;</span>
+      <span class="close">&times;</span>
       <h2>Editar Funcionário</h2>
       <form id="form-editar">
         <div class="linha-dupla">
@@ -133,7 +134,7 @@
         <div class="linha-dupla">
           <div>
             <label>CPF:</label>
-            <input type="text" id="funcionario-cpf" maxlength="14" placeholder="000.000.000-00" />
+            <input type="text" id="funcionario-cpf" required>
           </div>
           <div>
             <label>Sexo:</label>
@@ -192,6 +193,7 @@
             <input type="text" id="funcionario-rua" required>
           </div>
         </div>
+
         <div class="linha-dupla">
           <div>
             <label>Número:</label>
@@ -199,20 +201,18 @@
           </div>
           <div>
             <label>Telefone:</label>
-             <input type="text" id="funcionario-telefone" maxlength="15" placeholder="(00) 00000-0000" />
+            <input type="text" id="funcionario-telefone" required>
           </div>
         </div>
 
-        <div class="btn">
-          <button class="btn-editar">Editar</button>
-          <button class="btn-desativar">Desativar</button>
-        </div>        
+        <div class="botao">
+          <button type="submit" class="btn">Salvar</button>
+          <button type="button" class="btn" id="cancelar-edicao">Cancelar</button>
+        </div>
       </form>
     </div>
   </div>
-  
 
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="subtelas_javascript/telconsultar_funcionarios.js"></script>
 </body>
 </html>
