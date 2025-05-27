@@ -14,6 +14,23 @@ body {
   position: relative;
 }
 
+.btn-voltar {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  padding: 8px 15px;
+  background-color: #7076c9;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-voltar:hover {
+  background-color: #4c52a7;
+}
+
 header {
   height: 150px;
   background-color: #85ccea;
@@ -341,15 +358,13 @@ a {
 #modal-adicionar input[type="number"],
 #modal-adicionar input[type="date"],
 #modal-adicionar select {
-  width: 100%;
-  padding: 6px 10px;
-  margin-bottom: 15px;
-  border: 1px solid #85ccea;
-  border-radius: 5px;
-  background-color: #f0faff;
+  width: 90%;           /* Ou menos, como 80% */
+  max-width: 350px;     /* Para limitar o tamanho em telas grandes */
+  padding: 8px;
   font-size: 14px;
-  height: 30px;
-  box-sizing: border-box
+  border-radius: 10px;
+  margin: 0 auto 12px;
+  display: block;
 }
 
 .swal2-icon.swal2-warning.swal-add-icon {
@@ -480,14 +495,14 @@ a {
 
 .linha-dupla-radio {
   display: flex;
-  gap: 20px;
+  gap: 20px; /* espaço entre os dois labels */
   align-items: center;
 }
 
 .linha-dupla-radio label {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 6px; /* espaço entre bolinha e texto */
   cursor: pointer;
 }
 
@@ -640,7 +655,6 @@ a {
   background-color: #f0faff;
   font-size: 14px;
   height: 30px;
-  box-sizing: border-box
 }
 
 .linha-dupla {
@@ -671,39 +685,17 @@ a {
   background-color: #5a8699;
 }
 
-#cancelar-editar {
-  background-color: #85ccea;
+#botao-cancelar {
+  background-color: #f44336;
   color: white;
-  padding: 12px 25px;
-  font-size: 16px;
   border: none;
-  border-radius: 8px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s;
 }
 
-#cancelar-status:hover {
-  background-color: #5a8699;
+#botao-cancelar:hover {
+  background-color: #d32f2f;
 }
-
-.linha-unica {
-  display: flex;
-  flex-direction: column;
-  margin-top: 15px;
-}
-
-.imagem-preview-container {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-top: 5px;
-}
-
-.imagem-preview {
-  width: 100px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
