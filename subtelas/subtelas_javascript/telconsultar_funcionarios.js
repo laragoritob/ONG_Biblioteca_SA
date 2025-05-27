@@ -6,6 +6,7 @@ const formEditar = document.getElementById('form-editar');
 const closeEditar = document.getElementById('close-editar');
 const cancelarEdicao = document.getElementById('cancelar-edicao');
 
+
 const funcionario = [
   {
     selector: '.detalhes-funcionarios',
@@ -323,7 +324,7 @@ formEditar.addEventListener('submit', function(e) {
     const codigo = document.getElementById('funcionario-codigo').value;
     const funcionarioEncontrado = funcionario.find(f => f.codigo === codigo);
     
-    if (funcionarioEncontrado) {
+    if (funcionarioEncontrado) 
         // Atualizar os dados do funcionário
         funcionarioEncontrado.nome = document.getElementById('funcionario-nome').value;
         funcionarioEncontrado.cpf = document.getElementById('funcionario-cpf').value;
@@ -338,6 +339,7 @@ formEditar.addEventListener('submit', function(e) {
         funcionarioEncontrado.rua = document.getElementById('funcionario-rua').value;
         funcionarioEncontrado.numero = document.getElementById('funcionario-numero').value;
         funcionarioEncontrado.telefone = document.getElementById('funcionario-telefone').value;
+        
 
         // Atualizar a tabela
         const linhasTabela = document.querySelectorAll('table tbody tr');
@@ -350,6 +352,24 @@ formEditar.addEventListener('submit', function(e) {
                 linha.cells[4].textContent = funcionarioEncontrado.efetivacao;
             }
         });
+
+
+        // LIMITADOR DO CPF E TELEFONE
+
+        document.getElementById('funcionario-cpf').addEventListener('input', function () {
+    this.value = this.value.replace(/\D/g, '')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+});
+
+document.getElementById('funcionario-telefone').addEventListener('input', function () {
+    this.value = this.value.replace(/\D/g, '')
+        .replace(/(\d{2})(\d)/, '($1) $2')
+        .replace(/(\d{5})(\d{1,4})$/, '$1-$2')
+        .substring(0, 15);
+});
+
 
         // Fechar o modal de edição
         modalEditar.style.display = 'none';
@@ -367,7 +387,7 @@ formEditar.addEventListener('submit', function(e) {
             icon: 'success',
             confirmButtonText: 'OK'
         });
-    }
+    
 });
 
 // Função para desativar funcionário
