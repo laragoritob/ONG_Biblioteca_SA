@@ -19,7 +19,8 @@ function preencherNomeFuncionario() {
         "12": "Jake Gyllenhaal",
         "13": "James Hetfield",
         "14": "Gerard Way",
-        "15": "Rodrigo Pantera"
+        "15": "Mason Thames",
+        "16": "Gustavo Tobler"
       };      
   
     // Atribui o nome do funcionário correspondente ao ID inserido, ou uma string vazia caso não exista
