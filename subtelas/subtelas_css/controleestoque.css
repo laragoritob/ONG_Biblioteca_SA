@@ -48,6 +48,23 @@ header h1 {
   color: #4a3092;
 }
 
+.btn-voltar {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  padding: 8px 15px;
+  background-color: #7076c9;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-voltar:hover {
+  background-color: #4c52a7;
+}
+
 /* MODAL VISUALIZAÇÃO */
 #modal {
   display: none; /* inicialmente oculto */
@@ -358,13 +375,19 @@ a {
 #modal-adicionar input[type="number"],
 #modal-adicionar input[type="date"],
 #modal-adicionar select {
-  width: 90%;           /* Ou menos, como 80% */
-  max-width: 350px;     /* Para limitar o tamanho em telas grandes */
+  width: 100%;         
+  max-width: 350px;     
   padding: 8px;
   font-size: 14px;
-  border-radius: 10px;
   margin: 0 auto 12px;
-  display: block;
+  display: block;  
+  padding: 4px 8px;
+  margin-bottom: 10px;
+  border: 1px solid #85ccea;
+  border-radius: 5px;
+  background-color: #f0faff;
+  height: 35px;     /* menor altura */
+  border-radius: 30px;
 }
 
 .swal2-icon.swal2-warning.swal-add-icon {
@@ -435,6 +458,7 @@ a {
 
 #form-status input[type="radio"] {
   margin-right: 10px;
+  border-radius: 30px;
 }
 
 #form-status button {
@@ -512,6 +536,38 @@ a {
   margin: 0;
 }
 
+/* imagem */
+#livro-imagem {
+  width: 100%;         
+  max-width: 350px;     
+  padding: 8px;
+  font-size: 14px;
+  margin: 0 auto 12px;
+  display: block;  
+  padding: 4px 8px;
+  margin-bottom: 10px;
+  border: 1px solid #85ccea;
+  border-radius: 5px;
+  background-color: #f0faff;
+  height: 35px;     /* menor altura */
+  border-radius: 30px;
+}
+
+#livro-imagem-preview {
+  display: block;
+  margin-top: 5px;
+  height: 100px;
+  width: auto;
+  max-width: 100%;
+  border-radius: 6px;
+  object-fit: contain;
+  border: 1px solid #ccc;
+  padding: 4px;
+  background-color: #f9f9f9;
+}
+
+
+
 
 /* Estilos SweetAlert2 */
 .swal2-popup {
@@ -548,7 +604,6 @@ a {
 
 .swal2-confirm {
   background-color: #77d440; /* verde */
-
   font-weight: 600;
   box-shadow: #000000;
   transition: background-color 0.3s ease;
@@ -647,14 +702,19 @@ a {
 
 #modal-editar form input,
 #modal-editar form select {
-  width: 100%;
-  padding: 6px 10px;
-  margin-bottom: 15px;
+  width: 100%;         
+  max-width: 350px;     
+  padding: 8px;
+  font-size: 14px;
+  margin: 0 auto 12px;
+  display: block;  
+  padding: 4px 8px;
+  margin-bottom: 10px;
   border: 1px solid #85ccea;
   border-radius: 5px;
   background-color: #f0faff;
-  font-size: 14px;
-  height: 30px;
+  height: 35px;     /* menor altura */
+  border-radius: 30px;
 }
 
 .linha-dupla {
@@ -685,17 +745,39 @@ a {
   background-color: #5a8699;
 }
 
-#botao-cancelar {
-  background-color: #f44336;
+#cancelar-editar {
+  background-color: #85ccea;
   color: white;
+  padding: 12px 25px;
+  font-size: 16px;
   border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-size: 14px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
 }
 
-#botao-cancelar:hover {
-  background-color: #d32f2f;
+#cancelar-editar:hover {
+  background-color: #5a8699;
+}
+
+.linha-unica {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+.imagem-preview-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 5px;
+}
+
+.imagem-preview {
+  width: 100px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #ccc;
 }
