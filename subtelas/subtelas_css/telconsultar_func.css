@@ -414,35 +414,81 @@ table {
 
 /* Estilo para mensagem de sucesso */
 .swal2-popup {
-    border-radius: 15px !important;
-    padding: 20px !important;
+    font-family: "Candara", sans-serif;
+    border: 15px solid #87ceeb;
+    font-size: 10px;
+    background: #fefefe;
+    color: #333;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    width: 600px !important;  
+    max-width: 90vw !important;
+    font-size: 1rem !important;
+    margin-top: 5px;
 }
 
 .swal2-title {
-    color: #4a3092 !important;
-    font-size: 24px !important;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: "Candara", sans-serif;
+    text-align: center;
+    color: #4a3092;
+    margin-bottom: 20px;
 }
 
-.swal2-html-container {
-    color: #333 !important;
-    font-size: 16px !important;
+.swal2-icon.swal2-warning {
+    border-color: #f44336 !important;
+    color: #f44336 !important;
 }
 
-.swal2-confirm {
-    background: #ffbcfc !important;
-    color: #000 !important;
-    border-radius: 25px !important;
-    padding: 12px 30px !important;
-    font-size: 16px !important;
+.swal2-icon.swal2-success {
+    border-color: #4CAF50 !important;
+    color: #4CAF50 !important;
+}
+
+.swal2-confirm, .swal2-cancel {
+    background-color: #ffbcfc !important;
+    color: rgb(0, 0, 0) !important;
     font-weight: bold !important;
+    box-shadow: none !important;
+    transition: all 0.3s ease !important;
+    padding: 12px 30px !important;
+    margin: 10px 5px 0 5px !important;
+    font-size: 16px !important;
     border: none !important;
-    box-shadow: 0 0 10px rgba(136, 75, 133, 0.3) !important;
+    border-radius: 25px !important;
+    cursor: pointer !important;
+    min-width: 200px !important;
 }
 
-.swal2-confirm:hover {
+.swal2-confirm:hover, .swal2-cancel:hover {
     background: #e07ddb !important;
     transform: translateY(-2px) !important;
-    box-shadow: 0 0 15px #884b85 !important;
+    box-shadow: 0 0 10px #884b85 !important;
+}
+
+.swal2-actions {
+    margin: 1.25em auto 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    gap: 10px !important;
+}
+
+.btn.desativar {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn.ativar {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn.desativar:hover {
+    background-color: #d32f2f;
+}
+
+.btn.ativar:hover {
+    background-color: #388e3c;
 }
   
   
