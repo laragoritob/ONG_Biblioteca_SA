@@ -342,14 +342,15 @@ function mostrarFicha(e) {
                         <p class="info-item"><strong>Bairro:</strong> ${funcionarioAtual.bairro}</p> 
                         <p class="info-item"><strong>Rua:</strong> ${funcionarioAtual.rua}</p> 
                         <p class="info-item"><strong>Número:</strong> ${funcionarioAtual.numero}</p> 
-                        <p class="info-item"><strong>Telefone:</strong> ${funcionarioAtual.telefone}</p> 
+                        <p class="info-item"><strong>Telefone:</strong> ${funcionarioAtual.telefone}</p>
+                        <p class="info-item"><strong>Status:</strong> <span class="status-badge ${funcionarioAtual.status.toLowerCase()}">${funcionarioAtual.status}</span></p>
                     </div>
                 </div>
             </div>
 
             <div class="botao">
                 <button type="button" class="btn renovar" onclick="abrirModalEditar('${funcionarioAtual.codigo}')">EDITAR</button>
-                <button type="button" class="btn">DESATIVAR</button>
+                <button type="button" class="btn ${funcionarioAtual.status === 'Ativo' ? 'desativar' : 'ativar'}" onclick="alterarStatus('${funcionarioAtual.codigo}')">${funcionarioAtual.status === 'Ativo' ? 'DESATIVAR' : 'ATIVAR'}</button>
             </div>
         `;
         
@@ -446,14 +447,13 @@ function salvarAlteracoes() {
     console.log('Iniciando salvamento...');
     
     const codigo = document.getElementById('funcionario-codigo').value;
-    console.log('Código do funcionário:', codigo);
+    const index = funcionario.findIndex(f => f.codigo === codigo);
     
-    const funcionarioEncontrado = funcionario.find(f => f.codigo === codigo);
-    console.log('Funcionário encontrado:', funcionarioEncontrado);
-    
-    if (funcionarioEncontrado) {
+    if (index !== -1) {
         // Atualizar os dados do funcionário
-        const novosDados = {
+        funcionario[index] = {
+            ...funcionario[index], // mantém propriedades como imagem e status
+            codigo,
             nome: document.getElementById('funcionario-nome').value,
             cpf: document.getElementById('funcionario-cpf').value,
             sexo: document.getElementById('funcionario-sexo').value,
@@ -468,61 +468,43 @@ function salvarAlteracoes() {
             numero: document.getElementById('funcionario-numero').value,
             telefone: document.getElementById('funcionario-telefone').value
         };
-        
-        console.log('Novos dados a serem salvos:', novosDados);
-
-        // Atualizar os dados do funcionário
-        Object.assign(funcionarioEncontrado, novosDados);
-        console.log('Dados atualizados no objeto:', funcionarioEncontrado);
 
         // Salvar no localStorage
         localStorage.setItem('funcionarios', JSON.stringify(funcionario));
 
-        // Atualizar a tabela
-        function salvarAlteracoes() {
-            console.log('Iniciando salvamento...');
-            
-            const codigo = document.getElementById('funcionario-codigo').value;
-            const index = funcionario.findIndex(f => f.codigo === codigo);
-            
-            if (index !== -1) {
-                funcionario[index] = {
-                    ...funcionario[index], // mantém propriedades como imagem
-                    codigo,
-                    nome: document.getElementById('funcionario-nome').value,
-                    cpf: document.getElementById('funcionario-cpf').value,
-                    sexo: document.getElementById('funcionario-sexo').value,
-                    civil: document.getElementById('funcionario-civil').value,
-                    cargo: document.getElementById('funcionario-cargo').value,
-                    nascimento: formatarDataBR(document.getElementById('funcionario-nascimento').value),
-                    efetivacao: formatarDataBR(document.getElementById('funcionario-efetivacao').value),
-                    estado: document.getElementById('funcionario-estado').value,
-                    cidade: document.getElementById('funcionario-cidade').value,
-                    bairro: document.getElementById('funcionario-bairro').value,
-                    rua: document.getElementById('funcionario-rua').value,
-                    numero: document.getElementById('funcionario-numero').value,
-                    telefone: document.getElementById('funcionario-telefone').value
-                };
-        
-                // Salva no localStorage
-                localStorage.setItem('funcionarios', JSON.stringify(funcionario));
-        
-                // Fecha o modal de edição
-                modalEditar.style.display = 'none';
-        
-                // Atualiza a ficha se estiver aberta
-                mostrarFichaPorCodigo(codigo);
-        
-                console.log('Funcionário atualizado e salvo.');
-            } else {
-                console.warn('Funcionário não encontrado para salvar.');
-            }
-        }
-        
-        
         // Fechar o modal de edição
         modalEditar.style.display = 'none';
-        console.log('Modal de edição fechado');
+
+        // Atualizar a ficha do funcionário
+        const funcionarioAtualizado = funcionario[index];
+        modalBody.innerHTML = `
+            <h3 class="modal-title">Ficha de ${funcionarioAtualizado.nome}</h3>
+            
+            <div class="modal-content-container">
+                <div class="photo-info-container">
+                    <img src="${funcionarioAtualizado.imagem}" title="funcionário" class="hmfuncionario" />
+                    <div class="info-grid">
+                        <p class="info-item"><strong>CPF:</strong> ${funcionarioAtualizado.cpf}</p> 
+                        <p class="info-item"><strong>Sexo:</strong> ${funcionarioAtualizado.sexo}</p> 
+                        <p class="info-item"><strong>Estado Civil:</strong> ${funcionarioAtualizado.civil}</p> 
+                        <p class="info-item"><strong>Cargo:</strong> ${funcionarioAtualizado.cargo}</p> 
+                        <p class="info-item"><strong>Data de Efetivação:</strong> ${funcionarioAtualizado.efetivacao}</p> 
+                        <p class="info-item"><strong>Data de Nascimento:</strong> ${funcionarioAtualizado.nascimento}</p>
+                        <p class="info-item"><strong>Estado:</strong> ${funcionarioAtualizado.estado}</p> 
+                        <p class="info-item"><strong>Cidade:</strong> ${funcionarioAtualizado.cidade}</p> 
+                        <p class="info-item"><strong>Bairro:</strong> ${funcionarioAtualizado.bairro}</p> 
+                        <p class="info-item"><strong>Rua:</strong> ${funcionarioAtualizado.rua}</p> 
+                        <p class="info-item"><strong>Número:</strong> ${funcionarioAtualizado.numero}</p> 
+                        <p class="info-item"><strong>Telefone:</strong> ${funcionarioAtualizado.telefone}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="botao">
+                <button type="button" class="btn renovar" onclick="abrirModalEditar('${funcionarioAtualizado.codigo}')">EDITAR</button>
+                <button type="button" class="btn ${funcionarioAtualizado.status === 'Ativo' ? 'desativar' : 'ativar'}" onclick="alterarStatus('${funcionarioAtualizado.codigo}')">${funcionarioAtualizado.status === 'Ativo' ? 'DESATIVAR' : 'ATIVAR'}</button>
+            </div>
+        `;
 
         // Mostrar mensagem de sucesso
         Swal.fire({
@@ -532,11 +514,27 @@ function salvarAlteracoes() {
             confirmButtonText: 'OK',
             confirmButtonColor: '#ffbcfc',
             allowOutsideClick: false,
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+            allowEscapeKey: false
+=======
+>>>>>>> Stashed changes
             allowEscapeKey: false,
             customClass: {
                 popup: 'swal2-popup',
                 title: 'swal2-title',
                 confirmButton: 'swal2-confirm'
+<<<<<<< Updated upstream
+            }
+        }).then(() => {
+            console.log('Atualizando ficha...');
+            // Atualizar a ficha se estiver aberta
+            const elemento = document.querySelector(funcionarioEncontrado.selector);
+            if (elemento) {
+                elemento.click();
+=======
+>>>>>>> Stashed changes
             }
         }).then(() => {
             console.log('Atualizando ficha...');
@@ -545,9 +543,10 @@ function salvarAlteracoes() {
             if (elemento) {
                 elemento.click();
             }
+>>>>>>> 1839b2c5f0095170269f97249b480628d3191549
         });
     } else {
-        console.log('Funcionário não encontrado com o código:', codigo);
+        console.warn('Funcionário não encontrado para salvar.');
         // Mostrar mensagem de erro
         Swal.fire({
             title: 'Erro!',
@@ -598,11 +597,26 @@ function confirmarAlteracaoStatus(codigo) {
         // Mostrar o modal de confirmação
         Swal.fire({
             title: 'Confirmação',
+<<<<<<< Updated upstream
             text: mensagem,
+=======
+<<<<<<< HEAD
+            text: `Tem certeza que deseja ${novoStatus === 'Desativado' ? 'desativar' : 'ativar'} este funcionário?`,
+=======
+            text: mensagem,
+>>>>>>> 1839b2c5f0095170269f97249b480628d3191549
+>>>>>>> Stashed changes
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Sim, tenho certeza',
+            confirmButtonText: 'Sim, confirmar',
             cancelButtonText: 'Cancelar',
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+            confirmButtonColor: '#4CAF50',
+            cancelButtonColor: '#f44336'
+=======
+>>>>>>> Stashed changes
             confirmButtonColor: '#ffbcfc',
             cancelButtonColor: '#ffbcfc',
             allowOutsideClick: false,
@@ -613,6 +627,10 @@ function confirmarAlteracaoStatus(codigo) {
                 confirmButton: 'swal2-confirm',
                 cancelButton: 'swal2-cancel'
             }
+<<<<<<< Updated upstream
+=======
+>>>>>>> 1839b2c5f0095170269f97249b480628d3191549
+>>>>>>> Stashed changes
         }).then((result) => {
             console.log('Resultado do modal:', result);
             
@@ -637,12 +655,29 @@ function confirmarAlteracaoStatus(codigo) {
                 // Salvar no localStorage
                 localStorage.setItem('funcionarios', JSON.stringify(funcionario));
                 
+<<<<<<< Updated upstream
                 console.log('Mostrando mensagem de sucesso...');
+=======
+<<<<<<< HEAD
+                // Fechar o modal atual
+                modal.style.display = 'none';
+=======
+                console.log('Mostrando mensagem de sucesso...');
+>>>>>>> 1839b2c5f0095170269f97249b480628d3191549
+>>>>>>> Stashed changes
                 
                 // Mostrar mensagem de sucesso
                 Swal.fire({
                     title: 'Sucesso!',
+<<<<<<< Updated upstream
                     text: 'Alteração feita com sucesso!',
+=======
+<<<<<<< HEAD
+                    text: `${novoStatus === 'Desativado' ? 'Desativação' : 'Ativação'} feita com sucesso!`,
+=======
+                    text: 'Alteração feita com sucesso!',
+>>>>>>> 1839b2c5f0095170269f97249b480628d3191549
+>>>>>>> Stashed changes
                     icon: 'success',
                     confirmButtonText: 'OK',
                     confirmButtonColor: '#ffbcfc',
@@ -694,7 +729,7 @@ function confirmarAlteracaoStatus(codigo) {
     }
 }
 
-// Adicionar estilos CSS para o status
+// Atualizar os estilos CSS
 const style = document.createElement('style');
 style.textContent = `
     .status-badge {
@@ -714,10 +749,96 @@ style.textContent = `
         color: white;
     }
     .btn.desativar {
-        background-color: #f44336;
+        background: #ffbcfc;
+        color: rgb(0, 0, 0);
     }
     .btn.ativar {
-        background-color: #4CAF50;
+        background: #ffbcfc;
+        color: rgb(0, 0, 0);
+    }
+    .btn.renovar {
+        background: #ffbcfc;
+        color: rgb(0, 0, 0);
+    }
+    .confirmation-modal {
+        text-align: center;
+        padding: 20px;
+    }
+    .confirmation-modal h3 {
+        margin-bottom: 15px;
+        color: #333;
+    }
+    .confirmation-modal p {
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+    .confirmation-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+    .confirm-btn {
+        background: #ffbcfc;
+        color: rgb(0, 0, 0);
+    }
+    .cancel-btn {
+        background: #ffbcfc;
+        color: rgb(0, 0, 0);
     }
 `;
 document.head.appendChild(style);
+
+// LIMITAR O NÚMERO DE DÍGITOS DO CPF E PERMITIR APENAS NÚMEROS //
+function formatCPF(input) {
+    let value = input.value.replace(/\D/g, ''); // Remove tudo que não for dígito
+    value = value.slice(0, 11); // Limita a 11 dígitos
+
+    // Aplica a máscara: 123.456.789-00
+    if (value.length > 9) {
+        input.value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+    } else if (value.length > 6) {
+        input.value = value.replace(/(\d{3})(\d{3})(\d{1,3})/, "$1.$2.$3");
+    } else if (value.length > 3) {
+        input.value = value.replace(/(\d{3})(\d{1,3})/, "$1.$2");
+    } else {
+        input.value = value;
+    }
+}
+
+// LIMITAR O NÚMERO DE DÍGITOS DO TELEFONE E PERMITIR APENAS NÚMEROS //
+function formatTelefone(input) {
+    let value = input.value.replace(/\D/g, ''); // Remove tudo que não for dígito
+    value = value.slice(0, 11); // Limita a 11 dígitos
+
+    if (value.length <= 10) {
+        // Telefone fixo: (xx) xxxx-xxxx
+        if (value.length > 6) {
+            input.value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+        } else if (value.length > 2) {
+            input.value = value.replace(/(\d{2})(\d{0,4})/, '($1) $2');
+        } else {
+            input.value = value;
+        }
+    } else {
+        // Celular: (xx) xxxxx-xxxx
+        input.value = value.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+    }
+}
+
+// Adicionar event listeners para os campos de CPF e telefone no formulário de edição
+document.addEventListener('DOMContentLoaded', function() {
+    const cpfInput = document.getElementById('funcionario-cpf');
+    const telefoneInput = document.getElementById('funcionario-telefone');
+
+    if (cpfInput) {
+        cpfInput.addEventListener('input', function() {
+            formatCPF(this);
+        });
+    }
+
+    if (telefoneInput) {
+        telefoneInput.addEventListener('input', function() {
+            formatTelefone(this);
+        });
+    }
+});
