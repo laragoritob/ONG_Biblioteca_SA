@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>ONG Biblioteca - Sala Arco-íris</title>
   <link rel="stylesheet" type="text/css" href="subtelas_css/telconsultar_func.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -224,7 +225,16 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    // Verificar se o SweetAlert2 foi carregado
+    window.addEventListener('load', function() {
+      if (typeof Swal === 'undefined') {
+        console.error('SweetAlert2 não foi carregado corretamente');
+      } else {
+        console.log('SweetAlert2 carregado com sucesso');
+      }
+    });
+  </script>
   <script src="subtelas_javascript/telconsultar_funcionarios.js"></script>
 </body>
 </html>
