@@ -467,12 +467,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }).then(() => {
       formStatus.reset();
       modalStatus.style.display = "none";
-      
-      // Adicionar e remover classe para animação
-      cancelarStatus.classList.add('cancelado');
-      setTimeout(() => {
-        cancelarStatus.classList.remove('cancelado');
-      }, 500);
     });
   });
 
