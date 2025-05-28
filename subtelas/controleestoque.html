@@ -50,7 +50,7 @@
       <td>30</td>
       <td>05</td>
       <td>30/07/2024</td>
-      <td>Ativo</td>
+      <td><span class="status-badge ativo">Ativo</span></td>
     </tr>
     <!-- Mais exemplos -->
     <tr>
@@ -61,7 +61,7 @@
       <td>12</td>
       <td>03</td>
       <td>01/08/2024</td>
-      <td>Ativo</td>
+      <td><span class="status-badge ativo">Ativo</span></td>
     </tr>
     <tr>
       <td>#0003</td>
@@ -71,7 +71,7 @@
       <td>20</td>
       <td>02</td>
       <td>15/09/2024</td>
-      <td>Ativo</td>
+      <td><span class="status-badge ativo">Ativo</span></td>
     </tr>
     <tr>
       <td>#0004</td>
@@ -81,7 +81,7 @@
       <td>10</td>
       <td>04</td>
       <td>20/10/2024</td>
-      <td>Ativo</td>
+      <td><span class="status-badge ativo">Ativo</span></td>
     </tr>
   </tbody>
 </table>
@@ -146,8 +146,8 @@
       <!-- Linha com data e status -->
       <div class="linha-dupla">
         <div>
-          <label>Data:</label>
-          <input type="date" id="livro-data" required>
+          <label>Data de Cadastro (automática):</label>
+          <input type="date" id="livro-data" readonly>
         </div>
         <div>
           <label>Status:</label>
@@ -156,6 +156,24 @@
             <option value="Desativado">Desativado</option>
           </select>
         </div>
+      </div>
+
+      <!-- Linha com editora e data de lançamento -->
+      <div class="linha-dupla">
+        <div>
+          <label>Editora:</label>
+          <input type="text" id="livro-editora" required>
+        </div>
+        <div>
+          <label>Data de Lançamento:</label>
+          <input type="date" id="livro-lancamento" required>
+        </div>
+      </div>
+
+      <!-- Linha única com sinopse -->
+      <div class="linha-unica">
+        <label>Sinopse:</label>
+        <textarea id="livro-sinopse" rows="4" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #85ccea; background-color: #f0faff; margin-bottom: 15px;" required></textarea>
       </div>
 
 <!-- Linha com imagem e prévia -->
@@ -169,9 +187,6 @@
     <input type="file" id="livro-imagem" accept="image/*">
   </div>
 </div>
-
-
-
       <!-- Botões do formulário -->
       <div style="text-align: center; margin-top: 15px;">
         <button type="submit" id="botao-salvar-adicionar">Salvar</button>
@@ -248,8 +263,8 @@
       <!-- Linha com data e status -->
       <div class="linha-dupla">
         <div>
-          <label>Data:</label>
-          <input type="date" id="editar-livro-data" required>
+          <label>Data de Cadastro (automática):</label>
+          <input type="date" id="editar-livro-data" readonly>
         </div>
         <div>
           <label>Status:</label>
@@ -258,6 +273,24 @@
             <option value="Desativado">Desativado</option>
           </select>
         </div>
+      </div>
+
+      <!-- Linha com editora e data de lançamento -->
+      <div class="linha-dupla">
+        <div>
+          <label>Editora:</label>
+          <input type="text" id="editar-livro-editora" required>
+        </div>
+        <div>
+          <label>Data de Lançamento:</label>
+          <input type="date" id="editar-livro-lancamento" required>
+        </div>
+      </div>
+
+      <!-- Linha única com sinopse -->
+      <div class="linha-unica">
+        <label>Sinopse:</label>
+        <textarea id="editar-livro-sinopse" rows="4" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #85ccea; background-color: #f0faff; margin-bottom: 15px;" required></textarea>
       </div>
 
 <!-- Linha com imagem e prévia -->
@@ -270,6 +303,14 @@
     <label for="livro-imagem-editar">Imagem do Livro:</label>
     <input type="file" id="livro-imagem-editar" accept="image/*">
   </div>
+</div>
+
+<div style="text-align: center; margin-top: 15px;">
+  <button type="submit" id="salvar-editar">Salvar</button>
+  <button type="button" id="cancelar-editar">Cancelar</button>
+</div>
+</form>
+</div>
 </div>
 
 <!-- Script com funcionalidades da página -->
