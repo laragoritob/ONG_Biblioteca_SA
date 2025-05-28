@@ -18,7 +18,7 @@
 
   <div class="container">
     <!-- Formulário para preenchimento dos dados -->
-    <form class="formulario" id="form_login" action="#" method="post">
+    <form class="formulario" id="form_pessoal" action="#" method="post">
       
       <!-- Linha de entrada para ID do Funcionário e Nome -->
       <div class="linha-dupla">
@@ -78,7 +78,7 @@
 
       <!-- Botão de Cancelar -->
       <div class="botao-wrapper">
-        <button class="botao-cancelar" id="botao-cancelar">Cancelar</button>
+        <button type="button" class="botao-cancelar" id="botao-cancelar" onclick="document.getElementById('form_pessoal').reset(); document.getElementById('arquivo').value = '';"> Cancelar </button>
       </div>
       </div>
     </form>
@@ -153,30 +153,6 @@
     });
   }
 });
-
-      // Função chamada ao clicar no botão "Cancelar" - exibe um alerta de erro
-      document.getElementById('botao-cancelar').addEventListener('click', function () {
-  Swal.fire({
-    title: 'Cancelado!',
-    text: 'Envio do relatório cancelado!',
-    icon: 'warning',
-    confirmButtonText: 'OK',
-    confirmButtonColor: '#ffbcfc'
-  }).then(() => {
-    const form = document.getElementById('form_login');
-    form.reset(); // Limpa todos os campos do formulário
-
-    // Zera o campo de nome do funcionário (readonly)
-    document.getElementById('nome_funcionario').value = '';
-
-    // Zera o campo de exibição do nome do arquivo
-    document.getElementById('arquivo').value = 'Nenhum arquivo selecionado';
-
-    // Limpa arquivos selecionados
-    document.getElementById('seletor_arquivo').value = '';
-  });
-});
-
 
   </script>
 </body>
