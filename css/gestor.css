@@ -31,6 +31,32 @@ header h1{
            margin: 36px 225px 30px;
          }
 
+.opcao {
+  background: #85ccea;
+  color: rgb(0, 0, 0);
+  padding: 15px 130px;
+  border: none;
+  border-radius: 50px;
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 30px;
+  margin-left: 20px;
+  height: 70px;
+}
+
+.opcao.glow {
+  box-shadow: 0px 0px 15px #275870;
+}
+
+.opcao:hover {
+  background: #66a4be;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px #72b0cf;
+}
 
 .logout-btn {
     position: absolute;
@@ -69,16 +95,11 @@ nav a{
        height: 110px;
        width: 360px;
        border-radius: 50px;
-       background-color: #85ccea;
        margin: 50px;
        display: flex;
        align-items: center;
        justify-content: center;
      }
-
-nav a:hover{
-             background-color: #72b0cf;
-           }
 
 .logo{
       float:right;
