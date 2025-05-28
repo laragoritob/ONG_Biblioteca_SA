@@ -105,14 +105,15 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!statusCell) return;
 
     if (row.classList.contains('devolvido')) {
-      statusCell.textContent = 'DEVOLVIDO';
-      statusCell.style.color = 'green';
+      if (data < hoje) {
+        statusCell.innerHTML = '<span class="status-badge devolvido-atraso">Devolvido com Atraso</span>';
+      } else if (data >= hoje) {
+        statusCell.innerHTML = '<span class="status-badge devolvido">Devolvido</span>';
+      }
     } else if (data < hoje) {
-      statusCell.textContent = 'EM ATRASO';
-      statusCell.style.color = 'red';
+      statusCell.innerHTML = '<span class="status-badge atrasado">Em Atraso</span>';
     } else {
-      statusCell.textContent = 'EM ANDAMENTO';
-      statusCell.style.color = 'orange';
+      statusCell.innerHTML = '<span class="status-badge no-prazo">No Prazo</span>';
     }
   }
 
@@ -197,6 +198,33 @@ document.addEventListener('DOMContentLoaded', function () {
       const livro = livros.find(l => l.nome === nomeLivro);
       if (!livro) return;
 
+      // Verificar se o livro já foi devolvido
+      const linha = [...document.querySelectorAll('#livros-table tbody tr')]
+        .find(tr => tr.cells[1].textContent.trim() === nomeLivro);
+      
+      if (linha && linha.classList.contains('devolvido')) {
+        Swal.fire({
+          title: 'Não é possível renovar!',
+          text: 'Este livro já foi devolvido. Para renovar, é necessário fazer um novo empréstimo.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#ffbcfc'
+        });
+        return;
+      }
+
+      // Verificar se o livro está em atraso
+      if (dataDevolucao < hoje) {
+        Swal.fire({
+          title: 'Não é possível renovar!',
+          text: 'Livros em atraso não podem ser renovados. Por favor, devolva o livro primeiro.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#ffbcfc'
+        });
+        return;
+      }
+
       if (livro.renovacoes >= 3) {
         Swal.fire('Limite de renovações atingido.', '', 'error');
         return;
@@ -211,38 +239,30 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }
 
-      if (dataDevolucao >= hoje) {
-        const novaData = new Date(dataDevolucao);
-        novaData.setDate(novaData.getDate() + 7);
-        const novaDataFormatada = novaData.toISOString().split('T')[0];
+      const novaData = new Date(dataDevolucao);
+      novaData.setDate(novaData.getDate() + 7);
+      const novaDataFormatada = novaData.toISOString().split('T')[0];
 
-        Swal.fire({
-          title: 'Renovação feita com sucesso!',
-          text: `Nova data de devolução: ${novaDataFormatada}`,
-          icon: 'success',
-          confirmButtonText: 'OK',
-          confirmButtonColor: '#ffbcfc'
-        }).then(() => {
-          devolucaoInput.value = novaDataFormatada;
-          livro.ultimaRenovacao = novaDataFormatada;
-          livro.devolucao = novaDataFormatada;
-          livro.renovacoes += 1;
+      Swal.fire({
+        title: 'Renovação feita com sucesso!',
+        text: `Nova data de devolução: ${novaDataFormatada}`,
+        icon: 'success',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#ffbcfc'
+      }).then(() => {
+        devolucaoInput.value = novaDataFormatada;
+        livro.ultimaRenovacao = novaDataFormatada;
+        livro.devolucao = novaDataFormatada;
+        livro.renovacoes += 1;
 
-          const linha = [...document.querySelectorAll('#livros-table tbody tr')]
-            .find(tr => tr.cells[1].textContent.trim() === nomeLivro);
+        if (linha) {
+          const data = new Date(novaDataFormatada);
+          linha.cells[4].textContent = data.toLocaleDateString('pt-BR');
+          reposicionarLivroNaTabela(linha, 'topo');
+        }
 
-          if (linha) {
-            const data = new Date(novaDataFormatada);
-            linha.cells[4].textContent = data.toLocaleDateString('pt-BR');
-            reposicionarLivroNaTabela(linha, 'topo');
-          }
-
-          modal.style.display = 'none';
-        });
-
-      } else {
-        Swal.fire('LIVRO EM ATRASO!', 'Sem sucesso na renovação.', 'error');
-      }
+        modal.style.display = 'none';
+      });
     }
   });
 
@@ -261,8 +281,27 @@ document.addEventListener('DOMContentLoaded', function () {
       const linha = [...document.querySelectorAll('#livros-table tbody tr')]
         .find(tr => tr.cells[1].textContent.trim() === nomeLivro);
 
+      // Verificar se o livro já foi devolvido
+      if (linha && linha.classList.contains('devolvido')) {
+        Swal.fire({
+          title: 'Não é possível devolver!',
+          text: 'Este livro já foi devolvido anteriormente.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#ffbcfc'
+        });
+        return;
+      }
+
       if (linha) {
         linha.classList.add('devolvido');
+        const statusCell = linha.cells[5];
+        
+        if (dataDevolucao < hoje) {
+          statusCell.innerHTML = '<span class="status-badge devolvido-atraso">Devolvido com Atraso</span>';
+        } else if (dataDevolucao >= hoje) {
+          statusCell.innerHTML = '<span class="status-badge devolvido">Devolvido</span>';
+        }
       }
 
       if (dataDevolucao < hoje) {
@@ -296,6 +335,36 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   });
+
+  // Add status badge styles
+  const style = document.createElement('style');
+  style.textContent = `
+    .status-badge {
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+      display: inline-block;
+      min-width: 80px;
+      text-align: center;
+    }
+    .status-badge.atrasado {
+      background-color: #f44336;
+      color: white;
+    }
+    .status-badge.no-prazo {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .status-badge.devolvido {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .status-badge.devolvido-atraso {
+      background-color: #f44336;
+      color: white;
+    }
+  `;
+  document.head.appendChild(style);
 });
 
 // Filtro de busca

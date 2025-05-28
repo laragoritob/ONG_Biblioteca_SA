@@ -73,4 +73,62 @@ document.addEventListener('DOMContentLoaded', function() {
             modal.style.display = 'block';
         });
     });
-}); 
+});
+
+const style = document.createElement('style');
+style.textContent = `
+    .status-badge {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-weight: bold;
+        display: inline-block;
+        min-width: 80px;
+        text-align: center;
+    }
+    .status-badge.ativo {
+        background-color: #4CAF50;
+        color: white;
+    }
+    .status-badge.desativado {
+        background-color: #f44336;
+        color: white;
+    }
+    .btn.desativar {
+        background: #ffbcfc;
+        color: rgb(0, 0, 0);
+    }
+    .btn.ativar {
+        background: #ffbcfc;
+        color: rgb(0, 0, 0);
+    }
+    .btn.renovar {
+        background: #ffbcfc;
+        color: rgb(0, 0, 0);
+    }
+    .confirmation-modal {
+        text-align: center;
+        padding: 20px;
+    }
+    .confirmation-modal h3 {
+        margin-bottom: 15px;
+        color: #333;
+    }
+    .confirmation-modal p {
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+    .confirmation-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+    .confirm-btn {
+        background: #ffbcfc;
+        color: rgb(0, 0, 0);
+    }
+    .cancel-btn {
+        background: #ffbcfc;
+        color: rgb(0, 0, 0);
+    }
+`;
+document.head.appendChild(style);
