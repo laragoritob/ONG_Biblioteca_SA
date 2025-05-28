@@ -250,7 +250,7 @@ funcionario.forEach(funcionario => {
 
       <div class="botao">
           <button type="button" class="btn renovar" onclick="abrirModalEditar('${funcionario.codigo}')">EDITAR</button>
-          <button type="button" class="btn ${funcionario.status === 'Ativo' ? 'desativar' : 'ativar'}" onclick="confirmarAlteracaoStatus('${funcionario.codigo}')">${funcionario.status === 'Ativo' ? 'DESATIVAR' : 'ATIVAR'}</button>
+          <button type="button" class="btn ${funcionario.status === 'Ativo' ? 'desativar' : 'ativar'}" onclick="alterarStatus('${funcionario.codigo}')">${funcionario.status === 'Ativo' ? 'DESATIVAR' : 'ATIVAR'}</button>
         </div>
 `;
 
@@ -363,6 +363,57 @@ function mostrarFicha(e) {
     }
 }
 
+// Função para alterar o status do funcionário
+function alterarStatus(codigo) {
+    const funcionarioEncontrado = funcionario.find(f => f.codigo === codigo);
+    if (funcionarioEncontrado) {
+        const novoStatus = funcionarioEncontrado.status === 'Ativo' ? 'Desativado' : 'Ativo';
+        
+        Swal.fire({
+            title: 'Confirmação',
+            text: `Tem certeza que deseja ${novoStatus === 'Desativado' ? 'desativar' : 'ativar'} este funcionário?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sim, confirmar',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#4CAF50',
+            cancelButtonColor: '#f44336'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Atualizar o status do funcionário
+                funcionarioEncontrado.status = novoStatus;
+                
+                // Atualizar o status na tabela
+                const linhas = document.querySelectorAll('#funcionarios-table tbody tr');
+                linhas.forEach(linha => {
+                    const codigoCell = linha.querySelector('td:first-child');
+                    if (codigoCell && codigoCell.textContent.trim() === codigo) {
+                        const statusCell = linha.querySelector('td:last-child');
+                        if (statusCell) {
+                            statusCell.innerHTML = `<span class="status-badge ${novoStatus.toLowerCase()}">${novoStatus}</span>`;
+                        }
+                    }
+                });
+                
+                // Salvar no localStorage
+                localStorage.setItem('funcionarios', JSON.stringify(funcionario));
+                
+                // Fechar o modal atual
+                modal.style.display = 'none';
+                
+                // Mostrar mensagem de sucesso
+                Swal.fire({
+                    title: 'Sucesso!',
+                    text: `${novoStatus === 'Desativado' ? 'Desativação' : 'Ativação'} feita com sucesso!`,
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#4CAF50'
+                });
+            }
+        });
+    }
+}
+
 // Adicionar evento de clique ao botão salvar quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM carregado');
@@ -419,7 +470,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 const codigo = this.getAttribute('onclick').match(/'([^']+)'/)[1];
                 console.log('Botão de status clicado para o código:', codigo);
-                confirmarAlteracaoStatus(codigo);
+                alterarStatus(codigo);
             });
         });
     }
@@ -447,13 +498,14 @@ function salvarAlteracoes() {
     console.log('Iniciando salvamento...');
     
     const codigo = document.getElementById('funcionario-codigo').value;
-    const index = funcionario.findIndex(f => f.codigo === codigo);
+    console.log('Código do funcionário:', codigo);
     
-    if (index !== -1) {
+    const funcionarioEncontrado = funcionario.find(f => f.codigo === codigo);
+    console.log('Funcionário encontrado:', funcionarioEncontrado);
+    
+    if (funcionarioEncontrado) {
         // Atualizar os dados do funcionário
-        funcionario[index] = {
-            ...funcionario[index], // mantém propriedades como imagem e status
-            codigo,
+        const novosDados = {
             nome: document.getElementById('funcionario-nome').value,
             cpf: document.getElementById('funcionario-cpf').value,
             sexo: document.getElementById('funcionario-sexo').value,
@@ -468,43 +520,61 @@ function salvarAlteracoes() {
             numero: document.getElementById('funcionario-numero').value,
             telefone: document.getElementById('funcionario-telefone').value
         };
+        
+        console.log('Novos dados a serem salvos:', novosDados);
+
+        // Atualizar os dados do funcionário
+        Object.assign(funcionarioEncontrado, novosDados);
+        console.log('Dados atualizados no objeto:', funcionarioEncontrado);
 
         // Salvar no localStorage
         localStorage.setItem('funcionarios', JSON.stringify(funcionario));
 
+        // Atualizar a tabela
+        function salvarAlteracoes() {
+            console.log('Iniciando salvamento...');
+            
+            const codigo = document.getElementById('funcionario-codigo').value;
+            const index = funcionario.findIndex(f => f.codigo === codigo);
+            
+            if (index !== -1) {
+                funcionario[index] = {
+                    ...funcionario[index], // mantém propriedades como imagem
+                    codigo,
+                    nome: document.getElementById('funcionario-nome').value,
+                    cpf: document.getElementById('funcionario-cpf').value,
+                    sexo: document.getElementById('funcionario-sexo').value,
+                    civil: document.getElementById('funcionario-civil').value,
+                    cargo: document.getElementById('funcionario-cargo').value,
+                    nascimento: formatarDataBR(document.getElementById('funcionario-nascimento').value),
+                    efetivacao: formatarDataBR(document.getElementById('funcionario-efetivacao').value),
+                    estado: document.getElementById('funcionario-estado').value,
+                    cidade: document.getElementById('funcionario-cidade').value,
+                    bairro: document.getElementById('funcionario-bairro').value,
+                    rua: document.getElementById('funcionario-rua').value,
+                    numero: document.getElementById('funcionario-numero').value,
+                    telefone: document.getElementById('funcionario-telefone').value
+                };
+        
+                // Salva no localStorage
+                localStorage.setItem('funcionarios', JSON.stringify(funcionario));
+        
+                // Fecha o modal de edição
+                modalEditar.style.display = 'none';
+        
+                // Atualiza a ficha se estiver aberta
+                mostrarFichaPorCodigo(codigo);
+        
+                console.log('Funcionário atualizado e salvo.');
+            } else {
+                console.warn('Funcionário não encontrado para salvar.');
+            }
+        }
+        
+        
         // Fechar o modal de edição
         modalEditar.style.display = 'none';
-
-        // Atualizar a ficha do funcionário
-        const funcionarioAtualizado = funcionario[index];
-        modalBody.innerHTML = `
-            <h3 class="modal-title">Ficha de ${funcionarioAtualizado.nome}</h3>
-            
-            <div class="modal-content-container">
-                <div class="photo-info-container">
-                    <img src="${funcionarioAtualizado.imagem}" title="funcionário" class="hmfuncionario" />
-                    <div class="info-grid">
-                        <p class="info-item"><strong>CPF:</strong> ${funcionarioAtualizado.cpf}</p> 
-                        <p class="info-item"><strong>Sexo:</strong> ${funcionarioAtualizado.sexo}</p> 
-                        <p class="info-item"><strong>Estado Civil:</strong> ${funcionarioAtualizado.civil}</p> 
-                        <p class="info-item"><strong>Cargo:</strong> ${funcionarioAtualizado.cargo}</p> 
-                        <p class="info-item"><strong>Data de Efetivação:</strong> ${funcionarioAtualizado.efetivacao}</p> 
-                        <p class="info-item"><strong>Data de Nascimento:</strong> ${funcionarioAtualizado.nascimento}</p>
-                        <p class="info-item"><strong>Estado:</strong> ${funcionarioAtualizado.estado}</p> 
-                        <p class="info-item"><strong>Cidade:</strong> ${funcionarioAtualizado.cidade}</p> 
-                        <p class="info-item"><strong>Bairro:</strong> ${funcionarioAtualizado.bairro}</p> 
-                        <p class="info-item"><strong>Rua:</strong> ${funcionarioAtualizado.rua}</p> 
-                        <p class="info-item"><strong>Número:</strong> ${funcionarioAtualizado.numero}</p> 
-                        <p class="info-item"><strong>Telefone:</strong> ${funcionarioAtualizado.telefone}</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="botao">
-                <button type="button" class="btn renovar" onclick="abrirModalEditar('${funcionarioAtualizado.codigo}')">EDITAR</button>
-                <button type="button" class="btn ${funcionarioAtualizado.status === 'Ativo' ? 'desativar' : 'ativar'}" onclick="alterarStatus('${funcionarioAtualizado.codigo}')">${funcionarioAtualizado.status === 'Ativo' ? 'DESATIVAR' : 'ATIVAR'}</button>
-            </div>
-        `;
+        console.log('Modal de edição fechado');
 
         // Mostrar mensagem de sucesso
         Swal.fire({
@@ -514,27 +584,11 @@ function salvarAlteracoes() {
             confirmButtonText: 'OK',
             confirmButtonColor: '#ffbcfc',
             allowOutsideClick: false,
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-            allowEscapeKey: false
-=======
->>>>>>> Stashed changes
             allowEscapeKey: false,
             customClass: {
                 popup: 'swal2-popup',
                 title: 'swal2-title',
                 confirmButton: 'swal2-confirm'
-<<<<<<< Updated upstream
-            }
-        }).then(() => {
-            console.log('Atualizando ficha...');
-            // Atualizar a ficha se estiver aberta
-            const elemento = document.querySelector(funcionarioEncontrado.selector);
-            if (elemento) {
-                elemento.click();
-=======
->>>>>>> Stashed changes
             }
         }).then(() => {
             console.log('Atualizando ficha...');
@@ -543,10 +597,9 @@ function salvarAlteracoes() {
             if (elemento) {
                 elemento.click();
             }
->>>>>>> 1839b2c5f0095170269f97249b480628d3191549
         });
     } else {
-        console.warn('Funcionário não encontrado para salvar.');
+        console.log('Funcionário não encontrado com o código:', codigo);
         // Mostrar mensagem de erro
         Swal.fire({
             title: 'Erro!',
@@ -572,164 +625,7 @@ document.getElementById('search-input').addEventListener('input', function () {
     });
 });
 
-// Função para confirmar a alteração de status
-function confirmarAlteracaoStatus(codigo) {
-    console.log('confirmarAlteracaoStatus chamado com código:', codigo);
-    
-    const funcionarioEncontrado = funcionario.find(f => f.codigo === codigo);
-    console.log('Funcionário encontrado:', funcionarioEncontrado);
-    
-    if (funcionarioEncontrado) {
-        const novoStatus = funcionarioEncontrado.status === 'Ativo' ? 'Desativado' : 'Ativo';
-        const mensagem = funcionarioEncontrado.status === 'Ativo' ? 
-            'Tem certeza que deseja desativar este funcionário?' : 
-            'Tem certeza que deseja ativar este funcionário?';
-        
-        // Verificar se o SweetAlert2 está disponível
-        if (typeof Swal === 'undefined') {
-            console.error('SweetAlert2 não está disponível');
-            alert('Erro: SweetAlert2 não está disponível');
-            return;
-        }
-
-        console.log('Mostrando modal de confirmação...');
-        
-        // Mostrar o modal de confirmação
-        Swal.fire({
-            title: 'Confirmação',
-<<<<<<< Updated upstream
-            text: mensagem,
-=======
-<<<<<<< HEAD
-            text: `Tem certeza que deseja ${novoStatus === 'Desativado' ? 'desativar' : 'ativar'} este funcionário?`,
-=======
-            text: mensagem,
->>>>>>> 1839b2c5f0095170269f97249b480628d3191549
->>>>>>> Stashed changes
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Sim, confirmar',
-            cancelButtonText: 'Cancelar',
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-            confirmButtonColor: '#4CAF50',
-            cancelButtonColor: '#f44336'
-=======
->>>>>>> Stashed changes
-            confirmButtonColor: '#ffbcfc',
-            cancelButtonColor: '#ffbcfc',
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-            customClass: {
-                popup: 'swal2-popup',
-                title: 'swal2-title',
-                confirmButton: 'swal2-confirm',
-                cancelButton: 'swal2-cancel'
-            }
-<<<<<<< Updated upstream
-=======
->>>>>>> 1839b2c5f0095170269f97249b480628d3191549
->>>>>>> Stashed changes
-        }).then((result) => {
-            console.log('Resultado do modal:', result);
-            
-            if (result.isConfirmed) {
-                console.log('Confirmação aceita, atualizando status...');
-                
-                // Atualizar o status do funcionário
-                funcionarioEncontrado.status = novoStatus;
-                
-                // Atualizar o status na tabela
-                const linhas = document.querySelectorAll('#funcionarios-table tbody tr');
-                linhas.forEach(linha => {
-                    const codigoCell = linha.querySelector('td:first-child');
-                    if (codigoCell && codigoCell.textContent.trim() === codigo) {
-                        const statusCell = linha.querySelector('td:last-child');
-                        if (statusCell) {
-                            statusCell.innerHTML = `<span class="status-badge ${novoStatus.toLowerCase()}">${novoStatus}</span>`;
-                        }
-                    }
-                });
-                
-                // Salvar no localStorage
-                localStorage.setItem('funcionarios', JSON.stringify(funcionario));
-                
-<<<<<<< Updated upstream
-                console.log('Mostrando mensagem de sucesso...');
-=======
-<<<<<<< HEAD
-                // Fechar o modal atual
-                modal.style.display = 'none';
-=======
-                console.log('Mostrando mensagem de sucesso...');
->>>>>>> 1839b2c5f0095170269f97249b480628d3191549
->>>>>>> Stashed changes
-                
-                // Mostrar mensagem de sucesso
-                Swal.fire({
-                    title: 'Sucesso!',
-<<<<<<< Updated upstream
-                    text: 'Alteração feita com sucesso!',
-=======
-<<<<<<< HEAD
-                    text: `${novoStatus === 'Desativado' ? 'Desativação' : 'Ativação'} feita com sucesso!`,
-=======
-                    text: 'Alteração feita com sucesso!',
->>>>>>> 1839b2c5f0095170269f97249b480628d3191549
->>>>>>> Stashed changes
-                    icon: 'success',
-                    confirmButtonText: 'OK',
-                    confirmButtonColor: '#ffbcfc',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                    customClass: {
-                        popup: 'swal2-popup',
-                        title: 'swal2-title',
-                        confirmButton: 'swal2-confirm'
-                    }
-                }).then(() => {
-                    console.log('Atualizando ficha...');
-                    // Atualizar a ficha se estiver aberta
-                    const elemento = document.querySelector(funcionarioEncontrado.selector);
-                    if (elemento) {
-                        elemento.click();
-                    }
-                });
-            }
-        }).catch(error => {
-            console.error('Erro ao mostrar modal:', error);
-            Swal.fire({
-                title: 'Erro!',
-                text: 'Ocorreu um erro ao processar sua solicitação.',
-                icon: 'error',
-                confirmButtonText: 'OK',
-                confirmButtonColor: '#ffbcfc',
-                customClass: {
-                    popup: 'swal2-popup',
-                    title: 'swal2-title',
-                    confirmButton: 'swal2-confirm'
-                }
-            });
-        });
-    } else {
-        console.error('Funcionário não encontrado com o código:', codigo);
-        Swal.fire({
-            title: 'Erro!',
-            text: 'Funcionário não encontrado.',
-            icon: 'error',
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#ffbcfc',
-            customClass: {
-                popup: 'swal2-popup',
-                title: 'swal2-title',
-                confirmButton: 'swal2-confirm'
-            }
-        });
-    }
-}
-
-// Atualizar os estilos CSS
+// Adicionar estilos CSS para o status
 const style = document.createElement('style');
 style.textContent = `
     .status-badge {
@@ -749,96 +645,10 @@ style.textContent = `
         color: white;
     }
     .btn.desativar {
-        background: #ffbcfc;
-        color: rgb(0, 0, 0);
+        background-color: #f44336;
     }
     .btn.ativar {
-        background: #ffbcfc;
-        color: rgb(0, 0, 0);
-    }
-    .btn.renovar {
-        background: #ffbcfc;
-        color: rgb(0, 0, 0);
-    }
-    .confirmation-modal {
-        text-align: center;
-        padding: 20px;
-    }
-    .confirmation-modal h3 {
-        margin-bottom: 15px;
-        color: #333;
-    }
-    .confirmation-modal p {
-        margin-bottom: 20px;
-        font-size: 16px;
-    }
-    .confirmation-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-    }
-    .confirm-btn {
-        background: #ffbcfc;
-        color: rgb(0, 0, 0);
-    }
-    .cancel-btn {
-        background: #ffbcfc;
-        color: rgb(0, 0, 0);
+        background-color: #4CAF50;
     }
 `;
 document.head.appendChild(style);
-
-// LIMITAR O NÚMERO DE DÍGITOS DO CPF E PERMITIR APENAS NÚMEROS //
-function formatCPF(input) {
-    let value = input.value.replace(/\D/g, ''); // Remove tudo que não for dígito
-    value = value.slice(0, 11); // Limita a 11 dígitos
-
-    // Aplica a máscara: 123.456.789-00
-    if (value.length > 9) {
-        input.value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
-    } else if (value.length > 6) {
-        input.value = value.replace(/(\d{3})(\d{3})(\d{1,3})/, "$1.$2.$3");
-    } else if (value.length > 3) {
-        input.value = value.replace(/(\d{3})(\d{1,3})/, "$1.$2");
-    } else {
-        input.value = value;
-    }
-}
-
-// LIMITAR O NÚMERO DE DÍGITOS DO TELEFONE E PERMITIR APENAS NÚMEROS //
-function formatTelefone(input) {
-    let value = input.value.replace(/\D/g, ''); // Remove tudo que não for dígito
-    value = value.slice(0, 11); // Limita a 11 dígitos
-
-    if (value.length <= 10) {
-        // Telefone fixo: (xx) xxxx-xxxx
-        if (value.length > 6) {
-            input.value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
-        } else if (value.length > 2) {
-            input.value = value.replace(/(\d{2})(\d{0,4})/, '($1) $2');
-        } else {
-            input.value = value;
-        }
-    } else {
-        // Celular: (xx) xxxxx-xxxx
-        input.value = value.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
-    }
-}
-
-// Adicionar event listeners para os campos de CPF e telefone no formulário de edição
-document.addEventListener('DOMContentLoaded', function() {
-    const cpfInput = document.getElementById('funcionario-cpf');
-    const telefoneInput = document.getElementById('funcionario-telefone');
-
-    if (cpfInput) {
-        cpfInput.addEventListener('input', function() {
-            formatCPF(this);
-        });
-    }
-
-    if (telefoneInput) {
-        telefoneInput.addEventListener('input', function() {
-            formatTelefone(this);
-        });
-    }
-});
