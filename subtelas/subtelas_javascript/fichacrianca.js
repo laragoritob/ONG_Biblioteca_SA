@@ -203,83 +203,6 @@ const fichacrianca8 = `
 </div>
 `;
 
-document.querySelectorAll('.fichacrianca').forEach(link => {
-  link.addEventListener('click', function (e) {
-      e.preventDefault();
-      abrirModal(fichacrianca);
-  });
-  });
-  
-  
-  document.querySelectorAll('.fichacrianca2').forEach(link => {
-  link.addEventListener('click', function (e) {
-        e.preventDefault();
-        abrirModal(fichacrianca2);
-  });
-  });
-  
-  
-  document.querySelectorAll('.fichacrianca3').forEach(link => {
-  link.addEventListener('click', function (e) {
-        e.preventDefault();
-        abrirModal(fichacrianca3);
-  });
-  });
-  
-  
-  document.querySelectorAll('.fichacrianca4').forEach(link => {
-  link.addEventListener('click', function (e) {
-        e.preventDefault();
-        abrirModal(fichacrianca4);
-  });
-  });
-  
-  
-  document.querySelectorAll('.fichacrianca5').forEach(link => {
-  link.addEventListener('click', function (e) {
-      e.preventDefault();
-      abrirModal(fichacrianca5);
-  });
-  });
-  
-  
-  document.querySelectorAll('.fichacrianca6').forEach(link => {
-  link.addEventListener('click', function (e) {
-      e.preventDefault();
-      abrirModal(fichacrianca6);
-  });
-  });
-  
-  
-  document.querySelectorAll('.fichacrianca7').forEach(link => {
-  link.addEventListener('click', function (e) {
-      e.preventDefault();
-      abrirModal(fichacrianca7);
-  });
-  });
-  
-  
-  document.querySelectorAll('.fichacrianca8').forEach(link => {
-  link.addEventListener('click', function (e) {
-      e.preventDefault();
-      abrirModal(fichacrianca8);
-  });
-  });
-  
-  
-  // Fecha o modal ao clicar no X
-  closeModal.onclick = function () {
-    modal.style.display = 'none';
-  };
-  
-  
-  // Fecha o modal ao clicar fora dele
-  window.onclick = function (event) {
-    if (event.target === modal) {
-      modal.style.display = 'none';
-    }
-  };  
-
 // ========== BOTÕES DO MODAL ==========
 const botaoContainer = document.createElement('div');
 botaoContainer.classList.add('botao-container');
@@ -297,98 +220,613 @@ botaoContainer.appendChild(botaoDesativar);
 // ========== FUNÇÕES ==========
 function abrirModal(fichaHtml) {
   modalBody.innerHTML = fichaHtml;
+  
+  // Recreate the button container and buttons
+  const botaoContainer = document.createElement('div');
+  botaoContainer.classList.add('botao-container');
+
+  const botaoEditar = document.createElement('button');
+  botaoEditar.textContent = 'Editar';
+  botaoEditar.classList.add('editar-ficha');
+  botaoContainer.appendChild(botaoEditar);
+
+  const botaoDesativar = document.createElement('button');
+  botaoDesativar.classList.add('desativar-ficha');
+
+  // Check if the ficha is desativada
+  const nome = modalBody.querySelector('.info-crianca h3')?.textContent.trim();
+  const isDesativado = Array.from(document.querySelectorAll('#Fichas-table tbody tr')).some(row => {
+    return row.cells[1].textContent.trim() === nome && row.classList.contains('ficha-desativada');
+  });
+
+  if (isDesativado) {
+    botaoEditar.style.opacity = '0.5';
+    botaoEditar.style.cursor = 'not-allowed';
+    botaoEditar.onclick = () => {
+      const mensagem = document.createElement('div');
+      mensagem.textContent = 'Não é possível editar uma ficha desativada';
+      mensagem.style.cssText = `
+        background-color: #F44336;
+        color: white;
+        padding: 10px;
+        border-radius: 4px;
+        text-align: center;
+        margin-top: 10px;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        animation: fadeOut 3s forwards;
+      `;
+      document.body.appendChild(mensagem);
+      setTimeout(() => mensagem.remove(), 3000);
+    };
+
+    botaoDesativar.textContent = 'Reativar';
+    botaoDesativar.style.backgroundColor = '#4CAF50';
+    botaoDesativar.onclick = () => reativarFicha(nome);
+  } else {
+    botaoEditar.style.opacity = '1';
+    botaoEditar.style.cursor = 'pointer';
+    botaoEditar.onclick = () => habilitarEdicao(modalBody.querySelector('.ficha-crianca'));
+
+    botaoDesativar.textContent = 'Desativar';
+    botaoDesativar.style.backgroundColor = '#F44336';
+    botaoDesativar.onclick = () => desativarFicha(nome);
+  }
+
+  botaoContainer.appendChild(botaoDesativar);
   modalBody.appendChild(botaoContainer);
   modal.style.display = 'block';
-
-  botaoEditar.textContent = 'Editar';
-  botaoEditar.onclick = () => habilitarEdicao(modalBody.querySelector('.ficha-crianca'));
 }
 
-function desativarFicha() {
-  const nome = modalBody.querySelector('h3')?.textContent.trim();
+function desativarFicha(nome) {
   if (!nome) return;
 
   const rows = document.querySelectorAll('#Fichas-table tbody tr');
   rows.forEach(row => {
-    const nomeC = row.cells[1].textContent.trim();
-    if (nomeC === nome) {
+    const nomeCell = row.cells[1].textContent.trim();
+    if (nomeCell === nome) {
+      // Update status in table
+      const statusCell = row.cells[row.cells.length - 1];
+      statusCell.innerHTML = '<span class="status-desativado">Desativado</span>';
       row.classList.add('ficha-desativada');
+
+      // Update buttons in modal
+      const botaoEditar = modalBody.querySelector('.editar-ficha');
+      const botaoDesativar = modalBody.querySelector('.desativar-ficha');
+
+      if (botaoEditar && botaoDesativar) {
+        // Disable edit button
+        botaoEditar.style.opacity = '0.5';
+        botaoEditar.style.cursor = 'not-allowed';
+        botaoEditar.onclick = () => {
+          const mensagem = document.createElement('div');
+          mensagem.textContent = 'Não é possível editar uma ficha desativada';
+          mensagem.style.cssText = `
+            background-color: #F44336;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            margin-top: 10px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            animation: fadeOut 3s forwards;
+          `;
+          document.body.appendChild(mensagem);
+          setTimeout(() => mensagem.remove(), 3000);
+        };
+
+        // Change to Reativar button
+        botaoDesativar.textContent = 'Reativar';
+        botaoDesativar.style.backgroundColor = '#4CAF50';
+        botaoDesativar.onclick = () => reativarFicha(nome);
+      }
     }
   });
+}
 
-  modal.style.display = 'none';
+function reativarFicha(nome) {
+  if (!nome) return;
+
+  const rows = document.querySelectorAll('#Fichas-table tbody tr');
+  rows.forEach(row => {
+    const nomeCell = row.cells[1].textContent.trim();
+    if (nomeCell === nome) {
+      // Update status in table
+      const statusCell = row.cells[row.cells.length - 1];
+      statusCell.innerHTML = '<span class="status-ativo">Ativo</span>';
+      row.classList.remove('ficha-desativada');
+
+      // Update buttons in modal
+      const botaoEditar = modalBody.querySelector('.editar-ficha');
+      const botaoDesativar = modalBody.querySelector('.desativar-ficha');
+
+      if (botaoEditar && botaoDesativar) {
+        // Enable edit button
+        botaoEditar.style.opacity = '1';
+        botaoEditar.style.cursor = 'pointer';
+        botaoEditar.onclick = () => habilitarEdicao(modalBody.querySelector('.ficha-crianca'));
+
+        // Change back to Desativar button
+        botaoDesativar.textContent = 'Desativar';
+        botaoDesativar.style.backgroundColor = '#F44336';
+        botaoDesativar.onclick = () => desativarFicha(nome);
+      }
+
+      // Show success message
+      const mensagem = document.createElement('div');
+      mensagem.textContent = 'Ficha reativada com sucesso!';
+      mensagem.style.cssText = `
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        border-radius: 4px;
+        text-align: center;
+        margin-top: 10px;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        animation: fadeOut 3s forwards;
+      `;
+      document.body.appendChild(mensagem);
+      setTimeout(() => mensagem.remove(), 3000);
+    }
+  });
 }
 
 function habilitarEdicao(container) {
-  const paragrafos = container.querySelectorAll('.info-crianca p');
-  const titulo = container.querySelector('.info-crianca h3');
+  // Store the original image before clearing the container
+  const originalImage = container.querySelector('.foto-crianca');
+  const originalSrc = originalImage?.src || '';
+  const originalTitle = originalImage?.title || '';
 
-  const inputNome = document.createElement('input');
-  inputNome.type = 'text';
-  inputNome.value = titulo.textContent;
-  titulo.replaceWith(inputNome);
+  // Change button text to "Salvar" when entering edit mode
+  const botaoEditar = modalBody.querySelector('.editar-ficha');
+  if (botaoEditar) {
+    botaoEditar.textContent = 'Salvar';
+  }
 
-  paragrafos.forEach(p => {
-    const strong = p.querySelector('strong');
-    const texto = p.textContent.replace(strong?.textContent || '', '').trim();
+  // Extract information from the current ficha
+  const infoContainer = container.querySelector('.info-crianca');
+  const nome = infoContainer.querySelector('h3').textContent;
+  
+  // Function to extract value from paragraph with given label
+  const getValue = (label) => {
+    const p = Array.from(infoContainer.querySelectorAll('p')).find(p => 
+      p.querySelector('strong')?.textContent.includes(label)
+    );
+    return p ? p.textContent.replace(p.querySelector('strong').textContent, '').trim() : '';
+  };
 
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.value = texto;
+  // Get all the values
+  const dataNascimento = getValue('Data de Nascimento:');
+  const responsavel = getValue('Responsável:');
+  const telefone = getValue('Telefone:');
+  const estado = getValue('Estado:');
+  const cidade = getValue('Cidade:');
+  const bairro = getValue('Bairro:');
+  const rua = getValue('Rua:');
+  const numero = getValue('Número:');
+  
+  // Get the description
+  const descricao = infoContainer.querySelector('h4 em')?.textContent || '';
 
-    if (strong) {
-      const label = document.createElement('label');
-      label.textContent = strong.textContent;
-      p.innerHTML = '';
-      p.appendChild(label);
-      p.appendChild(input);
-    } else {
-      const textarea = document.createElement('textarea');
-      textarea.value = p.textContent.trim();
-      p.innerHTML = '';
-      p.appendChild(textarea);
+  // Clear the container and create a new form
+  container.innerHTML = `
+    <div class="edit-form">
+      <div class="image-preview" style="text-align: center; margin-bottom: 20px;">
+        <img src="${originalSrc}" title="${originalTitle}" class="foto-crianca" style="max-width: 200px; height: auto;"/>
+      </div>
+      <h2>Editar Ficha</h2>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nome:</label>
+          <input type="text" id="nome" class="form-input" value="${nome}">
+        </div>
+        <div class="form-group">
+          <label>Data de Nascimento:</label>
+          <input type="text" id="data-nascimento" class="form-input" value="${dataNascimento}">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Responsável:</label>
+          <input type="text" id="responsavel" class="form-input" value="${responsavel}">
+        </div>
+        <div class="form-group">
+          <label>Telefone:</label>
+          <input type="text" id="telefone" class="form-input" value="${telefone}">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Estado:</label>
+          <input type="text" id="estado" class="form-input" value="${estado}">
+        </div>
+        <div class="form-group">
+          <label>Cidade:</label>
+          <input type="text" id="cidade" class="form-input" value="${cidade}">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Bairro:</label>
+          <input type="text" id="bairro" class="form-input" value="${bairro}">
+        </div>
+        <div class="form-group">
+          <label>Rua:</label>
+          <input type="text" id="rua" class="form-input" value="${rua}">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Número:</label>
+          <input type="text" id="numero" class="form-input" value="${numero}">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group" style="flex: 1;">
+          <label>Descrição:</label>
+          <textarea id="descricao" class="form-input" style="height: 100px; resize: vertical;">${descricao}</textarea>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Store the original information in data attributes for later use
+  const editForm = container.querySelector('.edit-form');
+  editForm.dataset.originalSrc = originalSrc;
+  editForm.dataset.originalTitle = originalTitle;
+  editForm.dataset.originalNome = nome;
+
+  // Update the style for the edit form
+  const editStyle = document.createElement('style');
+  editStyle.innerHTML = `
+    .edit-form {
+      width: 100%;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
     }
-  });
+
+    .edit-form h2 {
+      color: #673AB7;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 15px;
+    }
+
+    .form-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .form-input {
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      background-color: #E3F2FD;
+      font-size: 14px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    textarea.form-input {
+      border-radius: 15px;
+      font-family: inherit;
+      line-height: 1.5;
+      padding: 12px;
+    }
+
+    select.form-input {
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1em;
+      padding-right: 2.5em;
+    }
+
+    .botao-container {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .botao-container button {
+      padding: 10px 30px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    .editar-ficha {
+      background-color: #673AB7;
+      color: white;
+    }
+
+    .desativar-ficha {
+      background-color: #F44336;
+      color: white;
+    }
+
+    .editar-ficha:hover {
+      background-color: #5E35B1;
+    }
+
+    .desativar-ficha:hover {
+      opacity: 0.9;
+    }
+
+    .botao-container button:active {
+      transform: translateY(0);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+
+    .botao-container button[disabled],
+    .botao-container button.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+  `;
+  document.head.appendChild(editStyle);
 
   botaoEditar.textContent = 'Salvar';
-  botaoEditar.onclick = () => salvarEdicao(container, inputNome, paragrafos);
+  botaoEditar.onclick = () => salvarEdicao(container);
 }
 
-function salvarEdicao(container, inputNome, paragrafos) {
-  const h3 = document.createElement('h3');
-  h3.textContent = inputNome.value;
-  inputNome.replaceWith(h3);
+function salvarEdicao(container) {
+  // Get all the form values
+  const nome = document.getElementById('nome').value;
+  const dataNascimento = document.getElementById('data-nascimento').value;
+  const responsavel = document.getElementById('responsavel').value;
+  const telefone = document.getElementById('telefone').value;
+  const estado = document.getElementById('estado').value;
+  const cidade = document.getElementById('cidade').value;
+  const bairro = document.getElementById('bairro').value;
+  const rua = document.getElementById('rua').value;
+  const numero = document.getElementById('numero').value;
+  const descricao = document.getElementById('descricao').value;
 
-  paragrafos.forEach(p => {
-    const label = p.querySelector('label');
-    const input = p.querySelector('input');
-    const textarea = p.querySelector('textarea');
+  // Get the stored original image information
+  const editForm = container.querySelector('.edit-form');
+  const originalSrc = editForm.dataset.originalSrc;
+  const originalTitle = editForm.dataset.originalTitle;
+  const originalNome = editForm.dataset.originalNome;
 
-    if (label && input) {
-      const strong = document.createElement('strong');
-      strong.textContent = label.textContent;
-      p.innerHTML = '';
-      p.appendChild(strong);
-      p.innerHTML += ' ' + input.value;
-    } else if (textarea) {
-      p.innerHTML = `<em>${textarea.value}</em>`;
+  // Create the updated ficha HTML
+  const fichaAtualizada = `
+    <div class="ficha-crianca">
+      <img src="${originalSrc}" title="${originalTitle}" class="foto-crianca" />
+      <div class="info-crianca">
+        <h3>${nome}</h3>
+        <p> </p>
+        <p><strong>Data de Nascimento:</strong> ${dataNascimento}</p>
+        <p><strong>Responsável:</strong> ${responsavel}</p>
+        <p><strong>Telefone:</strong> ${telefone}</p>
+        <p><strong>Estado:</strong> ${estado}</p>
+        <p><strong>Cidade:</strong> ${cidade}</p>
+        <p><strong>Bairro:</strong> ${bairro}</p>
+        <p><strong>Rua:</strong> ${rua}</p>
+        <p><strong>Número:</strong> ${numero}</p>
+        <h4><em>${descricao}</em></h4>
+      </div>
+    </div>
+  `;
+
+  // Update the table
+  const rows = document.querySelectorAll('#Fichas-table tbody tr');
+  rows.forEach(row => {
+    const cells = row.cells;
+    if (cells[1].textContent.trim() === originalNome) {
+      cells[1].textContent = nome;
+      if (cells[2]) cells[2].textContent = responsavel;
+      if (cells[3]) cells[3].textContent = telefone;
     }
   });
 
+  // Update the stored ficha variable
+  const fichaVariables = {
+    'Gustavo T.': 'fichacrianca',
+    'Helena L.': 'fichacrianca2',
+    'Emanuela W.': 'fichacrianca3',
+    'João A.': 'fichacrianca4',
+    'Matheus D.': 'fichacrianca5',
+    'Ian L.': 'fichacrianca6',
+    'Tatiane V.': 'fichacrianca7',
+    'Matheus H.': 'fichacrianca8'
+  };
+
+  const fichaVariable = fichaVariables[originalNome];
+  if (fichaVariable) {
+    window[fichaVariable] = fichaAtualizada;
+  }
+
+  // Update the current modal content
+  modalBody.innerHTML = fichaAtualizada;
+
+  // Recreate the button container and buttons
+  const botaoContainer = document.createElement('div');
+  botaoContainer.classList.add('botao-container');
+
+  const botaoEditar = document.createElement('button');
   botaoEditar.textContent = 'Editar';
-  botaoEditar.onclick = () => habilitarEdicao(container);
+  botaoEditar.classList.add('editar-ficha');
+  botaoContainer.appendChild(botaoEditar);
+
+  const botaoDesativar = document.createElement('button');
+  botaoDesativar.classList.add('desativar-ficha');
+
+  // Check if the ficha is desativada
+  const isDesativado = Array.from(document.querySelectorAll('#Fichas-table tbody tr')).some(row => {
+    return row.cells[1].textContent.trim() === nome && row.classList.contains('ficha-desativada');
+  });
+
+  if (isDesativado) {
+    botaoEditar.style.opacity = '0.5';
+    botaoEditar.style.cursor = 'not-allowed';
+    botaoEditar.onclick = () => {
+      const mensagem = document.createElement('div');
+      mensagem.textContent = 'Não é possível editar uma ficha desativada';
+      mensagem.style.cssText = `
+        background-color: #F44336;
+        color: white;
+        padding: 10px;
+        border-radius: 4px;
+        text-align: center;
+        margin-top: 10px;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        animation: fadeOut 3s forwards;
+      `;
+      document.body.appendChild(mensagem);
+      setTimeout(() => mensagem.remove(), 3000);
+    };
+
+    botaoDesativar.textContent = 'Reativar';
+    botaoDesativar.style.backgroundColor = '#4CAF50';
+    botaoDesativar.onclick = () => reativarFicha(nome);
+  } else {
+    botaoEditar.style.opacity = '1';
+    botaoEditar.style.cursor = 'pointer';
+    botaoEditar.onclick = () => habilitarEdicao(modalBody.querySelector('.ficha-crianca'));
+
+    botaoDesativar.textContent = 'Desativar';
+    botaoDesativar.style.backgroundColor = '#F44336';
+    botaoDesativar.onclick = () => desativarFicha(nome);
+  }
+
+  botaoContainer.appendChild(botaoDesativar);
+  modalBody.appendChild(botaoContainer);
+
+  // Add success message
+  const successMessage = document.createElement('div');
+  successMessage.className = 'success-message';
+  successMessage.textContent = 'Alterações salvas com sucesso!';
+  successMessage.style.cssText = `
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+    margin-top: 10px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    animation: fadeOut 3s forwards;
+  `;
+
+  document.body.appendChild(successMessage);
+  setTimeout(() => successMessage.remove(), 3000);
 }
 
-// ========== EVENTOS ==========
-botaoDesativar.addEventListener('click', desativarFicha);
+// Event Listeners for each ficha
+function setupFichaListeners() {
+  document.querySelectorAll('.fichacrianca').forEach(link => {
+    link.onclick = (e) => {
+      e.preventDefault();
+      abrirModal(fichacrianca);
+    };
+  });
 
-closeModal.onclick = function () {
+  document.querySelectorAll('.fichacrianca2').forEach(link => {
+    link.onclick = (e) => {
+      e.preventDefault();
+      abrirModal(fichacrianca2);
+    };
+  });
+
+  document.querySelectorAll('.fichacrianca3').forEach(link => {
+    link.onclick = (e) => {
+      e.preventDefault();
+      abrirModal(fichacrianca3);
+    };
+  });
+
+  document.querySelectorAll('.fichacrianca4').forEach(link => {
+    link.onclick = (e) => {
+      e.preventDefault();
+      abrirModal(fichacrianca4);
+    };
+  });
+
+  document.querySelectorAll('.fichacrianca5').forEach(link => {
+    link.onclick = (e) => {
+      e.preventDefault();
+      abrirModal(fichacrianca5);
+    };
+  });
+
+  document.querySelectorAll('.fichacrianca6').forEach(link => {
+    link.onclick = (e) => {
+      e.preventDefault();
+      abrirModal(fichacrianca6);
+    };
+  });
+
+  document.querySelectorAll('.fichacrianca7').forEach(link => {
+    link.onclick = (e) => {
+      e.preventDefault();
+      abrirModal(fichacrianca7);
+    };
+  });
+
+  document.querySelectorAll('.fichacrianca8').forEach(link => {
+    link.onclick = (e) => {
+      e.preventDefault();
+      abrirModal(fichacrianca8);
+    };
+  });
+}
+
+// Initialize event listeners
+document.addEventListener('DOMContentLoaded', () => {
+  setupFichaListeners();
+  initializeStatusColumn();
+});
+
+// Close modal handlers
+closeModal.onclick = function() {
   modal.style.display = 'none';
+  setupFichaListeners(); // Reattach listeners when modal is closed
 };
 
-window.onclick = function (event) {
+window.onclick = function(event) {
   if (event.target === modal) {
     modal.style.display = 'none';
+    setupFichaListeners(); // Reattach listeners when modal is closed
   }
 };
 
@@ -401,6 +839,8 @@ document.getElementById('search-input').addEventListener('keyup', function () {
   });
 });
 
+// Initialize status column when the page loads
+document.addEventListener('DOMContentLoaded', initializeStatusColumn);
 
 // ========== ESTILO ==========
 const style = document.createElement('style');
@@ -464,16 +904,45 @@ style.innerHTML = `
 
 .botao-container button {
   display: flex;
-  justify-content: center; /* centraliza horizontalmente */
-  align-items: center;     /* centraliza verticalmente */
+  justify-content: center;
+  align-items: center;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
   border: none;
   border-radius: 50px;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  color: white;
 }
 
+.editar-ficha {
+  background-color:rgb(221, 115, 224);
+}
+
+.editar-ficha:hover {
+  background-color:rgb(184, 89, 187);
+}
+
+.desativar-ficha {
+  background-color:rgb(221, 115, 224);
+}
+
+.desativar-ficha:hover {
+  opacity: 0.9;
+}
+
+.botao-container button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+.botao-container button[disabled],
+.botao-container button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
 
 @media screen and (max-width: 768px) {
   .ficha-crianca {
@@ -485,7 +954,157 @@ style.innerHTML = `
   .info-crianca {
     align-items: center;
   }
-
 }
 `;
 document.head.appendChild(style);
+
+// Add styles for status indicators
+const statusStyles = document.createElement('style');
+statusStyles.innerHTML = `
+  .status-ativo {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    min-width: 80px;
+  }
+
+  .status-desativado {
+    background-color: #F44336;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    min-width: 80px;
+  }
+
+  .ficha-desativada {
+    opacity: 0.7;
+  }
+
+  .status-column {
+    text-align: center;
+    padding: 10px;
+  }
+
+  .editar-ficha {
+    background-color: #673AB7;
+    color: white;
+  }
+
+  .desativar-ficha {
+    background-color: #F44336;
+    color: white;
+  }
+
+  .desativar-ficha[data-status="ativo"] {
+    background-color: #F44336;
+  }
+
+  .desativar-ficha[data-status="desativado"] {
+    background-color: #4CAF50;
+  }
+
+  /* Table header styling */
+  #Fichas-table thead th {
+    background-color: #90CAF9 !important;
+    color: #000;
+    padding: 12px;
+    text-align: center;
+  }
+
+  /* Table row styling */
+  #Fichas-table tbody tr:nth-child(even) td {
+    background-color: #E1F5FE !important;
+  }
+
+  #Fichas-table tbody tr:nth-child(odd) td {
+    background-color: #B3E5FC !important;
+  }
+
+  /* Status column specific */
+  .status-column {
+    text-align: center;
+    padding: 10px;
+  }
+`;
+document.head.appendChild(statusStyles);
+
+// Function to initialize status column if it doesn't exist
+function initializeStatusColumn() {
+  const table = document.getElementById('Fichas-table');
+  if (!table) return;
+
+  // Add header if it doesn't exist
+  const headerRow = table.querySelector('thead tr');
+  if (headerRow && !headerRow.querySelector('.status-header')) {
+    const statusHeader = document.createElement('th');
+    statusHeader.className = 'status-header';
+    statusHeader.textContent = 'STATUS';
+    headerRow.appendChild(statusHeader);
+  }
+
+  // Add status cells to each row if they don't exist
+  const rows = table.querySelectorAll('tbody tr');
+  rows.forEach(row => {
+    if (!row.querySelector('.status-column')) {
+      const statusCell = document.createElement('td');
+      statusCell.className = 'status-column';
+      const isDesativado = row.classList.contains('ficha-desativada');
+      statusCell.innerHTML = `<span class="status-${isDesativado ? 'desativado' : 'ativo'}">${isDesativado ? 'Desativado' : 'Ativo'}</span>`;
+      row.appendChild(statusCell);
+    }
+  });
+}
+
+// Add styles for table columns
+const tableStyles = document.createElement('style');
+tableStyles.innerHTML = `
+  .id-column,
+  .nome-column,
+  .responsavel-column,
+  .telefone-column,
+  .status-column {
+    padding: 12px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    background-color: inherit !important;
+  }
+
+  #Fichas-table tbody tr td {
+    padding: 12px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    background-color: inherit !important;
+  }
+
+  #Fichas-table tbody tr:nth-child(even) td {
+    background-color: #E1F5FE !important;
+  }
+
+  #Fichas-table tbody tr:nth-child(odd) td {
+    background-color: #B3E5FC !important;
+  }
+
+  .ficha-desativada td {
+    opacity: 0.7 !important;
+  }
+
+  #Fichas-table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+
+  #Fichas-table th,
+  #Fichas-table td {
+    border: 1px solid #ddd !important;
+  }
+`;
+document.head.appendChild(tableStyles);
