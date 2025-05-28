@@ -240,12 +240,21 @@ header h1 {
 }
 
 /* BOTÕES */
+.botoes-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  margin: 40px auto 60px;
+  max-width: 800px;
+}
+
 .botao-adicionar,
 .botao-editar,
 .botao-mudar {
   background: #ffbcfc;
   color: rgb(0, 0, 0);
-  padding: 15px 40px;
+  padding: 15px 50px;
   border: none;
   border-radius: 25px;
   font-size: 16px;
@@ -254,15 +263,7 @@ header h1 {
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 0px;
-}
-
-.botoes-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  margin-top: 30px;
+  min-width: 180px;
 }
 
 .botao-mudar.glow,
@@ -635,14 +636,23 @@ a {
   border-radius: 25px;
   cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.2s ease
+  transition: all 0.3s ease;
 }
 
+.swal2-cancel.cancelado {
+  animation: shake 0.5s ease-in-out;
+  background-color: #ff6b6b;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
 
 .swal2-cancel:hover {
   background-color: #eab2d2;
 }
-
 
 .swal2-input-label {
   color: #555;
@@ -767,17 +777,71 @@ a {
   margin-top: 15px;
 }
 
-.imagem-preview-container {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-top: 5px;
+/* imagem */
+#livro-imagem-editar {
+  width: 100%;         
+  max-width: 350px;     
+  padding: 8px;
+  font-size: 14px;
+  margin: 0 auto 12px;
+  display: block;  
+  padding: 4px 8px;
+  margin-bottom: 10px;
+  border: 1px solid #85ccea;
+  border-radius: 5px;
+  background-color: #f0faff;
+  height: 35px;     /* menor altura */
+  border-radius: 30px;
 }
 
-.imagem-preview {
-  width: 100px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 4px;
+#imagem-preview-editar {
+  display: block;
+  margin-top: 5px;
+  height: 100px;
+  width: auto;
+  max-width: 100%;
+  border-radius: 6px;
+  object-fit: contain;
   border: 1px solid #ccc;
+  padding: 4px;
+  background-color: #f9f9f9;
+}
+
+/* Status badges */
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    display: inline-block;
+    min-width: 80px;
+    text-align: center;
+}
+
+.status-badge.ativo {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.status-badge.desativado {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn.desativar {
+    background-color: #f44336;
+}
+
+.btn.ativar {
+    background-color: #4CAF50;
+}
+
+/* Animação de cancelar */
+.cancelado {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
 }
