@@ -250,7 +250,10 @@ funcionario.forEach(funcionario => {
 
       <div class="botao">
           <button type="button" class="btn renovar" onclick="abrirModalEditar('${funcionario.codigo}')">EDITAR</button>
-          <button type="button" class="btn ${funcionario.status === 'Ativo' ? 'desativar' : 'ativar'}" onclick="alterarStatus('${funcionario.codigo}')">${funcionario.status === 'Ativo' ? 'DESATIVAR' : 'ATIVAR'}</button>
+          ${funcionario.status === 'Desativado' ? 
+            `<button type="button" class="btn ativar" onclick="alterarStatus('${funcionario.codigo}')">ATIVAR</button>` :
+            `<button type="button" class="btn desativar" onclick="alterarStatus('${funcionario.codigo}')">DESATIVAR</button>`
+          }
         </div>
 `;
 
