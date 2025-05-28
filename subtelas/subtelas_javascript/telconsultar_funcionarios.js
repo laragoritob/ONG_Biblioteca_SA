@@ -104,7 +104,7 @@ const funcionario = [
     cargo: 'Recreador',
     nascimento: '09/04/1977',
     efetivacao: '05/02/2025',
-    imagem: 'subtelas_img/gerard_way.webp',
+    imagem: 'subtelas_img/gerard_way.jpg',
     status: 'Desativado'
   },
   {
@@ -243,14 +243,14 @@ funcionario.forEach(funcionario => {
         <p class="info-item"><strong>Rua:</strong> ${funcionario.rua}</p> 
         <p class="info-item"><strong>Número:</strong> ${funcionario.numero}</p> 
         <p class="info-item"><strong>Telefone:</strong> ${funcionario.telefone}</p>
-        <p class="info-item"><strong>Status:</strong> <span class="status-badge ${funcionario.status.toLowerCase()}">${funcionario.status}</span></p>
+        <p class="info-item"><strong>Status:</strong> <span class="status-badge ${funcionario.status ? funcionario.status.toLowerCase() : 'ativo'}">${funcionario.status || 'Ativo'}</span></p>
       </div>
     </div>
   </div>
 
       <div class="botao">
           <button type="button" class="btn renovar" onclick="abrirModalEditar('${funcionario.codigo}')">EDITAR</button>
-          <button type="button" class="btn ${funcionario.status === 'Ativo' ? 'desativar' : 'ativar'}" onclick="alterarStatus('${funcionario.codigo}')">${funcionario.status === 'Ativo' ? 'DESATIVAR' : 'ATIVAR'}</button>
+          <button type="button" class="btn ${funcionario.status === 'Ativo' ? 'desativar' : 'ativar'}" onclick="confirmarAlteracaoStatus('${funcionario.codigo}')">${funcionario.status === 'Ativo' ? 'DESATIVAR' : 'ATIVAR'}</button>
         </div>
 `;
 
@@ -406,6 +406,39 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Modal fechado ao clicar fora');
         }
     });
+
+    // Adicionar event listener para o botão de status quando o DOM estiver carregado
+    console.log('DOM carregado, configurando botões de status...');
+    
+    // Função para configurar os botões de status
+    function configurarBotoesStatus() {
+        const botoesStatus = document.querySelectorAll('.btn.desativar, .btn.ativar');
+        botoesStatus.forEach(botao => {
+            botao.addEventListener('click', function(e) {
+                e.preventDefault();
+                const codigo = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+                console.log('Botão de status clicado para o código:', codigo);
+                confirmarAlteracaoStatus(codigo);
+            });
+        });
+    }
+
+    // Configurar botões iniciais
+    configurarBotoesStatus();
+
+    // Observar mudanças no DOM para configurar novos botões
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.addedNodes.length) {
+                configurarBotoesStatus();
+            }
+        });
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
 });
 
 // Função para salvar as alterações
@@ -497,13 +530,20 @@ function salvarAlteracoes() {
             text: 'Alteração feita com sucesso!',
             icon: 'success',
             confirmButtonText: 'OK',
+            confirmButtonColor: '#ffbcfc',
             allowOutsideClick: false,
-            allowEscapeKey: false
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Fechar o modal de visualização também
-                modal.style.display = 'none';
-                console.log('Modal de visualização fechado após salvar');
+            allowEscapeKey: false,
+            customClass: {
+                popup: 'swal2-popup',
+                title: 'swal2-title',
+                confirmButton: 'swal2-confirm'
+            }
+        }).then(() => {
+            console.log('Atualizando ficha...');
+            // Atualizar a ficha se estiver aberta
+            const elemento = document.querySelector(funcionarioEncontrado.selector);
+            if (elemento) {
+                elemento.click();
             }
         });
     } else {
@@ -533,46 +573,122 @@ document.getElementById('search-input').addEventListener('input', function () {
     });
 });
 
-// Função para alterar o status do funcionário
-function alterarStatus(codigo) {
+// Função para confirmar a alteração de status
+function confirmarAlteracaoStatus(codigo) {
+    console.log('confirmarAlteracaoStatus chamado com código:', codigo);
+    
     const funcionarioEncontrado = funcionario.find(f => f.codigo === codigo);
+    console.log('Funcionário encontrado:', funcionarioEncontrado);
+    
     if (funcionarioEncontrado) {
         const novoStatus = funcionarioEncontrado.status === 'Ativo' ? 'Desativado' : 'Ativo';
+        const mensagem = funcionarioEncontrado.status === 'Ativo' ? 
+            'Tem certeza que deseja desativar este funcionário?' : 
+            'Tem certeza que deseja ativar este funcionário?';
         
+        // Verificar se o SweetAlert2 está disponível
+        if (typeof Swal === 'undefined') {
+            console.error('SweetAlert2 não está disponível');
+            alert('Erro: SweetAlert2 não está disponível');
+            return;
+        }
+
+        console.log('Mostrando modal de confirmação...');
+        
+        // Mostrar o modal de confirmação
         Swal.fire({
             title: 'Confirmação',
-            text: 'Tem certeza que deseja desativar este funcionário?',
+            text: mensagem,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Sim, tenho certeza',
             cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#f44336',
-            cancelButtonColor: '#4CAF50'
+            confirmButtonColor: '#ffbcfc',
+            cancelButtonColor: '#ffbcfc',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            customClass: {
+                popup: 'swal2-popup',
+                title: 'swal2-title',
+                confirmButton: 'swal2-confirm',
+                cancelButton: 'swal2-cancel'
+            }
         }).then((result) => {
+            console.log('Resultado do modal:', result);
+            
             if (result.isConfirmed) {
+                console.log('Confirmação aceita, atualizando status...');
+                
                 // Atualizar o status do funcionário
                 funcionarioEncontrado.status = novoStatus;
                 
                 // Atualizar o status na tabela
-                const statusCell = document.querySelector(`tr td:first-child:contains('${codigo}')`).closest('tr').querySelector('td:last-child');
-                statusCell.innerHTML = `<span class="status-badge ${novoStatus.toLowerCase()}">${novoStatus}</span>`;
+                const linhas = document.querySelectorAll('#funcionarios-table tbody tr');
+                linhas.forEach(linha => {
+                    const codigoCell = linha.querySelector('td:first-child');
+                    if (codigoCell && codigoCell.textContent.trim() === codigo) {
+                        const statusCell = linha.querySelector('td:last-child');
+                        if (statusCell) {
+                            statusCell.innerHTML = `<span class="status-badge ${novoStatus.toLowerCase()}">${novoStatus}</span>`;
+                        }
+                    }
+                });
                 
                 // Salvar no localStorage
                 localStorage.setItem('funcionarios', JSON.stringify(funcionario));
                 
-                // Atualizar a ficha se estiver aberta
-                const elemento = document.querySelector(funcionarioEncontrado.selector);
-                if (elemento) {
-                    elemento.click();
-                }
+                console.log('Mostrando mensagem de sucesso...');
                 
+                // Mostrar mensagem de sucesso
                 Swal.fire({
                     title: 'Sucesso!',
-                    text: 'Desativação feita com sucesso!',
+                    text: 'Alteração feita com sucesso!',
                     icon: 'success',
                     confirmButtonText: 'OK',
-                    confirmButtonColor: '#4CAF50'
+                    confirmButtonColor: '#ffbcfc',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    customClass: {
+                        popup: 'swal2-popup',
+                        title: 'swal2-title',
+                        confirmButton: 'swal2-confirm'
+                    }
+                }).then(() => {
+                    console.log('Atualizando ficha...');
+                    // Atualizar a ficha se estiver aberta
+                    const elemento = document.querySelector(funcionarioEncontrado.selector);
+                    if (elemento) {
+                        elemento.click();
+                    }
                 });
+            }
+        }).catch(error => {
+            console.error('Erro ao mostrar modal:', error);
+            Swal.fire({
+                title: 'Erro!',
+                text: 'Ocorreu um erro ao processar sua solicitação.',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#ffbcfc',
+                customClass: {
+                    popup: 'swal2-popup',
+                    title: 'swal2-title',
+                    confirmButton: 'swal2-confirm'
+                }
+            });
+        });
+    } else {
+        console.error('Funcionário não encontrado com o código:', codigo);
+        Swal.fire({
+            title: 'Erro!',
+            text: 'Funcionário não encontrado.',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#ffbcfc',
+            customClass: {
+                popup: 'swal2-popup',
+                title: 'swal2-title',
+                confirmButton: 'swal2-confirm'
             }
         });
     }
