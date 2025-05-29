@@ -4,10 +4,7 @@
 body {
   margin: 0 auto;
   font-family: "Candara", sans-serif;
-  background: rgb(255, 255, 255);
-  background-image: url("https://chat.google.com/u/0/api/get_attachment_url?url_type=FIFE_URL&content_type=image%2Fpng&attachment_token=AOo0EEWkE%2F5I3YDu7CG6eAgtL9SC6Qnsq1MWC0D%2Bep6BNH%2BtAV%2B1pYDSiL9vfymdjIWzS8TK%2FFa7QtXeWf9uBdgIKd3cAyuiXWkYCHhbrbEXKp3pVhdJj6MtvK9h1%2F3edXVKCxF394mKFhV2Y%2FRSuN4AFcEUCALRNJl3O84972JZzDIFLMZaUJ25z7rBsw8mcUigQ1TOVU41JQhojZuTEvVp9jAYvQ63EFoACSELlKUfD%2FA2UR3nHNuRAESKF5ug8Dz80GeHHoUgsqG2wdn0ZSAM7FsHV1GK4f4y1JbK67xgQ%2F7Kq1g1x3LWGeOgtpS1lo5L9Dnc95PJa6mHmyWR7bwSpEhMRPoIn6x0gLsByt4aH3jsNYzb%2BSHN2D8Wgeu13pnka0%2F6BUkZZEUR%2F%2F15PjmRA%2Bz30jTKk1R5TMiQpxXwur1MS3KK%2F1xNidiivilVi1helrktlEbmsA1gGQN7f46IhSBHoxs6eXTSi1pwHZx2ZG4hYhUPQFb1jpMOHuP6CGuatQDJF8rnjyUlp3XRxUTM%2BgS4TiLkkqvJKhkv7LCy6wVan6k7SM0ULgBrdqcM9u%2F2lF7XyA%3D%3D&allow_caching=true&sz=w512"); /* Truncado por segurança */
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: #fbf0ff;
   height: 100%;
   padding:0;
   display: flex;
